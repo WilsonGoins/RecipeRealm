@@ -1,0 +1,5 @@
+app.py will be the brain of our web application
+models.py will be our closest connection with SQLite
+database.py will be the connection from app.py to database
+
+need axios to connect react to FastAPI ("npm install axios")
