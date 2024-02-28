@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated, List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    'http://loclahost:3000'
+    "http://loclahost:3000",
 ]
 
 app.add_middleware(
@@ -17,15 +17,15 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=['*'],
-    allow_headers=['*']
+    allow_headers=['*'],
 )
 
 
 class TransactionBase(BaseModel):
-    amount: float
-    category: str
+    name: str
+    calories: int
     description: str
-    is_income: bool
+    is_healthy: bool
     date: str
 
 
@@ -58,7 +58,7 @@ async def create_transaction(transaction: TransactionBase, db: db_dependency):
     return db_transaction
 
 
-@app.get("/transactions", response_model=List[TransactionModel])
+@app.get("/transactions/", response_model=List[TransactionModel])
 async def read_transaction(db: db_dependency, skip: int = 0, limit: int = 100):
     transactions = db.query(models.Transaction).offset(skip).limit(limit).all()
     return transactions

@@ -1,13 +1,13 @@
 from database import Base
-from sqlalchemy import Column, Integer, Boolean, Float, String
+from sqlalchemy import Column, Integer, Boolean, String
 
 
 class Transaction(Base):
     __tablename__ = "transactions"
 
     id = Column(Integer, primary_key=True, index=True)
-    amount = Column(Float)
-    category = Column(String)
+    name = Column(String)
+    calories = Column(Integer)
     description = Column(String)
-    is_income = Column(Boolean)
+    is_healthy = Column(Boolean)
     date = Column(String)
