@@ -11,4 +11,6 @@ Errors I ran into:
    If it doesn't work run "npm install npm -g" then try again
  - I somehow created node_modules outside of the finance-app folder. The only node_modules folder should be within the finance-app folder
  - I was not inside the finance-app directory when I ran "npm install axios" and so it didn't download to the correct spot
-
+ - Got Axios Network Error
+   I wasn't running the back end. So once you do "npm start" you need to also cd into FastAPI in a new terminal and run
+   "uvicorn main:app --reload" to run the backend. Make sure you do this in a different terminal

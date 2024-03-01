@@ -6,7 +6,7 @@ const App = () => {
     const [formData, setFormData] = useState({
         name: '',
         calories: 0,
-        description: 0,
+        description: "",
         is_healthy: false,
         date: ''
     });
@@ -35,7 +35,7 @@ const App = () => {
         setFormData({
             name: '',
             calories: 0,
-            description: 0,
+            description: "",
             is_healthy: false,
             date: ''
         });
