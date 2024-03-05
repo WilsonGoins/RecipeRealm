@@ -37,8 +37,19 @@
     }
 }
 
+.title-container {
+    position: relative;
+    text-align: center; /* Adjust text alignment as needed */
+}
+
+.title-text {
+    position: relative;
+    font-family: Arial, sans-serif; /* Use the desired font-family here */
+    padding: 0;
+}
+
 .bg-image {
-    height: 102vh;
+    height: 100vh;
     background-image: url("RR_Food_On_Table.jpg");
     background-size: cover;
 }
@@ -46,4 +57,21 @@
 .dark-background {
     background-color: #333;
     color: #fff;
+}
+
+.text-entry-form {
+    position: relative;
+    left: 15vw;
+    width: 50%;
+    padding: 15px;
+}
+
+.text-entry-form label {
+    margin-bottom: 0;
+}
+
+.create-account {
+    position: relative;
+    left: 59vw;
+    top: 39.25vh;
 }
