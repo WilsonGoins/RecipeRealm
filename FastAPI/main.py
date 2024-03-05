@@ -22,7 +22,7 @@ app.add_middleware(
 
 
 class TransactionBase(BaseModel):
-    firstName: str
+    name: str
     email: str
     password: str
 

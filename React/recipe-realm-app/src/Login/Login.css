@@ -38,8 +38,12 @@
 }
 
 .bg-image {
-    display: flex;
-    height: 100vh;
-    background-image: url("./RR_Food_On_Table.jpg");
+    height: 102vh;
+    background-image: url("RR_Food_On_Table.jpg");
     background-size: cover;
+}
+
+.dark-background {
+    background-color: #333;
+    color: #fff;
 }
