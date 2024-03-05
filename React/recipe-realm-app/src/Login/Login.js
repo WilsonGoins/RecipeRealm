@@ -32,13 +32,13 @@ const Login = () => {
 
     return (
         <section className="bg-image" style={{backgroundImage: `url(${RR_Food_On_Table}`}}>
+
+            <div className="title-container">
+                <div className="title-text"> Recipe Realm</div>
+            </div>
+
             <div className="container">
                 <form onSubmit={handleFormSubmit}>
-
-                    {/*<div className="title-container">*/}
-                    {/*    <p className="title-text">Recipe Realm</p>*/}
-                    {/*</div>*/}
-
                     {/* Name textbox */}
                     <div className="text-entry-form" style={{top: "62vh"}}>
                         <div className="row g-3 align-items-center form-control-lg dark-background">
@@ -100,7 +100,7 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-lg create-account">
+                    <button type="submit" className="btn btn-primary btn-lg create-account-btn">
                         Create Account
                     </button>
 
