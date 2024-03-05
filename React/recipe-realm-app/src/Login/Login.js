@@ -41,19 +41,20 @@ const Login = () => {
                 <form onSubmit={handleFormSubmit}>
                     {/* Name textbox */}
                     <div className="text-entry-form" style={{top: "62vh"}}>
-                        <div className="row g-3 align-items-center form-control-lg dark-background">
+                        <div className="row g-3 align-items-center form-control-lg">
                             <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">First Name</label>
                             </div>
                             <div className="col-auto">
                                 <input type="text" id="inputPassword6" className="form-control"
                                        aria-describedby="passwordHelpInline"
+                                       style={{left: "50%"}}
                                        onChange={(event) => setName(event.target.value)}
                                        value={name}
                                 />
                             </div>
                             <div className="col-auto">
-                                <span id="passwordHelpInline" className="form-text" style={{color: "#fff"}}>
+                                <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
                                   Please Enter Your First Name.
                                 </span>
                             </div>
@@ -62,7 +63,7 @@ const Login = () => {
 
                     {/* email textbox */}
                     <div className="text-entry-form" style={{top: "62vh"}}>
-                        <div className="row g-3 align-items-center form-control-lg dark-background">
+                        <div className="row g-3 align-items-center form-control-lg">
                             <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">Email</label>
                             </div>
@@ -73,7 +74,7 @@ const Login = () => {
                                        value={email}/>
                             </div>
                             <div className="col-auto">
-                                <span id="passwordHelpInline" className="form-text" style={{color: "#fff"}}>
+                                <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
                                   Please Enter Your Email Address.
                                 </span>
                             </div>
@@ -82,7 +83,7 @@ const Login = () => {
 
                     {/* password textbox */}
                     <div className="text-entry-form" style={{top: "62vh"}}>
-                        <div className="row g-3 align-items-center form-control-lg dark-background">
+                        <div className="row g-3 align-items-center form-control-lg">
                             <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">Password</label>
                             </div>
@@ -93,14 +94,14 @@ const Login = () => {
                                        value={password}/>
                             </div>
                             <div className="col-auto">
-                                <span id="passwordHelpInline" className="form-text" style={{color: "#fff"}}>
+                                <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
                                   Must be 8-20 characters long.
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-lg create-account-btn">
+                    <button type="submit" className="btn btn-primary btn-lg dark-background create-account-btn">
                         Create Account
                     </button>
 
