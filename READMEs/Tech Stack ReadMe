@@ -8,7 +8,10 @@ app.js is the brain of our front end that connects to app.py
 
 Errors I ran into:
  - When you get to around 19 minute mark and you have to run "npx create-react-app finance-app" it may not work.
-   If it doesn't work run "npm install npm -g" then try again
+   Once you install node.js make sure you double clicked on it in your files and select "open with Windows Installer"
+        This will fully install node.js, just pressing download from the site is NOT enough
+   If it still doesn't work run "npm install npm -g" then restart your computer.
+   Then the npx command will work
  - I somehow created node_modules outside of the finance-app folder. The only node_modules folder should be within the finance-app folder
  - I was not inside the finance-app directory when I ran "npm install axios" and so it didn't download to the correct spot
  - Got Axios Network Error
