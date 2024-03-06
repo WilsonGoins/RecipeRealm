@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react"
-import "./Login.css"
+import "./LandingPage.css"
 import api from '../api'
 import RR_Food_On_Table from "./RR_Food_On_Table.jpg";
 
-const Login = () => {
+const LandingPage = () => {
     const [transactions, setTransactions] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const Login = () => {
     }, []);
 
 
-    const handleFormSubmit = async (event) => {
+    const handleCreateAccountSubmit = async (event) => {
         event.preventDefault();
         await api.post('/transactions/', {name, email, password});
         await fetchTransactions();
@@ -28,6 +28,10 @@ const Login = () => {
         setName('');
         setEmail('');
         setPassword('');
+    };
+    
+    const handleLoginSubmit = () => {
+        console.log("logging in!!");
     };
 
     return (
@@ -38,7 +42,7 @@ const Login = () => {
             </div>
 
             <div className="container">
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleCreateAccountSubmit}>
                     {/* Name textbox */}
                     <div className="text-entry-form" style={{top: "62vh"}}>
                         <div className="row g-3 align-items-center form-control-lg">
@@ -101,7 +105,7 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-lg dark-background create-account-btn">
+                    <button type="submit" className="btn btn-lg btn-dark create-account-btn">
                         Create Account
                     </button>
 
@@ -125,9 +129,15 @@ const Login = () => {
                     {/*</table>*/}
                 </form>
             </div>
+
+            <div>
+                <button type="submit" className="btn btn-dark btn-lg login-btn" onClick={handleLoginSubmit}>
+                    Log In
+                </button>
+            </div>
         </section>
     )
 }
 
 
-export default Login;
+export default LandingPage;

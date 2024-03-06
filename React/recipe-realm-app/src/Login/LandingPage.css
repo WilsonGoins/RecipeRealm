@@ -78,3 +78,9 @@
     left: 59vw;
     top: 40.25vh;
 }
+
+.login-btn {
+    position: absolute;
+    left: 90vw;
+    top: 5vh;
+}
