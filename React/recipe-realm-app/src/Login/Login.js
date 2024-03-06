@@ -45,7 +45,7 @@ const Login = () => {
                             <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">First Name</label>
                             </div>
-                            <div className="col-auto">
+                            <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
                                 <input type="text" id="inputPassword6" className="form-control"
                                        aria-describedby="passwordHelpInline"
                                        style={{left: "50%"}}
@@ -53,7 +53,7 @@ const Login = () => {
                                        value={name}
                                 />
                             </div>
-                            <div className="col-auto">
+                            <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                 <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
                                   Please Enter Your First Name.
                                 </span>
@@ -67,13 +67,13 @@ const Login = () => {
                             <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">Email</label>
                             </div>
-                            <div className="col-auto">
+                            <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
                                 <input type="text" id="inputPassword6" className="form-control"
                                        aria-describedby="passwordHelpInline"
                                        onChange={(event) => setEmail(event.target.value)}
                                        value={email}/>
                             </div>
-                            <div className="col-auto">
+                            <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                 <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
                                   Please Enter Your Email Address.
                                 </span>
@@ -87,13 +87,13 @@ const Login = () => {
                             <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">Password</label>
                             </div>
-                            <div className="col-auto">
+                            <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
                                 <input type="password" id="inputPassword6" className="form-control"
                                        aria-describedby="passwordHelpInline"
                                        onChange={(event) => setPassword(event.target.value)}
                                        value={password}/>
                             </div>
-                            <div className="col-auto">
+                            <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                 <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
                                   Must be 8-20 characters long.
                                 </span>
