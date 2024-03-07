@@ -42,7 +42,24 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
 
+.search-bar-text-container {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+}
+
+.food-dish-text-container {
+    position: absolute;
+    top: 190%;
+    left: 2.5%;
+}
+
+.files-text-container {
+    position: absolute;
+    top: 255%;
+    left: 62%;
 }
 
 @font-face {
@@ -55,10 +72,33 @@
     font-size: 500%;
 }
 
+.image-text {
+    font-family: "Prata", sans-serif;
+    font-size: 350%;
+}
+
 .bg-image {
     height: 100vh;
-    background-image: url("RR_Food_On_Table.jpg");
+    background-image: url("FoodOnTable_RR.jpg");
     background-size: cover;
+}
+
+.search-bar-img {
+    position: relative;
+    margin-top: 40px;
+    left: 2.5%;
+    margin-bottom: 40px;
+}
+
+.food-dish-img {
+    position: relative;
+    left: 36%;
+}
+
+.files-img {
+    position: relative;
+    margin-top: 50px;
+    left: 2.5%;
 }
 
 .dark-background {
