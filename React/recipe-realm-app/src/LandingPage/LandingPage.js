@@ -38,6 +38,7 @@ const LandingPage = () => {
             setName('');
             setEmail('');
             setPassword('');
+            navigate('/home');
         }
     };
 
@@ -66,11 +67,6 @@ const LandingPage = () => {
 
         // Append the alert element to the body or a specific container
         document.body.appendChild(alertElement);
-
-        // // Optionally, you can set a timeout to automatically dismiss the alert after a certain duration
-        // setTimeout(() => {
-        //     alertElement.remove();
-        // }, 5000); // Remove the alert after 5 seconds (adjust as needed)
     };
 
     const validateAccountCreation = (name, email, password) => {
@@ -205,7 +201,7 @@ const LandingPage = () => {
                 </div>
 
                 <div>
-                    <button type="submit" className="btn btn-dark btn-lg login-btn" onClick={() => navigate('/Login')}>
+                    <button type="submit" className="btn btn-dark btn-lg login-btn" onClick={() => navigate('/login')}>
                         Log In
                     </button>
                 </div>
