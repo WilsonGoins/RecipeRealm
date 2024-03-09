@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import api from '../api'
 import "./LandingPage.css"
 import FoodOnTable_RR from "./FoodOnTable_RR.jpg";
@@ -9,7 +9,7 @@ import OrganizedFiles_RR from "./OrganizedFiles_RR.png"
 import ShoppingList_RR from "./ShoppingList_RR.jpg"
 
 const LandingPage = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -196,9 +196,7 @@ const LandingPage = () => {
                 </div>
 
                 <div>
-                    <button type="submit" className="btn btn-dark btn-lg login-btn"
-                            // onClick={() => navigate('/Login')}
-                    >
+                    <button type="submit" className="btn btn-dark btn-lg login-btn" onClick={() => navigate('/Login')}>
                         Log In
                     </button>
                 </div>
