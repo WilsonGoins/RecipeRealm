@@ -46,13 +46,13 @@
 
 .search-bar-text-container {
     position: absolute;
-    top: 120%;
+    top: 123%;
     left: 50%;
 }
 
 .food-dish-text-container {
     position: absolute;
-    top: 190%;
+    top: 188%;
     left: 2.5%;
 }
 
@@ -60,6 +60,12 @@
     position: absolute;
     top: 255%;
     left: 62%;
+}
+
+.shopping-list-text-container {
+    position: absolute;
+    top: 317%;
+    left: 5.25%;
 }
 
 @font-face {
@@ -73,8 +79,10 @@
 }
 
 .image-text {
+    position: relative;
     font-family: "Prata", sans-serif;
     font-size: 350%;
+    text-align: center;
 }
 
 .bg-image {
@@ -99,6 +107,12 @@
     position: relative;
     margin-top: 50px;
     left: 2.5%;
+}
+
+.shopping-list-img {
+    position: relative;
+    margin-top: 50px;
+    left: 46%;
 }
 
 .dark-background {

@@ -5,6 +5,7 @@ import FoodOnTable_RR from "./FoodOnTable_RR.jpg";
 import SearchBar_RR from "./SearchBar_RR.jpg";
 import FoodDish_RR from "./FoodDish_RR.jpg";
 import OrganizedFiles_RR from "./OrganizedFiles_RR.png"
+import ShoppingList_RR from "./ShoppingList_RR.jpg"
 
 const LandingPage = () => {
     const [transactions, setTransactions] = useState([]);
@@ -25,16 +26,73 @@ const LandingPage = () => {
 
     const handleCreateAccountSubmit = async (event) => {
         event.preventDefault();
-        await api.post('/transactions/', {name, email, password});
-        await fetchTransactions();
-        // reset the data
-        setName('');
-        setEmail('');
-        setPassword('');
+
+        if (validateAccountCreation(name, email, password)) {
+            await api.post('/transactions/', {name, email, password});
+            await fetchTransactions();
+            // reset the data
+            setName('');
+            setEmail('');
+            setPassword('');
+        }
     };
     
     const handleLoginSubmit = () => {
         console.log("logging in!!");
+    };
+
+    const isNewUser = (email) => {
+        return true;
+    };
+
+    const showAlert = (strongText, additionalText) => {
+        // Create a new alert element
+        const alertElement = document.createElement('div');
+        alertElement.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show');
+        alertElement.innerHTML = `
+        <strong>${strongText}</strong> ${additionalText}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        // set the css styles
+        alertElement.style.position = 'fixed';
+        alertElement.style.top = '0';
+        alertElement.style.left = '50%';
+        alertElement.style.transform = 'translateX(-50%)';
+
+        // Append the alert element to the body or a specific container
+        document.body.appendChild(alertElement);
+
+        // // Optionally, you can set a timeout to automatically dismiss the alert after a certain duration
+        // setTimeout(() => {
+        //     alertElement.remove();
+        // }, 5000); // Remove the alert after 5 seconds (adjust as needed)
+    };
+
+    const validateAccountCreation = (name, email, password) => {
+        if (/^[A-Za-z]+$/.test(name)) {
+            if (email.trim() !== '') {
+                if (/^\S{8,20}$/.test(password)) {
+                    if (isNewUser(email)) {
+                        console.log("Valid");
+                        return true;
+                    } else {
+                        showAlert("Email Already Exists!", "Try an email that isn't already linked with a Recipe Realm account")
+                        console.log("Existing User")
+                    }
+                } else {
+                    showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
+                    console.log("Password Invalid")
+                }
+            } else {
+                showAlert("Email Invalid!", "Please enter a valid email address")
+                console.log("Email Invalid")
+            }
+        } else {
+            showAlert("Name Invalid!", "Names must be one word long and may only contain letters")
+            console.log("Name Invalid")
+        }
+        return false;
     };
 
     return (
@@ -152,7 +210,7 @@ const LandingPage = () => {
             </div>
 
             {/*second image + text*/}
-            <div style={{background: "lightgrey"}}>
+            <div>
                 <img src={FoodDish_RR} alt="Food Dish Image" className="food-dish-img"/>
 
                 <div className="food-dish-text-container">
@@ -162,7 +220,7 @@ const LandingPage = () => {
             </div>
 
             {/*third image + text*/}
-            <div style={{background: "lightgrey"}}>
+            <div>
                 <img src={OrganizedFiles_RR} alt="Organized Files Image" className="files-img"/>
 
                 <div className="files-text-container">
@@ -171,6 +229,17 @@ const LandingPage = () => {
                 </div>
             </div>
 
+            {/*fourth image + text*/}
+            <div>
+                <img src={ShoppingList_RR} alt="Shopping List Image" className="shopping-list-img"/>
+
+                <div className="shopping-list-text-container">
+                    <div className="image-text"> Generate Shopping</div>
+                    <div className="image-text"> Lists With Ease</div>
+                </div>
+            </div>
+
+            {/*footer*/}
             <nav className="navbar fixed-bottom bg-dark" style={{position: "relative", marginTop: "50px"}}>
                 <div className="container-fluid d-flex justify-content-between">
                     <p className="navbar-text text-white mb-0">
