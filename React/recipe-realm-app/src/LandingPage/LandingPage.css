@@ -115,6 +115,14 @@
     left: 46%;
 }
 
+.eye-icon {
+    position: absolute;
+    width: 2%;
+    height: auto;
+    left: 44%;
+    top: 90.85%;
+}
+
 .dark-background {
     background-color: #333;
     color: #fff;

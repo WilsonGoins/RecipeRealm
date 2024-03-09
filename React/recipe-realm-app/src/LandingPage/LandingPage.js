@@ -7,6 +7,7 @@ import SearchBar_RR from "./SearchBar_RR.jpg";
 import FoodDish_RR from "./FoodDish_RR.jpg";
 import OrganizedFiles_RR from "./OrganizedFiles_RR.png"
 import ShoppingList_RR from "./ShoppingList_RR.jpg"
+import Eye_RR from "./Eye_RR.png"
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -124,7 +125,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                     <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
-                                      Please Enter Your First Name.
+                                      Please Enter Your First Name
                                     </span>
                                 </div>
                             </div>
@@ -144,7 +145,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                     <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
-                                      Please Enter Your Email Address.
+                                      Please Enter Your Email Address
                                     </span>
                                 </div>
                             </div>
@@ -164,7 +165,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                     <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
-                                      Must be 8-20 characters long.
+                                      Must be 8-20 characters long
                                     </span>
                                 </div>
                             </div>
@@ -239,6 +240,11 @@ const LandingPage = () => {
                     <div className="image-text"> Generate Shopping</div>
                     <div className="image-text"> Lists With Ease</div>
                 </div>
+            </div>
+
+            {/*eye image*/}
+            <div>
+                <img src={Eye_RR} alt="Show Password Icon" className="eye-icon"/>
             </div>
 
             {/*footer*/}
