@@ -15,6 +15,7 @@ const LandingPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPass, setShowPass] = useState(false);
 
 
     const fetchTransactions = async () => {
@@ -158,10 +159,17 @@ const LandingPage = () => {
                                     <label htmlFor="inputPassword6" className="col-form-label">Password</label>
                                 </div>
                                 <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
-                                    <input type="password" id="inputPassword6" className="form-control"
+                                    {showPass ? (
+                                        <input type="text" id="inputPassword6" className="form-control"
                                            aria-describedby="passwordHelpInline"
                                            onChange={(event) => setPassword(event.target.value)}
                                            value={password}/>
+                                    ) : (
+                                        <input type="password" id="inputPassword6" className="form-control"
+                                           aria-describedby="passwordHelpInline"
+                                           onChange={(event) => setPassword(event.target.value)}
+                                           value={password}/>
+                                    )}
                                 </div>
                                 <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
                                     <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
@@ -244,7 +252,7 @@ const LandingPage = () => {
 
             {/*eye image*/}
             <div>
-                <img src={Eye_RR} alt="Show Password Icon" className="eye-icon"/>
+                <img src={Eye_RR} alt="Show Password Icon" className="eye-icon" onClick={() => {setShowPass(!showPass)}}/>
             </div>
 
             {/*footer*/}
