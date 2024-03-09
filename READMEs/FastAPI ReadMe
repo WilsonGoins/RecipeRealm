@@ -1,4 +1,4 @@
-A guide on how to start this project using FastAPI on PyCharm
+A ReadMe on how to start using FastAPI on PyCharm
 
 1. Open this project in PyCharm
 2. Copy and Paste the following code into main.py (insure there are no comments above it)

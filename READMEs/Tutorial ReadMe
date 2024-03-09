@@ -1,4 +1,4 @@
-Follow this tutorial: https://www.youtube.com/watch?v=0zb2kohYZIM
+A ReadMe for following this tutorial which sets up our tech stack: https://www.youtube.com/watch?v=0zb2kohYZIM
 
 main.py will be the brain of our web application
 models.py will be our closest connection with SQLite
