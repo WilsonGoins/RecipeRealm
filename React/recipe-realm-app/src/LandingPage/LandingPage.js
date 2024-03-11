@@ -74,23 +74,18 @@ const LandingPage = () => {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
                     if (isNewUser(email)) {
-                        console.log("Valid");
                         return true;
                     } else {
                         showAlert("Email Already Exists!", "Try an email that isn't already linked with a Recipe Realm account")
-                        console.log("Existing User")
                     }
                 } else {
                     showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
-                    console.log("Password Invalid")
                 }
             } else {
                 showAlert("Email Invalid!", "Please enter a valid email address")
-                console.log("Email Invalid")
             }
         } else {
             showAlert("Name Invalid!", "Names must be one word long and may only contain letters")
-            console.log("Name Invalid")
         }
         return false;
     };
