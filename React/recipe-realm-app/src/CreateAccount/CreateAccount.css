@@ -37,18 +37,18 @@
     }
 }
 
-.LGN-centered-container {
+.CR-centered-container {
     transform: translate(-50%, -50%);
 }
 
-.LGN-title-container {
+.CR-title-container {
     position: absolute;
-    top: 25%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.LGN-welcome-container {
+.CR-welcome-container {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -60,35 +60,35 @@
     src: url('Prata-Regular.ttf') format("truetype");
 }
 
-.LGN-title-text {
+.CR-title-text {
     font-family: "Prata", sans-serif;
     font-size: 500%;
 }
 
-.LGN-welcome-text {
+.CR-welcome-text {
     font-family: "Prata", sans-serif;
     font-size: 200%;
 }
 
-.LGN-text-entry-form {
+.CR-text-entry-form {
     position: relative;
     left: 15vw;
     width: 50%;
     padding: .75%;
 }
 
-.LGN-eye-icon {
+.CR-eye-icon {
     position: absolute;
     width: 2%;
     height: auto;
-    left: 50.25%;
-    top: 59%;
+    left: 50.5%;
+    top: 69.75%;
 }
 
 
-.LGN-login-btn {
+.CR-create-account-btn {
     position: absolute;
     left: 50vw;
-    top: 72vh;
+    top: 84vh;
     transform: translate(-50%, -50%);
 }

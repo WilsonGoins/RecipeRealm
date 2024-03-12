@@ -37,34 +37,34 @@
     }
 }
 
-.title-container {
+.LP-title-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.search-bar-text-container {
+.LP-search-bar-text-container {
     position: absolute;
     top: 125%;
     left: 50%;
 }
 
-.food-dish-text-container {
+.LP-food-dish-text-container {
     position: absolute;
-    top: 188%;
+    top: 192%;
     left: 7%;
 }
 
-.files-text-container {
+.LP-files-text-container {
     position: absolute;
-    top: 251%;
+    top: 257%;
     left: 60%;
 }
 
-.shopping-list-text-container {
+.LP-shopping-list-text-container {
     position: absolute;
-    top: 314%;
+    top: 322%;
     left: 5.25%;
 }
 
@@ -73,26 +73,26 @@
     src: url('Prata-Regular.ttf') format("truetype");
 }
 
-.title-text {
+.LP-title-text {
     font-family: "Prata", sans-serif;
     font-size: 500%;
 }
 
-.image-text {
+.LP-image-text {
     position: relative;
     font-family: "Prata", sans-serif;
     font-size: 350%;
     text-align: center;
 }
 
-.bg-image {
+.LP-bg-image {
     height: 100vh;
     width: auto;
     background-image: url("FoodOnTable_RR.jpg");
     background-size: cover;
 }
 
-.search-bar-img {
+.LP-search-bar-img {
     width: 47.5%;
     height: auto;
     position: relative;
@@ -101,14 +101,14 @@
     margin-bottom: 4%;
 }
 
-.food-dish-img {
+.LP-food-dish-img {
     width: 55%;
     height: auto;
     position: relative;
     left: 41%;
 }
 
-.files-img {
+.LP-files-img {
     height: 25%;
     width: auto;
     position: relative;
@@ -116,7 +116,7 @@
     left: 2.5%;
 }
 
-.shopping-list-img {
+.LP-shopping-list-img {
     width: 50%;
     height: auto;
     position: relative;
@@ -124,68 +124,58 @@
     left: 46%;
 }
 
-.eye-icon {
+.LP-eye-icon {
     position: absolute;
     width: 2%;
     height: auto;
     left: 44%;
-    top: 90.85%;
+    top: 87.5%;
 }
 
-.dark-background {
-    background-color: #333;
-    color: #fff;
-}
-
-.text-entry-form {
+.LP-text-entry-form {
     position: relative;
     left: 15vw;
     width: 50%;
     padding: .75%;
 }
 
-.create-account-btn {
-    position: relative;
-    left: 59vw;
-    top: 40.25vh;
-}
-
-.login-btn {
-    position: absolute;
-    /*left: 90vw;*/
-    left: 89.75vw;
-    top: 9vh;
-    /*top: 5vh;*/
-}
-
-.heading-container {
+.LP-heading-container {
     position: absolute;
     top: 71%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.heading-text {
+.LP-heading-text {
     font-family: "Prata", sans-serif;
     font-size: 250%;
     text-align: center;
 }
 
-.initiative-container {
+.LP-initiative-container {
     position: absolute;
+    display: flex;
+    width: 50%;
     top: 370%;
-    left: 50%;
+    left: 58.7%;
     transform: translate(-50%, -50%);
 }
 
-.initiative-text {
+.LP-initiative-text {
     font-family: "Prata", sans-serif;
+    margin-right: 5px;
     font-size: 150%;
     text-align: center;
     font-weight: bold;
 }
 
-.LP-find-btn {
+.LP-clickable-initiative-text {
+    text-decoration-line: underline;
+    color: cadetblue;
+    cursor: pointer;
+}
+
+.LP-create-account-btn {
     position: absolute;
     width: 12%;
     left: 35%;
@@ -193,7 +183,7 @@
     transform: translate(-50%, -50%);
 }
 
-.LP-organize-btn {
+.LP-learn-more-btn {
     position: absolute;
     width: 12%;
     left: 50%;
@@ -201,7 +191,7 @@
     transform: translate(-50%, -50%);
 }
 
-.LP-prepare-btn {
+.LP-login-btn {
     position: absolute;
     width: 12%;
     left: 65%;

@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom";
 import api from '../api'
-import "./Login.css"
+import "./CreateAccount.css"
 import Eye_RR from "./Eye_RR.png";
-const Login = () => {
+
+const CreateAccount = () => {
     const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
@@ -20,21 +22,22 @@ const Login = () => {
     }, []);
 
 
-    const handleLoginSubmit = async (event) => {
+    const handleCreateAccountSubmit = async (event) => {
         event.preventDefault();
 
-        if (validateLogin(email, password)) {
-            // TODO: backend stuff to log them in
-
+        if (validateAccountCreation(name, email, password)) {
+            await api.post('/transactions/', {name, email, password});
+            await fetchTransactions();
             // reset the data
+            setName('');
             setEmail('');
             setPassword('');
             navigate('/home');
         }
     };
 
-    const checkExistingUser = (email, password) => {      // TODO: Add checks through backend
-        return true;        // always return true for now bc we want them to be an existing user
+    const checkExistingUser = (email, password) => {      // TODO: Check for existing user via backend
+        return false;       // always return false bc we want to return false if they are a new user
     };
 
     const showAlert = (strongText, additionalText) => {
@@ -56,39 +59,61 @@ const Login = () => {
         document.body.appendChild(alertElement);
     };
 
-    const validateLogin = (email, password) => {
-        if (email.trim() !== '') {
-            if (/^\S{8,20}$/.test(password)) {
-                if (checkExistingUser(email, password)) {        // we check if they are an existing user
-                    return true;
+    const validateAccountCreation = (name, email, password) => {
+        if (/^[A-Za-z]+$/.test(name)) {
+            if (email.trim() !== '') {
+                if (/^\S{8,20}$/.test(password)) {
+                    if (!checkExistingUser(email, password)) {        // we check if they are an existing user
+                        return true;
+                    } else {
+                        showAlert("Email Does Not Exist!", "Check For Typos")
+                    }
                 } else {
-                    showAlert("Email or Password is Incorrect!", "Check For Typos")
+                    showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
                 }
             } else {
-                showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
+                showAlert("Email Invalid!", "Please enter a valid email address")
             }
         } else {
-            showAlert("Email Invalid!", "Please enter a valid email address")
+            showAlert("Name Invalid!", "Names must be one word long and may only contain letters")
         }
         return false;
     };
 
     return (
         <div style={{background: "floralwhite", width: "100vw", height: "100vh"}}>
-            <div className="LGN-title-container">
-                <div className="LGN-title-text">Recipe Realm</div>
+            <div className="CR-title-container">
+                <div className="CR-title-text">Recipe Realm</div>
             </div>
-            <div className="LGN-welcome-container">
-                <div className="LGN-welcome-text">Welcome Back</div>
-            </div>
-
 
             <div className="container">
-                <form onSubmit={handleLoginSubmit}>
-                    {/* email textbox */}
-                    <div className="LGN-text-entry-form LGN-centered-container" style={{top: "50vh", left: "42.5vw"}}>
+                <form onSubmit={handleCreateAccountSubmit}>
+                    {/* Name text box */}
+                    <div className="CR-text-entry-form CR-centered-container" style={{top: "50vh", left: "42.5vw"}}>
                         <div className="row g-3 align-items-center form-control-lg">
                             <div className="col-auto">
+                                <label htmlFor="inputPassword6" className="col-form-label">First Name</label>
+                            </div>
+                            <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
+                                <input type="text" id="inputPassword6" className="form-control"
+                                       aria-describedby="passwordHelpInline"
+                                       style={{left: "50%"}}
+                                       onChange={(event) => setName(event.target.value)}
+                                       value={name}
+                                />
+                            </div>
+                            <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
+                                    <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
+                                      Please Enter Your First Name
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* email textbox */}
+                    <div className="CR-text-entry-form CR-centered-container" style={{top: "50vh", left: "42.5vw"}}>
+                        <div className="row g-3 align-items-center form-control-lg">
+                        <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">Email</label>
                             </div>
                             <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
@@ -106,9 +131,9 @@ const Login = () => {
                     </div>
 
                     {/* password textbox */}
-                    <div className="LGN-text-entry-form LGN-centered-container" style={{top: "50vh", left: "42.5vw"}}>
+                    <div className="CR-text-entry-form CR-centered-container" style={{top: "50vh", left: "42.5vw"}}>
                         <div className="row g-3 align-items-center form-control-lg">
-                            <div className="col-auto">
+                        <div className="col-auto">
                                 <label htmlFor="inputPassword6" className="col-form-label">Password</label>
                             </div>
                             <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
@@ -132,15 +157,15 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-lg btn-dark LGN-login-btn">
-                        Log In
+                    <button type="submit" className="btn btn-lg btn-dark CR-create-account-btn">
+                        Create Account
                     </button>
                 </form>
             </div>
 
             {/*eye image*/}
             <div>
-                <img src={Eye_RR} alt="Show Password Icon" className="LGN-eye-icon" onClick={() => {setShowPass(!showPass)}}/>
+                <img src={Eye_RR} alt="Show Password Icon" className="CR-eye-icon" onClick={() => {setShowPass(!showPass)}}/>
             </div>
 
             {/*footer*/}
@@ -156,4 +181,4 @@ const Login = () => {
 }
 
 
-export default Login
+export default CreateAccount
