@@ -96,9 +96,9 @@
     width: 47.5%;
     height: auto;
     position: relative;
-    margin-top: 40px;
+    margin-top: 4%;
     left: 2.5%;
-    margin-bottom: 40px;
+    margin-bottom: 4%;
 }
 
 .food-dish-img {
@@ -112,7 +112,7 @@
     height: 25%;
     width: auto;
     position: relative;
-    margin-top: 50px;
+    margin-top: 4.5%;
     left: 2.5%;
 }
 
@@ -120,7 +120,7 @@
     width: 50%;
     height: auto;
     position: relative;
-    margin-top: 50px;
+    margin-top: 4.5%;
     left: 46%;
 }
 
@@ -141,7 +141,7 @@
     position: relative;
     left: 15vw;
     width: 50%;
-    padding: 15px;
+    padding: .75%;
 }
 
 .create-account-btn {
@@ -152,6 +152,59 @@
 
 .login-btn {
     position: absolute;
-    left: 90vw;
-    top: 5vh;
+    /*left: 90vw;*/
+    left: 89.75vw;
+    top: 9vh;
+    /*top: 5vh;*/
+}
+
+.heading-container {
+    position: absolute;
+    top: 71%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heading-text {
+    font-family: "Prata", sans-serif;
+    font-size: 250%;
+    text-align: center;
+}
+
+.initiative-container {
+    position: absolute;
+    top: 370%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.initiative-text {
+    font-family: "Prata", sans-serif;
+    font-size: 150%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.LP-find-btn {
+    position: absolute;
+    width: 12%;
+    left: 35%;
+    top: 92%;
+    transform: translate(-50%, -50%);
+}
+
+.LP-organize-btn {
+    position: absolute;
+    width: 12%;
+    left: 50%;
+    top: 92%;
+    transform: translate(-50%, -50%);
+}
+
+.LP-prepare-btn {
+    position: absolute;
+    width: 12%;
+    left: 65%;
+    top: 92%;
+    transform: translate(-50%, -50%);
 }

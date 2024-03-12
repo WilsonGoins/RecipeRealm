@@ -71,14 +71,9 @@
     width: 2%;
     height: auto;
     left: 52.8%;
-    top: 73.8%;
+    top: 70.25%;
 }
 
-.login-text-entry-form {
-    top: 50vh;
-    left: 50vh;
-    transform: translate(-50%, -50%);
-}
 
 .login-login-btn {
     position: absolute;

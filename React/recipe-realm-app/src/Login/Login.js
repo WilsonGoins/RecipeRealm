@@ -25,6 +25,7 @@ const Login = () => {
 
         if (validateAccountCreation(name, email, password)) {
             // TODO: backend stuff to log them in
+
             // reset the data
             setName('');
             setEmail('');
@@ -64,7 +65,7 @@ const Login = () => {
         if (/^[A-Za-z]+$/.test(name)) {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
-                    if (validateCredentials(email, password)) {        // we do NOT want new users bc we are in login page
+                    if (validateCredentials(email, password)) {        // we check if they are in the database
                         return true;
                     } else {
                         showAlert("Email Does Not Exist!", "Check For Typos")
@@ -163,7 +164,7 @@ const Login = () => {
                     </div>
 
                     <button type="submit" className="btn btn-lg btn-dark login-login-btn">
-                        Login
+                        Log In
                     </button>
                 </form>
             </div>
