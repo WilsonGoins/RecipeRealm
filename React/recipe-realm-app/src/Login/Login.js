@@ -74,7 +74,7 @@ const Login = () => {
     };
 
     return (
-        <div style={{background: "floralwhite", width: "100vw", height: "100vh"}}>
+        <div style={{background: "antiquewhite", width: "100vw", height: "100vh"}}>
             <div className="LGN-title-container">
                 <div className="LGN-title-text">Recipe Realm</div>
             </div>
