@@ -1,0 +1,38 @@
+.HM-title-container {
+    position: relative;
+    margin-bottom: 10%;
+    top: 2%;
+    left: 0.35%;
+}
+
+@font-face {
+    font-family: 'Prata';
+    src: url('Prata-Regular.ttf') format("truetype");
+}
+
+.HM-title-text {
+    font-family: "Prata", sans-serif;
+    font-size: 350%;
+}
+
+.HM-nav-item {
+    position: relative;
+    margin-bottom: 10%;
+    font-family: "Prata", sans-serif;
+    font-size: 200%;
+    color: antiquewhite;
+}
+
+.HM-credit-container {
+    position: absolute;
+    width: 22%;
+    left: 1%;
+    top: 92%;
+}
+
+.HM-credit-text {
+    font-family: "Prata", sans-serif;
+    font-size: 100%;
+    color: antiquewhite;
+    text-align: center;
+}

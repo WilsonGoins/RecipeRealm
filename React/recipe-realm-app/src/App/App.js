@@ -9,7 +9,10 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" exact element={<LandingPage />} />
+                {/*<Route path="/" exact element={<LandingPage />} />*/}
+
+                <Route path="/" exact element={<Home />} />
+
                 <Route path="/createaccount" exact element={<CreateAccount />} />
                 <Route path="/login" exact element={<Login />} />
                 <Route path="/home" exact element={<Home />} />
