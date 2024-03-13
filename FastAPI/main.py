@@ -23,10 +23,8 @@ app.add_middleware(
 
 class TransactionBase(BaseModel):
     name: str
-    calories: int
-    description: str
-    is_healthy: bool
-    date: str
+    email: str
+    password: str
 
 
 class TransactionModel(TransactionBase):
