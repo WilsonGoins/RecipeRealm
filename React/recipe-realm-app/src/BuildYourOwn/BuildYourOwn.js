@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom";
-import "./Home.css"
-import Template from "../Template/Template";
+import "./BuildYourOwn.css"
+import Template from "../Template/Template"
 
-const Home = () => {
+const BuildYourOwn = () => {
     const navigate = useNavigate();
 
     return (
@@ -13,4 +13,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default BuildYourOwn

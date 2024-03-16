@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Prata';
+    src: url('Prata-Regular.ttf') format("truetype");
+}
+
+.TMP-title-container {
+    position: absolute;
+    margin-bottom: 10%;
+    top: 5%;
+    left: 1.25%;
+}
+
+.TMP-empty-container {
+    position: relative;
+    width: 27vw;
+    height: 25vh;
+    left: 0;
+    top: 0;
+}
+
+.TMP-credit-container {
+    position: absolute;
+    width: 22%;
+    left: 2%;
+    top: 92%;
+}
+
+.TMP-title-text {
+    font-family: "Prata", sans-serif;
+    font-size: 350%;
+    cursor: pointer;
+}
+
+.TMP-credit-text {
+    font-family: "Prata", sans-serif;
+    font-size: 100%;
+    color: antiquewhite;
+    text-align: center;
+}
+
+.TMP-nav-item {
+    position: relative;
+    margin-bottom: 10%;
+    font-family: "Droid Sans", serif;
+    font-size: 250%;
+    color: antiquewhite;
+    cursor: pointer;
+}
+
+.TMP-hover-white {
+    .nav-item .nav-link {
+        color: antiquewhite;
+    }
+
+    .nav-item:hover .nav-link,
+    .nav-item:focus .nav-link,
+    .nav-item:active .nav-link {
+        color: yellow;
+        background-color: transparent;
+    }
+}
