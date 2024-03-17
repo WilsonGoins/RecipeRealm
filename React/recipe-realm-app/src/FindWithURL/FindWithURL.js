@@ -9,15 +9,27 @@ const FindWithURL = () => {
     const [recipeName, setRecipeName] = useState('No Recipe Found')
     const helpText = "Enter the URL for a web page that details a recipe you want to use. We will visit that page, scrape the information, and then add the recipe's information to your desired folder!"
 
-    const SendURL = async (event) => {
+    const GetRecipeInfo = async (event) => {
         event.preventDefault();
 
-        console.log(url);
+        try {
+            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
+            const response = await fetch(endpoint);
 
-        const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
-        const response = await fetch(endpoint);
-        const data = await response.json();
-        setRecipeName(data['title']);
+            if (!response.ok) {         // if bad request
+                console.error(`Error: ${response.status}`)
+                ShowAlert("Sorry That Didn't Work!", "Check for typos in the URL")
+            } else {                    // if good request
+                const data = await response.json();
+                if (data.length !== 0) {        // if we actually got information from the link
+                    setRecipeName(data['title']);       // TODO: do something with data
+                } else {
+                    ShowAlert("Sorry We Weren't Able To Find Data!", "The website isn't formatted well for us, try a different recipe")
+                }
+            }
+        } catch (error) {
+            ShowAlert("Uh-Oh, Something Went Wrong", "");
+        }
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
@@ -41,18 +53,26 @@ const FindWithURL = () => {
             <Template />
 
             {/* search bar */}
-            <div className="SBD-search-bar container-fluid">
+            <div className="FWU-search-bar container-fluid">
                 <form className="d-flex" role="search">
                     <input className="form-control me-2" type="search" placeholder="Enter a URL" aria-label="Search"
                            onChange={(event) => setUrl(event.target.value)}
                            value={url}/>
                     <button className="btn btn-outline-success bg-dark" type="button" style={{color: "antiquewhite"}}
-                            onClick={(event) => SendURL(event)}>
+                            onClick={(event) => GetRecipeInfo(event)}>
                         Search
                     </button>
                 </form>
             </div>
 
+            {/* title text */}
+            <div className="SBD-title-container">
+                <div className="SBD-title-text">
+                    Find With URL
+                </div>
+            </div>
+
+            {/* TODO: remove */}
             <div style={{position: "absolute", left: "50%", top: "50%"}}>
                 {recipeName}
             </div>
@@ -63,8 +83,8 @@ const FindWithURL = () => {
                      onClick={() => ShowAlert(helpText, "")} />
             </div>
 
-            TODO: Add the same file storage we have on the home page. But instead of being able to click into recipes,
-                  They will select a folder to put this new recipe into
+            {/*TODO: Add the same file storage we have on the home page. But instead of being able to click into recipes,*/}
+            {/*      They will select a folder to put this new recipe into*/}
         </div>
     )
 }

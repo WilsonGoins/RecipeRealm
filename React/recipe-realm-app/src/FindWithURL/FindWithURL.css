@@ -1,7 +1,26 @@
+.FWU-search-bar {
+    position: absolute;
+    left: 58%;
+    top: 8.5%;
+    width: 40%;
+    height: 5%;
+}
+
 .FWU-help-img {
     position: absolute;
     left: 56%;
-    top: 3.5%;
+    top: 9%;
     width: 2%;
     height: auto;
+}
+
+.FWU-title-container {
+    position: absolute;
+    top: 5%;
+    left: 30%;
+}
+
+.FWU-title-text {
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
 }

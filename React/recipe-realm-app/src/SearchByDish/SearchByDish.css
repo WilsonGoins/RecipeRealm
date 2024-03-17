@@ -1,7 +1,7 @@
 .SBD-search-bar {
     position: absolute;
     left: 58%;
-    top: 3%;
+    top: 8.5%;
     width: 40%;
     height: 5%;
 }
@@ -9,7 +9,18 @@
 .SBD-help-img {
     position: absolute;
     left: 56%;
-    top: 3.5%;
+    top: 9%;
     width: 2%;
     height: auto;
+}
+
+.SBD-title-container {
+    position: absolute;
+    top: 5%;
+    left: 30%;
+}
+
+.SBD-title-text {
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
 }

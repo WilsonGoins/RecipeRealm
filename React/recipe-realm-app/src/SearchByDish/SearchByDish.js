@@ -1,11 +1,35 @@
 import React, {useState, useEffect} from "react"
 import "./SearchByDish.css"
 import Template from "../Template/Template";
-import ShoppingList_RR from "../LandingPage/ShoppingList_RR.jpg";
+import SPapi from "../SPapi"
 import QuestionMark_RR from "./QuestionMark_RR.png"
 
 const SearchByDish = () => {
+    const [query, setQuery] = useState("")
     const helpText = "Enter any common dish, and we will search the internet for recipes that match it. If we don't find anything you like, try finding a recipe online and then use our 'Find With URL' page!"
+
+    const GetRecipeInfo = async (event) => {
+        event.preventDefault();
+        try {
+            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}`;
+            const response = await fetch(endpoint);
+
+            // check if we got a good response
+            if (!response.ok) {
+                ShowAlert("Uh-Oh, Something Went Wrong", "");
+            } else {   // if we didn't, proceed...
+                const rawData = await response.json();
+                const data = rawData.results || [];
+                if (data.length !== 0) {         // if we didn't get an empty result
+                    // TODO: do something with the list of recipes
+                } else {            // if we did, show them a message
+                    ShowAlert("Sorry No Results For This Query!", "Try something less specific")
+                }
+            }
+        } catch (error) {
+            ShowAlert("Uh-Oh, Something Went Wrong", "");
+        }
+    }
 
     const ShowAlert = (strongMessage, weakMessage) => {
         const alertElement = document.createElement('div');
@@ -31,12 +55,21 @@ const SearchByDish = () => {
             <div className="SBD-search-bar container-fluid">
                 <form className="d-flex" role="search">
                     <input className="form-control me-2" type="search" placeholder="Enter Any Popular Dish" aria-label="Search"
-                    />
+                           onChange={(event) => setQuery(event.target.value)}
+                           value={query}/>
 
-                    <button className="btn btn-outline-success bg-dark" type="submit" style={{color: "antiquewhite"}}>
+                    <button className="btn btn-outline-success bg-dark" type="button" style={{color: "antiquewhite"}}
+                            onClick={(event) => GetRecipeInfo(event)}>
                         Search
                     </button>
                 </form>
+            </div>
+
+            {/* title text */}
+            <div className="SBD-title-container">
+                <div className="SBD-title-text">
+                    Search By Dish
+                </div>
             </div>
 
             {/* help image */}
