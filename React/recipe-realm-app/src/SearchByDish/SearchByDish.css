@@ -24,3 +24,27 @@
     font-family: "Droid Sans", serif;
     font-size: 350%;
 }
+
+.SBD-options-title-container {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+}
+
+.SBD-options-title-text {
+    font-family: "Droid Sans", serif;
+    font-size: 250%;
+}
+
+.SBD-options-items-container {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+
+.SBD-options-items-text {
+    font-family: "Droid Sans", serif;
+    font-size: 150%;
+}
+
+
