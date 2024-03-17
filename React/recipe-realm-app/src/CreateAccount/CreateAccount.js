@@ -24,7 +24,6 @@ const CreateAccount = () => {
 
     const handleCreateAccountSubmit = async (event) => {
         event.preventDefault();
-        console.log(email);
 
         if (validateAccountCreation(name, email, password)) {
             await api.post('/transactions/', {name, email, password});

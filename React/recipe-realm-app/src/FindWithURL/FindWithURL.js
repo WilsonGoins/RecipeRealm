@@ -1,16 +1,23 @@
 import React, {useState, useEffect} from "react"
 import "./FindWithURL.css"
 import Template from "../Template/Template";
+import SPapi from "../SPapi"
 import QuestionMark_RR from "../SearchByDish/QuestionMark_RR.png";
 
 const FindWithURL = () => {
     const [url, setUrl] = useState('');
+    const [recipeName, setRecipeName] = useState('No Recipe Found')
     const helpText = "Enter the URL for a web page that details a recipe you want to use. We will visit that page, scrape the information, and then add the recipe's information to your desired folder!"
 
-    const SendURL = (event) => {
+    const SendURL = async (event) => {
         event.preventDefault();
 
         console.log(url);
+
+        const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
+        const response = await fetch(endpoint);
+        const data = await response.json();
+        setRecipeName(data['title']);
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
@@ -44,6 +51,10 @@ const FindWithURL = () => {
                         Search
                     </button>
                 </form>
+            </div>
+
+            <div style={{position: "absolute", left: "50%", top: "50%"}}>
+                {recipeName}
             </div>
 
             {/* help image */}
