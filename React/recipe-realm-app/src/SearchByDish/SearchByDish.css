@@ -27,7 +27,7 @@
 
 .SBD-options-title-container {
     position: absolute;
-    top: 20%;
+    top: 17%;
     left: 30%;
 }
 
@@ -38,13 +38,24 @@
 
 .SBD-options-items-container {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 30%;
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .SBD-options-items-text {
     font-family: "Droid Sans", serif;
     font-size: 150%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.SBD-options-item-img {
+    /*margin-right: 75px;*/
 }
 
 
