@@ -1,7 +1,15 @@
 .SBD-search-bar {
     position: absolute;
     left: 58%;
+    top: 3%;
     width: 40%;
     height: 5%;
-    top: 3%;
+}
+
+.SBD-help-img {
+    position: absolute;
+    left: 56%;
+    top: 3.5%;
+    width: 2%;
+    height: auto;
 }

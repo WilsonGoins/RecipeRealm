@@ -24,6 +24,7 @@ const CreateAccount = () => {
 
     const handleCreateAccountSubmit = async (event) => {
         event.preventDefault();
+        console.log(email);
 
         if (validateAccountCreation(name, email, password)) {
             await api.post('/transactions/', {name, email, password});
@@ -41,7 +42,6 @@ const CreateAccount = () => {
     };
 
     const showAlert = (strongText, additionalText) => {
-        // Create a new alert element
         const alertElement = document.createElement('div');
         alertElement.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show');
         alertElement.innerHTML = `
