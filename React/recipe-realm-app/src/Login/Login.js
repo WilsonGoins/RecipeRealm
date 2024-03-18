@@ -35,6 +35,7 @@ const Login = () => {
 
     const checkExistingUser = (email, password) => {      // TODO: Add checks through backend
         return true;        // always return true for now bc we want them to be an existing user
+        // return true if email and password are already in database
     };
 
     const showAlert = (strongText, additionalText) => {

@@ -3,6 +3,9 @@ import "./SearchByDish.css"
 import Template from "../Template/Template";
 import SPapi from "../SPapi"
 import QuestionMark_RR from "./QuestionMark_RR.png"
+import Arrow_Left_RR from "./Arrow_Left_RR.png"
+import Arrow_Right_RR from "./Arrow_Right_RR.png"
+import ShoppingList_RR from "../LandingPage/ShoppingList_RR.jpg";
 
 const SearchByDish = () => {
     const [query, setQuery] = useState("");
@@ -13,7 +16,7 @@ const SearchByDish = () => {
     const GetRecipeOptions = async (event) => {
         event.preventDefault();
         try {
-            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}`;
+            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}&number=12`;
             const response = await fetch(endpoint);
 
             // check if we got a bad response
@@ -55,7 +58,7 @@ const SearchByDish = () => {
 
             {/* search bar */}
             <div className="SBD-search-bar container-fluid">
-                <form className="d-flex" role="search">
+                <form className="d-flex" role="search" onSubmit={(event) => GetRecipeOptions(event)}>
                     <input className="form-control me-2" type="search" placeholder="Enter Any Popular Dish" aria-label="Search"
                            onChange={(event) => setQuery(event.target.value)}
                            value={query}/>
@@ -84,15 +87,56 @@ const SearchByDish = () => {
                         </div>
 
                         {optionStage === "1-4" && (
-                            <div className="SBD-options-items-container">
-                                {recipeOptions.map(recipe => (
-                                    <div key={recipe.id} style={{marginRight: "100px", alignContent: "center"}}>
-                                        <div className="SBD-options-items-text">{recipe.title}</div>
-                                        <img className="SBD-options-items-img" src={recipe.image}
-                                             alt="Picture of Dish"></img>
-                                    </div>
-                                ))}
-                            </div>
+                            <>
+                                <div className="SBD-options-items-container">
+                                    {recipeOptions.slice(0, 4).map(recipe => (
+                                        <div key={recipe.id} style={{marginRight: "100px", alignContent: "center"}}>
+                                            <div className="SBD-options-items-text">{recipe.title}</div>
+                                            <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
+                                onClick={() => {setOptionStage("5-8")}}/>
+                            </>
+                        )}
+
+                        {optionStage === "5-8" && (
+                            <>
+                                <div className="SBD-options-items-container">
+                                    {recipeOptions.slice(4, 8).map(recipe => (
+                                        <div key={recipe.id} style={{marginRight: "100px", alignContent: "center"}}>
+                                            <div className="SBD-options-items-text">{recipe.title}</div>
+                                            <img className="SBD-options-items-img" src={recipe.image}
+                                                 alt="Picture of Dish"/>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <img src={Arrow_Left_RR} alt="Left Arrow Button" className="SBD-arrow-left"
+                                     onClick={() => {setOptionStage("1-4")}}/>
+
+                                <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
+                                     onClick={() => {setOptionStage("9-12")}}/>
+                            </>
+                        )}
+
+                        {optionStage === "9-12" && (
+                            <>
+                                <div className="SBD-options-items-container">
+                                    {recipeOptions.slice(8, 12).map(recipe => (
+                                        <div key={recipe.id} style={{marginRight: "100px", alignContent: "center"}}>
+                                            <div className="SBD-options-items-text">{recipe.title}</div>
+                                            <img className="SBD-options-items-img" src={recipe.image}
+                                                 alt="Picture of Dish"/>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <img src={Arrow_Left_RR} alt="Left Arrow Button" className="SBD-arrow-left"
+                                     onClick={() => {setOptionStage("5-8")}}/>
+                            </>
                         )}
                     </>
                 )}

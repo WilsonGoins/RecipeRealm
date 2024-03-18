@@ -32,12 +32,14 @@ const CreateAccount = () => {
             setName('');
             setEmail('');
             setPassword('');
+
             navigate('/home');
         }
     };
 
-    const checkExistingUser = (email, password) => {      // TODO: Check for existing user via backend
+    const checkExistingUser = (email) => {      // TODO: Check for existing user via backend
         return false;       // always return false bc we want to return false if they are a new user
+        // check if email is in database, if so return true. if email is not in database return false
     };
 
     const showAlert = (strongText, additionalText) => {
@@ -62,7 +64,7 @@ const CreateAccount = () => {
         if (/^[A-Za-z]+$/.test(name)) {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
-                    if (!checkExistingUser(email, password)) {        // we check if they are an existing user
+                    if (!checkExistingUser(email)) {        // we check if they are an existing user
                         return true;
                     } else {
                         showAlert("Email Does Not Exist!", "Check For Typos")

@@ -54,8 +54,20 @@
     text-align: center;
 }
 
-.SBD-options-item-img {
-    /*margin-right: 75px;*/
+.SBD-arrow-right {
+    position: absolute;
+    left: 89%;
+    top: 56%;
+    width: 8%;
+    height: auto;
+}
+
+.SBD-arrow-left {
+    position: absolute;
+    left: 27.5%;
+    top: 56%;
+    width: 8%;
+    height: auto;
 }
 
 

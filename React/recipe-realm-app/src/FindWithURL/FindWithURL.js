@@ -54,7 +54,7 @@ const FindWithURL = () => {
 
             {/* search bar */}
             <div className="FWU-search-bar container-fluid">
-                <form className="d-flex" role="search">
+                <form className="d-flex" role="search" onSubmit={(event) => GetRecipeInfo(event)}>
                     <input className="form-control me-2" type="search" placeholder="Enter a URL" aria-label="Search"
                            onChange={(event) => setUrl(event.target.value)}
                            value={url}/>

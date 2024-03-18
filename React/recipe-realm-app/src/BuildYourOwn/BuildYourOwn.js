@@ -7,9 +7,15 @@ const BuildYourOwn = () => {
     const navigate = useNavigate();
 
     return (
-        <Template>
+        <>
+            <Template />
 
-        </Template>
+            {/* ingredient section*/}
+            <div>
+
+            </div>
+
+        </>
     )
 }
 
