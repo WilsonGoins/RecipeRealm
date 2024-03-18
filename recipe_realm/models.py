@@ -2,7 +2,8 @@ from database import Base
 from sqlalchemy import Column, Integer, String
 
 
-class Transaction(Base):
+#database model
+class User(Base):
     __tablename__ = "users"
 
     email = Column(String, primary_key=True, index=False)

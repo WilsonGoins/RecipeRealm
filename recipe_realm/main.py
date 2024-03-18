@@ -6,6 +6,7 @@ from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
 
+#fastapi instance
 app = FastAPI()
 
 origins = [
@@ -22,19 +23,19 @@ app.add_middleware(
 
 
 #Pydantic model for request data
-class TransactionBase(BaseModel):
+class UserCreate(BaseModel):
     name: str
     email: str
     password: str
 
 #Pydantic model for response data
-class TransactionModel(TransactionBase):
+class UserResponse(BaseModel):
     email: str
 
     class Config:
         orm_mode = True
 
-
+#dependency to get database session
 def get_db():
     db = SessionLocal()
     try:
@@ -45,19 +46,22 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
+#create tables
 models.Base.metadata.create_all(bind=engine)
 
-
-@app.post("/users/", response_model=TransactionModel)
-async def create_transaction(transaction: TransactionBase, db: db_dependency):
-    db_user = models.Transaction(**transaction.dict())
+#api endpoint to create an item
+@app.post("/users/", response_model=UserResponse)
+async def create_user(user: UserCreate, db: Session = Depends(db_dependency)):
+    db_user = models.User(**user.dict())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
-
-@app.get("/users/{}", response_model=List[TransactionModel])
-async def read_transaction(db: db_dependency, skip: int = 0, limit: int = 100):
-    db_user = db.query(models.Transaction).offset(skip).limit(limit).all()
+#api endpoint to read an item by id
+@app.get("/users/{user_email}", response_model=List[UserResponse])
+async def read_user(user_email: str, db: Session = Depends(db_dependency)):
+    db_user = db.query(models.User).filter(models.User.email == user_email).first()
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
     return db_user
