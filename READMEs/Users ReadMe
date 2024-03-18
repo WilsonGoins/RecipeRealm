@@ -1,0 +1,22 @@
+A ReadMe for new users on how to get this project running on their own machine
+
+1. First we need to install several backend dependencies. In a terminal run:
+    pip install fastapi
+    pip install sqlalchemy
+    pip install uvicorn
+2. We will now download the frontend dependencies:
+    a. Go to https://nodejs.org/en/download and download the correct version of Node.js
+        i. Double click on it in files and select "open with Windows Installer".
+        ii. Once installed, restart your computer
+    b. Now we just need to run the following commands in a terminal:
+        npm install npm -g
+        npm install react-router-dom
+2. Close that terminal and open two new terminals. One will run the front end, the other will run the back end
+3. First, in one terminal run:
+    cd .\FastAPI\ | uvicorn main:app --reload
+    a. If you get the error that uvicorn is not recognized, instead run
+        cd .\FastAPI\ | python -m uvicorn main:app --reload
+
+4. Now, in the other terminal you opened, run:
+    cd React/recipe-realm-app | npm start
+5. This will automatically open the react app in your browser, and everything is ready to go!
