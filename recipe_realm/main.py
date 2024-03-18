@@ -21,14 +21,15 @@ app.add_middleware(
 )
 
 
+#Pydantic model for request data
 class TransactionBase(BaseModel):
     name: str
     email: str
     password: str
 
-
+#Pydantic model for response data
 class TransactionModel(TransactionBase):
-    id: int
+    email: str
 
     class Config:
         orm_mode = True
@@ -47,16 +48,16 @@ db_dependency = Annotated[Session, Depends(get_db)]
 models.Base.metadata.create_all(bind=engine)
 
 
-@app.post("/transactions/", response_model=TransactionModel)
+@app.post("/users/", response_model=TransactionModel)
 async def create_transaction(transaction: TransactionBase, db: db_dependency):
-    db_transaction = models.Transaction(**transaction.dict())
-    db.add(db_transaction)
+    db_user = models.Transaction(**transaction.dict())
+    db.add(db_user)
     db.commit()
-    db.refresh(db_transaction)
-    return db_transaction
+    db.refresh(db_user)
+    return db_user
 
 
-@app.get("/transactions/", response_model=List[TransactionModel])
+@app.get("/users/{}", response_model=List[TransactionModel])
 async def read_transaction(db: db_dependency, skip: int = 0, limit: int = 100):
-    transactions = db.query(models.Transaction).offset(skip).limit(limit).all()
-    return transactions
+    db_user = db.query(models.Transaction).offset(skip).limit(limit).all()
+    return db_user
