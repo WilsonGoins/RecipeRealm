@@ -35,8 +35,10 @@ class UserResponse(BaseModel):
     class Config:
         orm_mode = True
 
+
 #dependency to get database session
-def get_db():
+#def get_db():
+def db_dependency():
     db = SessionLocal()
     try:
         yield db
@@ -44,7 +46,7 @@ def get_db():
         db.close()
 
 
-db_dependency = Annotated[Session, Depends(get_db)]
+#db_dependency = Annotated[Session, Depends(get_db)]
 
 #create tables
 models.Base.metadata.create_all(bind=engine)
@@ -59,9 +61,16 @@ async def create_user(user: UserCreate, db: Session = Depends(db_dependency)):
     return db_user
 
 #api endpoint to read an item by id
-@app.get("/users/{user_email}", response_model=List[UserResponse])
+@app.get("/users/{user_email}", response_model=UserResponse)
 async def read_user(user_email: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == user_email).first()
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    # Run the FastAPI application using Uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=3000)
