@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
+from hashing import Hasher
 
 #fastapi instance
 app = FastAPI()
@@ -22,15 +23,11 @@ app.add_middleware(
 )
 
 
-#Pydantic model for request data
-class UserCreate(BaseModel):
+#Pydantic model for request and response data
+class UserModel(BaseModel):
     name: str
     email: str
     password: str
-
-#Pydantic model for response data
-class UserResponse(BaseModel):
-    email: str
 
     class Config:
         orm_mode = True
@@ -52,8 +49,10 @@ def db_dependency():
 models.Base.metadata.create_all(bind=engine)
 
 #api endpoint to create an item
-@app.post("/users/", response_model=UserResponse)
-async def create_user(user: UserCreate, db: Session = Depends(db_dependency)):
+@app.post("/users/", response_model=UserModel)
+async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
+    # hash the password before storing it in the database
+    user.password = Hasher.get_password_hash(user.password)
     db_user = models.User(**user.dict())
     db.add(db_user)
     db.commit()
@@ -61,16 +60,9 @@ async def create_user(user: UserCreate, db: Session = Depends(db_dependency)):
     return db_user
 
 #api endpoint to read an item by id
-@app.get("/users/{user_email}", response_model=UserResponse)
-async def read_user(user_email: str, db: Session = Depends(db_dependency)):
+@app.get("/users/{user_email}", response_model=UserModel)
+async def read_user(user_email: str, db: Session = Depends(db_dependency), ):
     db_user = db.query(models.User).filter(models.User.email == user_email).first()
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    # Run the FastAPI application using Uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=3000)
