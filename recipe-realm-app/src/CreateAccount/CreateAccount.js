@@ -12,13 +12,8 @@ const CreateAccount = () => {
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
 
-    const fetchTransactions = async () => {
-        const response = await api.get('/transactions/');
-        setTransactions(response.data);
-    };
-
     useEffect(() => {
-        fetchTransactions();
+
     }, []);
 
 
@@ -26,8 +21,7 @@ const CreateAccount = () => {
         event.preventDefault();
 
         if (validateAccountCreation(name, email, password)) {
-            await api.post('/transactions/', {name, email, password});
-            await fetchTransactions();
+            await api.post('/users/', {name, email, password});
             // reset the data
             setName('');
             setEmail('');

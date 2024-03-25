@@ -4,9 +4,9 @@
     pip install uvicorn
 2. Close that terminal and open two new terminals. One will run the front end, the other will run the back end
 3. First, in one terminal run:
-    cd .\FastAPI\ | uvicorn main:app --reload
+    cd FastAPI | uvicorn main:app --reload
 3a. If you get an error that uvicorn is unrecognized, run:
-    cd .\FastAPI\ | python3 -m uvicorn main:app --reload
+    cd FastAPI | python3 -m uvicorn main:app --reload
 4. Now, in the other terminal you opened, run:
     cd React/recipe-realm-app | npm start
 5. This will automatically open the react app in your browser, and everything is ready to go!

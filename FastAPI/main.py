@@ -6,6 +6,7 @@ from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
 
+#fastapi instance
 app = FastAPI()
 
 origins = [
@@ -21,20 +22,23 @@ app.add_middleware(
 )
 
 
-class TransactionBase(BaseModel):
+#Pydantic model for request data
+class UserCreate(BaseModel):
     name: str
     email: str
     password: str
 
-
-class TransactionModel(TransactionBase):
-    id: int
+#Pydantic model for response data
+class UserResponse(BaseModel):
+    email: str
 
     class Config:
         orm_mode = True
 
 
-def get_db():
+#dependency to get database session
+#def get_db():
+def db_dependency():
     db = SessionLocal()
     try:
         yield db
@@ -42,21 +46,31 @@ def get_db():
         db.close()
 
 
-db_dependency = Annotated[Session, Depends(get_db)]
+#db_dependency = Annotated[Session, Depends(get_db)]
 
+#create tables
 models.Base.metadata.create_all(bind=engine)
 
-
-@app.post("/transactions/", response_model=TransactionModel)
-async def create_transaction(transaction: TransactionBase, db: db_dependency):
-    db_transaction = models.Transaction(**transaction.dict())
-    db.add(db_transaction)
+#api endpoint to create an item
+@app.post("/users/", response_model=UserResponse)
+async def create_user(user: UserCreate, db: Session = Depends(db_dependency)):
+    db_user = models.User(**user.dict())
+    db.add(db_user)
     db.commit()
-    db.refresh(db_transaction)
-    return db_transaction
+    db.refresh(db_user)
+    return db_user
+
+#api endpoint to read an item by id
+@app.get("/users/{user_email}", response_model=UserResponse)
+async def read_user(user_email: str, db: Session = Depends(db_dependency)):
+    db_user = db.query(models.User).filter(models.User.email == user_email).first()
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
 
 
-@app.get("/transactions/", response_model=List[TransactionModel])
-async def read_transaction(db: db_dependency, skip: int = 0, limit: int = 100):
-    transactions = db.query(models.Transaction).offset(skip).limit(limit).all()
-    return transactions
+if __name__ == "__main__":
+    import uvicorn
+
+    # Run the FastAPI application using Uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=3000)

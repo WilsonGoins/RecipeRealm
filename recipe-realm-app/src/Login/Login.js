@@ -10,13 +10,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
 
-    const fetchTransactions = async () => {
-        const response = await api.get('/transactions/');
-        setTransactions(response.data);
-    };
-
     useEffect(() => {
-        fetchTransactions();
+
     }, []);
 
 
