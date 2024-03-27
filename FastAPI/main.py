@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Response
 from typing import Annotated, List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -32,6 +32,12 @@ class UserModel(BaseModel):
     class Config:
         orm_mode = True
 
+class EmailModel(BaseModel):
+    email: str
+
+    class Config:
+        orm_mode = True
+
 
 #dependency to get database session
 #def get_db():
@@ -43,7 +49,8 @@ def db_dependency():
         db.close()
 
 
-#db_dependency = Annotated[Session, Depends(get_db)]
+# db_dependency = Annotated[Session, Depends(get_db)]
+        
 
 #create tables
 models.Base.metadata.create_all(bind=engine)
@@ -66,3 +73,12 @@ async def read_user(user_email: str, db: Session = Depends(db_dependency), ):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+# endpoint to check for user
+@app.get("/checkemail/")
+async def check_email(email: EmailModel, db: Session = Depends(db_dependency), ):
+    db_user = db.query(models.User).filter(models.User.email == email.email).first()
+    if db_user is None:
+        raise HTTPException(status_code=400)
+    return Response(status_code=200)
+

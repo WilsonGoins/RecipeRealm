@@ -31,9 +31,14 @@ const CreateAccount = () => {
         }
     };
 
-    const checkExistingUser = (email) => {      // TODO: Check for existing user via backend
-        return false;       // always return false bc we want to return false if they are a new user
-        // check if email is in database, if so return true. if email is not in database return false
+    const checkExistingUser = async (email) => {      // TODO: Check for existing user via backend
+        const response = await api.get('/checkemail/', {params: {email: email}});
+        
+        if (response.status === 200) {
+            return true;        // yes we are an existing user
+        } else {
+            return false;       // no we are not an existing user
+        }
     };
 
     const showAlert = (strongText, additionalText) => {
@@ -61,7 +66,7 @@ const CreateAccount = () => {
                     if (!checkExistingUser(email)) {        // we check if they are an existing user
                         return true;
                     } else {
-                        showAlert("Email Does Not Exist!", "Check For Typos")
+                        showAlert("Email Already Exists!", "")
                     }
                 } else {
                     showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
