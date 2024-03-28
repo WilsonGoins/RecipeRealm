@@ -29,6 +29,10 @@ class UserModel(BaseModel):
     email: str
     password: str
 
+class UserResponse(BaseModel):
+    email: str
+    password: str
+
     class Config:
         orm_mode = True
 
@@ -60,9 +64,21 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
     return db_user
 
 #api endpoint to read an item by id
-@app.get("/users/{user_email}", response_model=UserModel)
-async def read_user(user_email: str, db: Session = Depends(db_dependency), ):
-    db_user = db.query(models.User).filter(models.User.email == user_email).first()
+@app.get("/users/{user}", response_model=UserResponse)
+async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
+    db_user = db.query(models.User).filter(models.User.email == email).first()
+    #db_user = db.query(models.User).filter(models.User.email == user_email).first()
+    #print(db_user)
+    if Hasher.verify_password(password, db_user.password) is False:
+        raise HTTPException(status_code=404, detail='Incorrect Password')
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    # Run the FastAPI application using Uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
