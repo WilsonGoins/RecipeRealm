@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated, List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+from starlette.responses import JSONResponse
+
 from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,8 +35,17 @@ class UserResponse(BaseModel):
     email: str
     password: str
 
-    class Config:
-        orm_mode = True
+class RecipeModel(BaseModel):
+    rec_id: int
+    name: str
+
+class IngredientModel(BaseModel):
+    ing_id: int
+    name: str
+    amount: str
+
+class Config:
+    orm_mode = True
 
 
 #dependency to get database session
@@ -52,6 +63,16 @@ def db_dependency():
 #create tables
 models.Base.metadata.create_all(bind=engine)
 
+@app.post("/recipes/")
+async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], db: Session = Depends(db_dependency)):
+    db_recipe = models.Recipe(**recipe.dict())
+    db_ingredients = [ingredient_item.dict() for ingredient_item in ingredient]
+    db.add(db_recipe)
+    db.bulk_insert_mappings(models.Ingredient, db_ingredients)
+    db.commit()
+    db.refresh(db_recipe)
+    return db_recipe, db_ingredients
+
 #api endpoint to create an item
 @app.post("/users/", response_model=UserModel)
 async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
@@ -64,15 +85,13 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
     return db_user
 
 #api endpoint to read an item by id
-@app.get("/users/{user}", response_model=UserResponse)
+@app.get("/users/", response_model=UserResponse)
 async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
-    #db_user = db.query(models.User).filter(models.User.email == user_email).first()
-    #print(db_user)
-    if Hasher.verify_password(password, db_user.password) is False:
-        raise HTTPException(status_code=404, detail='Incorrect Password')
     if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        return JSONResponse(status_code=404, content={'error': 'User not found'})
+    if Hasher.verify_password(password, db_user.password) is False:
+        return JSONResponse(status_code=404, content={'error': 'Incorrect Password'})
     return db_user
 
 
