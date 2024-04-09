@@ -71,7 +71,8 @@ const SearchByDish = () => {
                     // now let's also correctly format the ingredient list
                     var ingredients = [];
                     for (var i = 0; i < data["extendedIngredients"].length; i++) {
-                        ingredients.push(data["extendedIngredients"][i]["original"]);
+                        const tempRes = {"item": data["extendedIngredients"][i]["original"], "aisle": data["extendedIngredients"][i]["aisle"]}
+                        ingredients.push(tempRes);
                     }
                     result["ingredients"] = ingredients;       
 
@@ -87,6 +88,21 @@ const SearchByDish = () => {
         } catch (error) {
             ShowAlert("Uh-Oh, Something Went Wrong", error);
         }
+    }
+
+    const AddRecipe = () => {
+        ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
+        // reset all variables
+        setQuery("");
+        setRecipeOptions([])
+        setOptionStage("1-4");
+        setShowOptions(false);
+        setCurrID("");
+
+        const infoToSend = currRecipe;
+        // TODO: send to backend
+
+        setCurrRecipe({});
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
@@ -226,7 +242,7 @@ const SearchByDish = () => {
                                     <div className="SBD-selected-text">Ingredients:</div>
                                     <ul>
                                         {currRecipe["ingredients"]?.map((ingredient) => (
-                                            <li className="SBD-selected-text"> {ingredient} </li>
+                                            <li className="SBD-selected-text"> {ingredient["item"]} </li>
                                         ))}
                                     </ul>
                                 </div>
@@ -244,7 +260,7 @@ const SearchByDish = () => {
 
                         {/* button to add the recipe */}
                         <div>
-                            <button className="btn btn-dark btn-lg SBD-add-recipe-btn">
+                            <button className="btn btn-dark btn-lg SBD-add-recipe-btn" onClick={() => {AddRecipe()}}>
                                 Add Recipe
                             </button>
                         </div>
