@@ -1,3 +1,8 @@
+.app-container {
+    min-height: 400vh;
+    background-color: antiquewhite;
+}
+
 .SBD-search-bar {
     position: absolute;
     left: 58%;
@@ -70,4 +75,63 @@
     height: auto;
 }
 
+.SBD-return-title-container {
+    position: absolute;
+    top: 17%;
+    left: 30%;
+}
 
+.SBD-return-title-container:hover {
+    text-decoration-line: underline;
+}
+
+.SBD-selected-text {
+    font-family: "Droid Sans", serif;
+    font-size: 175%;   
+}
+
+.SBD-selected-title-container {
+    position: absolute;
+    left: 32.5%;
+    top: 25%;
+}
+
+.SBD-selected-image-container {
+    position: absolute;
+    left: 60%;
+    top: 32.5%;
+}
+
+.SBD-selected-time-container {
+    position: absolute;
+    left: 35%;
+    top: 32.5%;
+}
+
+.SBD-selected-servings-container {
+    position: absolute;
+    left: 35%;
+    top: 37.5%;
+}
+
+.SBD-ingredients-steps-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 35%;
+    top: 42.5%;
+    width: 24%;
+}
+
+.SBD-selected-ingredients-container {
+    position: absolute;
+    left: 35%;
+    top: 42.5%;
+    width: 25%;
+}
+
+.SBD-add-recipe-btn {
+    position: absolute;
+    top: 85%;
+    left: 73.5%;
+}

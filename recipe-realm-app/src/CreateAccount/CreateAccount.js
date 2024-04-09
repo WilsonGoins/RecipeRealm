@@ -21,7 +21,8 @@ const CreateAccount = () => {
         event.preventDefault();
 
         if (validateAccountCreation(name, email, password)) {
-            await api.post('/users/', {name, email, password});
+            // await api.post('/users/', {name, email, password});
+
             // reset the data
             setName('');
             setEmail('');
@@ -34,7 +35,7 @@ const CreateAccount = () => {
     const checkExistingUser = async (email) => {      // TODO: Check for existing user via backend
         const response = await api.get('/checkemail/', {params: {email: email}});
         
-        if (response.status === 200) {
+        if (response.status === 400) {
             return true;        // yes we are an existing user
         } else {
             return false;       // no we are not an existing user
@@ -63,7 +64,8 @@ const CreateAccount = () => {
         if (/^[A-Za-z]+$/.test(name)) {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
-                    if (!checkExistingUser(email)) {        // we check if they are an existing user
+                    // if (!checkExistingUser(email)) {        // we check if they are an existing user
+                    if (true) {
                         return true;
                     } else {
                         showAlert("Email Already Exists!", "")
