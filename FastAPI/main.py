@@ -55,7 +55,7 @@ def db_dependency():
 #create tables
 models.Base.metadata.create_all(bind=engine)
 
-#api endpoint to create an item
+#api endpoint to create a user
 @app.post("/users/", response_model=UserModel)
 async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
     # hash the password before storing it in the database
