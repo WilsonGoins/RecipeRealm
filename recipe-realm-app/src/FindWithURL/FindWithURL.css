@@ -24,3 +24,59 @@
     font-family: "Droid Sans", serif;
     font-size: 350%;
 }
+
+.FWU-selected-text {
+    font-family: "Droid Sans", serif;
+    font-size: 175%;   
+}
+
+.FWU-selected-title-container {
+    position: absolute;
+    left: 32.5%;
+    top: 20%;
+}
+
+.FWU-selected-image-container {
+    position: absolute;
+    left: 64vw;
+    top: 27.5%;
+}
+
+.FWU-selected-image {
+    width: 25vw;
+    height: auto;
+}
+
+.FWU-selected-time-container {
+    position: absolute;
+    left: 35%;
+    top: 27.5%;
+}
+
+.FWU-selected-servings-container {
+    position: absolute;
+    left: 35%;
+    top: 32.5%;
+}
+
+.FWU-ingredients-steps-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 35%;
+    top: 37.5%;
+    width: 24%;
+}
+
+.FWU-selected-ingredients-container {
+    position: absolute;
+    left: 35%;
+    top: 37.5%;
+    width: 25%;
+}
+
+.FWU-add-recipe-btn {
+    position: absolute;
+    top: 85%;
+    left: 73.5%;
+}

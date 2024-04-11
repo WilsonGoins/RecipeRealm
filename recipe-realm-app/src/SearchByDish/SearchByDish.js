@@ -11,8 +11,7 @@ const SearchByDish = () => {
     const [query, setQuery] = useState("");
     const [recipeOptions, setRecipeOptions] = useState([]);      // a list of recipes (each recipe is a dict)
     const [optionStage, setOptionStage] = useState("1-4");
-    const [showOptions, setShowOptions] = useState(false);       // if we want to be showing them options
-    const [currID, setCurrID] = useState("");                    // a recipe id they clicked on
+    const [showOptions, setShowOptions] = useState(true);       // if we want to be showing them options
     const [currRecipe, setCurrRecipe] = useState({});            // the recipe they clicked on
     const helpText = "Enter any common dish, and we will search the internet for recipes that match it. If we don't find anything you like, try finding a recipe online and then use our 'Find With URL' page!";
 
@@ -44,8 +43,6 @@ const SearchByDish = () => {
     }
 
     const HandleImageSelected = async (id) => {
-        setShowOptions(false);              // we don't want to see options anymore
-        setCurrID(id);                      // the current ID is what they selected
         // fetch the recipe information
         try {
             const endpoint = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${SPapi}`;
@@ -60,6 +57,8 @@ const SearchByDish = () => {
                     setCurrRecipe({});
                     ShowAlert("Sorry we couldn't find information on this recipe!", "Try a different one!");
                 } else {            // if we did get results
+                    setShowOptions(false);              // we don't want to see options anymore
+                    
                     var result = {};
 
                     result["title"] = data["title"];
@@ -86,7 +85,7 @@ const SearchByDish = () => {
                 }
             }
         } catch (error) {
-            ShowAlert("Uh-Oh, Something Went Wrong", error);
+            ShowAlert("Uh-Oh, Something Went Wrong", "");
         }
     }
 
@@ -97,7 +96,6 @@ const SearchByDish = () => {
         setRecipeOptions([])
         setOptionStage("1-4");
         setShowOptions(false);
-        setCurrID("");
 
         const infoToSend = currRecipe;
         // TODO: send to backend
@@ -213,9 +211,9 @@ const SearchByDish = () => {
 
             {/* a selected recipe */}
             <div>
-                {!showOptions && currID && (                // if they selected a recipe
+                {!showOptions && (                // if they selected a recipe
                     <>
-                        <div className="SBD-return-title-container" style={{cursor: "pointer"}} onClick={() => {setShowOptions(true); setCurrID("");}}>
+                        <div className="SBD-return-title-container" style={{cursor: "pointer"}} onClick={() => {setShowOptions(true);}}>
                             <div className="SBD-options-title-text">Return to Options</div>
                         </div>
 
@@ -226,7 +224,7 @@ const SearchByDish = () => {
                             </div>
 
                             <div className="SBD-selected-image-container">
-                                <img className="SBD-selected-image" src={currRecipe["image"]} alt="Picture of Dish" />
+                                <img src={currRecipe["image"]} alt="Picture of Dish" />
                             </div>
 
                             <div className="SBD-selected-time-container">

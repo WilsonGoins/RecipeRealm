@@ -6,7 +6,8 @@ import QuestionMark_RR from "../SearchByDish/QuestionMark_RR.png";
 
 const FindWithURL = () => {
     const [url, setUrl] = useState('');
-    const [recipeName, setRecipeName] = useState('No Recipe Found')
+    const [showRecipe, setShowRecipe] = useState(false);
+    const [currRecipe, setCurrRecipe] = useState({});
     const helpText = "Enter the URL for a web page that details a recipe you want to use. We will visit that page, scrape the information, and then add the recipe's information to your desired folder!"
 
     const GetRecipeInfo = async (event) => {
@@ -21,8 +22,33 @@ const FindWithURL = () => {
                 ShowAlert("Sorry That Didn't Work!", "Check for typos in the URL")
             } else {                    // if good request
                 const data = await response.json();
+
                 if (data.length !== 0) {        // if we actually got information from the link
-                    setRecipeName(data['title']);       // TODO: do something with data
+                    setShowRecipe(true);        // they searched for a recipe so we need to show it
+
+                    var result = {};
+
+                    result["title"] = data["title"];
+                    result["id"] = data["id"];
+                    result["time"] = data["readyInMinutes"];
+                    result["image"] = data["image"];
+                    result["servings"] = data["servings"];
+
+                    // now let's also correctly format the ingredient list
+                    var ingredients = [];
+                    for (var i = 0; i < data["extendedIngredients"].length; i++) {
+                        const tempRes = {"item": data["extendedIngredients"][i]["original"], "aisle": data["extendedIngredients"][i]["aisle"]}
+                        ingredients.push(tempRes);
+                    }
+                    result["ingredients"] = ingredients;       
+
+                    var instructions = [];
+                    for (var i = 0; i < data["analyzedInstructions"][0]["steps"].length; i++) {
+                        instructions.push(data["analyzedInstructions"][0]["steps"][i]["step"]);
+                    }
+                    result["steps"] = instructions;
+
+                    setCurrRecipe(result);
                 } else {
                     ShowAlert("Sorry We Weren't Able To Find Data!", "The website isn't formatted well for us, try a different recipe")
                 }
@@ -30,6 +56,19 @@ const FindWithURL = () => {
         } catch (error) {
             ShowAlert("Uh-Oh, Something Went Wrong", "");
         }
+    }
+
+    const AddRecipe = () => {
+        ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
+
+        // reset all variables
+        setUrl("");
+        setShowRecipe(false);
+
+        const infoToSend = currRecipe;
+        // TODO: send to backend
+
+        setCurrRecipe({});
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
@@ -72,9 +111,57 @@ const FindWithURL = () => {
                 </div>
             </div>
 
-            {/* TODO: remove */}
-            <div style={{position: "absolute", left: "50%", top: "50%"}}>
-                {recipeName}
+            {/* a selected recipe */}
+            <div>
+                {showRecipe && (                // if they selected a recipe
+                    <>
+                        {/* display the recipe information */}
+                        <div>        
+                            <div className="FWU-selected-title-container">
+                                <div className="FWU-selected-text" style={{fontSize: "250%"}}>{currRecipe["title"]}</div>
+                            </div>
+
+                            <div className="FWU-selected-image-container">
+                                <img className="FWU-selected-image" src={currRecipe["image"]} alt="Picture of Dish" />
+                            </div>
+
+                            <div className="FWU-selected-time-container">
+                                <div className="FWU-selected-text">Ready in {currRecipe["time"]} minutes</div>
+                            </div>
+
+                            <div className="FWU-selected-servings-container">
+                                <div className="FWU-selected-text">Serves: {currRecipe["servings"]} people</div>
+                            </div>
+
+                            <div className="FWU-ingredients-steps-container">
+                                <div>
+                                    <div className="FWU-selected-text">Ingredients:</div>
+                                    <ul>
+                                        {currRecipe["ingredients"]?.map((ingredient) => (
+                                            <li className="FWU-selected-text"> {ingredient["item"]} </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <div className="FWU-selected-text">Instructions:</div>
+                                    <ul>
+                                        {currRecipe["steps"]?.map((step) => (
+                                            <li className="FWU-selected-text" style={{width: "50vw"}}> {step} </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* button to add the recipe */}
+                        <div>
+                            <button className="btn btn-dark btn-lg FWU-add-recipe-btn" onClick={() => {AddRecipe()}}>
+                                Add Recipe
+                            </button>
+                        </div>
+                    </>
+                )}              
             </div>
 
             {/* help image */}
@@ -82,9 +169,6 @@ const FindWithURL = () => {
                 <img src={QuestionMark_RR} alt="Small Question Mark Image" className="SBD-help-img"
                      onClick={() => ShowAlert(helpText, "")} />
             </div>
-
-            {/*TODO: Add the same file storage we have on the home page. But instead of being able to click into recipes,*/}
-            {/*      They will select a folder to put this new recipe into*/}
         </div>
     )
 }
