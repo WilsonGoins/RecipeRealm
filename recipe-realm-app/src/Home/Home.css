@@ -1,0 +1,46 @@
+.HM-title-container {
+    position: absolute;
+    top: 5%;
+    left: 32.5%;
+}
+
+.HM-title-text {
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
+}
+
+.HM-heading-container {
+    position: absolute;
+    top: 20%;
+    left: 32.5%;
+}
+
+.HM-heading-text {
+    font-family: "Droid Sans", serif;
+    font-size: 250%;
+}
+
+.HM-sad-chef-container {
+    position: absolute;
+    text-align: center;
+    left: 27%;
+    top: 25%;
+    width: 73%;
+}
+.HM-sad-chef-img {
+    width: 55%;
+    height: auto;
+}
+
+.HM-sad-text-container {
+    position: absolute;
+    text-align: center;
+    left: 27%;
+    top: 85%;
+    width: 73%;
+}
+
+.HM-sad-text {
+    font-family: "Droid Sans", serif;
+    font-size: 250%;
+}
