@@ -65,10 +65,13 @@ const FindWithURL = () => {
         setUrl("");
         setShowRecipe(false);
 
-        const infoToSend = currRecipe;
-        // TODO: send to backend
+        var recipeToSend = currRecipe;
+        delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
+        recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
+        
+        // TODO: send recipeToSend to backend
 
-        setCurrRecipe({});
+        setCurrRecipe({});      // reset currRecipe
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {

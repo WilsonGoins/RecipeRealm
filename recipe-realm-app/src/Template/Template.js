@@ -22,7 +22,7 @@ const Template = () => {
             <div className="container-fluid app-container">
                 <div className="row">
                     <nav className="TMP-hover-white TMP-dropdown-menu col-md-3 col-lg-2 d-md-block bg-dark sidebar"
-                         style={{width: "27vw", height: "425vh", color: "darkgrey"}}>
+                         style={{width: "27vw", height: "500vh", color: "darkgrey"}}>
                         <div className="position-sticky">
                             <ul className="nav flex-column">
                                 <li className="nav-item">

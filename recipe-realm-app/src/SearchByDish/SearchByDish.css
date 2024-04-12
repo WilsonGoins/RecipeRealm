@@ -1,4 +1,4 @@
-.app-container {
+o.app-container {
     min-height: 400vh;
     background-color: antiquewhite;
 }
@@ -41,15 +41,42 @@
     font-size: 250%;
 }
 
-.SBD-options-items-container {
+.SBD-options-items-container-big {
     position: absolute;
-    top: 25%;
-    left: 30%;
-    width: 70%;
-    height: auto;
+    top: 25vh;
+    left: 37.5vw;
+    width: 49vw;
+    height: 73vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* outline: 2px solid red;  */
+}
+
+.SBD-options-items-container1 {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* outline: 2px solid blue;  */
+}
+
+.SBD-options-items-container2 {
+    position: relative;     
+    display: flex;
+    flex-direction: row;
+    /* outline: 2px solid yellow;  */
+}
+
+.SBD-options-items-container-small {
+    position: relative;
+    margin-right: 31.25px;
+    margin-left: 31.25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    /* outline: 2px solid green;  */
 }
 
 .SBD-options-items-text {
@@ -100,6 +127,11 @@
     position: absolute;
     left: 60%;
     top: 32.5%;
+}
+
+.SBD-options-items-image {
+    width: 25vw;
+    height: auto;
 }
 
 .SBD-selected-time-container {

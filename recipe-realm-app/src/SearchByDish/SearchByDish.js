@@ -95,12 +95,23 @@ const SearchByDish = () => {
         setQuery("");
         setRecipeOptions([])
         setOptionStage("1-4");
-        setShowOptions(false);
+        setShowOptions(true);
 
-        const infoToSend = currRecipe;
-        // TODO: send to backend
+        var recipeToSend = currRecipe;
+        delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
+        recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
+        
+        // TODO: send recipeToSend to backend
 
-        setCurrRecipe({});
+        setCurrRecipe({});      // reset currRecipe
+    }
+
+    const ReduceRecipeName = (title) => {
+        if (title.length > 25) {
+            return title.substring(0, 25) + '...';
+          } else {
+            return title;
+        }    
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
@@ -155,13 +166,24 @@ const SearchByDish = () => {
 
                         {optionStage === "1-4" && (
                             <>
-                                <div className="SBD-options-items-container">
-                                    {recipeOptions.slice(0, 4).map(recipe => (
-                                        <div key={recipe.id} style={{marginRight: "100px", alignContent: "center", cursor: "pointer"}} onClick={() => HandleImageSelected(recipe.id)}>
-                                            <div className="SBD-options-items-text">{recipe.title}</div>
-                                            <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
-                                        </div>
-                                    ))}
+                                <div className="SBD-options-items-container-big">
+                                    <div className="SBD-options-items-container1">
+                                        {recipeOptions.slice(0, 2).map(recipe => (
+                                            <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
+                                                <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="SBD-options-items-container2">
+                                        {recipeOptions.slice(2, 4).map(recipe => (
+                                            <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
+                                                <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
@@ -171,14 +193,24 @@ const SearchByDish = () => {
 
                         {optionStage === "5-8" && (
                             <>
-                                <div className="SBD-options-items-container">
-                                    {recipeOptions.slice(4, 8).map(recipe => (
-                                        <div key={recipe.id} style={{marginRight: "100px", alignContent: "center", cursor: "pointer"}} onClick={() => HandleImageSelected(recipe.id)}>
-                                            <div className="SBD-options-items-text">{recipe.title}</div>
-                                            <img className="SBD-options-items-img" src={recipe.image}
-                                                 alt="Picture of Dish"/>
-                                        </div>
-                                    ))}
+                                <div className="SBD-options-items-container-big">
+                                    <div className="SBD-options-items-container1">
+                                        {recipeOptions.slice(4, 6).map(recipe => (
+                                            <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
+                                                <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="SBD-options-items-container2">
+                                        {recipeOptions.slice(6, 8).map(recipe => (
+                                            <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
+                                                <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 <img src={Arrow_Left_RR} alt="Left Arrow Button" className="SBD-arrow-left"
@@ -191,14 +223,24 @@ const SearchByDish = () => {
 
                         {optionStage === "9-12" && (
                             <>
-                                <div className="SBD-options-items-container">
-                                    {recipeOptions.slice(8, 12).map(recipe => (
-                                        <div key={recipe.id} style={{marginRight: "100px", alignContent: "center", cursor: "pointer"}} onClick={() => HandleImageSelected(recipe.id)}>
-                                            <div className="SBD-options-items-text">{recipe.title}</div>
-                                            <img className="SBD-options-items-img" src={recipe.image}
-                                                 alt="Picture of Dish"/>
-                                        </div>
-                                    ))}
+                                <div className="SBD-options-items-container-big">
+                                    <div className="SBD-options-items-container1">
+                                        {recipeOptions.slice(8, 10).map(recipe => (
+                                            <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
+                                                <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="SBD-options-items-container2">
+                                        {recipeOptions.slice(10, 12).map(recipe => (
+                                            <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
+                                                <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 <img src={Arrow_Left_RR} alt="Left Arrow Button" className="SBD-arrow-left"
