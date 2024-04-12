@@ -1,23 +1,58 @@
-.HM-title-container {
+.HM-container {
     position: absolute;
     top: 5%;
-    left: 32.5%;
+    left: 30%;
+    width: 67%;
+    height: 480vh;
+    outline: 2px solid red; 
 }
 
 .HM-title-text {
     font-family: "Droid Sans", serif;
     font-size: 350%;
+    text-align: center;
 }
 
 .HM-heading-container {
-    position: absolute;
-    top: 20%;
-    left: 32.5%;
+   margin-top: 1%; 
 }
 
 .HM-heading-text {
     font-family: "Droid Sans", serif;
     font-size: 250%;
+}
+
+.HM-all-recipes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.HM-row-recipes-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.HM-singular-recipe-container {
+    margin-right: 31.25px;
+    margin-left: 31.25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.HM-recipe-text {
+    font-family: "Droid Sans", serif;
+    font-size: 150%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.HM-recipe-img {
+    width: 25vw;
+    height: auto;
 }
 
 .HM-sad-chef-container {
