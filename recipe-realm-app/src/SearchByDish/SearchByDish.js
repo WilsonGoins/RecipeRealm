@@ -5,7 +5,6 @@ import SPapi from "../SPapi"
 import QuestionMark_RR from "./QuestionMark_RR.png"
 import Arrow_Left_RR from "./Arrow_Left_RR.png"
 import Arrow_Right_RR from "./Arrow_Right_RR.png"
-import ShoppingList_RR from "../LandingPage/ShoppingList_RR.jpg";
 
 const SearchByDish = () => {
     const [query, setQuery] = useState("");
@@ -96,12 +95,14 @@ const SearchByDish = () => {
                 // return;
 
         ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
+
         // reset all variables
         setQuery("");
         setRecipeOptions([])
         setOptionStage("1-4");
         setShowOptions(true);
 
+        // format recipe for backend
         var recipeToSend = currRecipe;
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions

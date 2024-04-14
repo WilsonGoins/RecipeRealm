@@ -45,6 +45,7 @@
 .FWU-selected-image {
     width: 25vw;
     height: auto;
+    border-radius: 10px; 
 }
 
 .FWU-selected-time-container {

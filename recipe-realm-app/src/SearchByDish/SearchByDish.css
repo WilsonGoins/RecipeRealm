@@ -132,6 +132,7 @@ o.app-container {
 .SBD-options-items-image {
     width: 25vw;
     height: auto;
+    border-radius: 10px; 
 }
 
 .SBD-selected-time-container {

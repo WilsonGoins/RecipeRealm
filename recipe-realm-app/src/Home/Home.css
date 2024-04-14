@@ -20,6 +20,21 @@
     text-align: center;
 }
 
+.HM-return-container {
+    position: absolute;
+    top: 17%;
+    left: 30%;
+}
+
+.HM-return-text {
+    font-family: "Droid Sans", serif;
+    font-size: 250%;
+}
+
+.HM-return-text:hover {
+    text-decoration-line: underline;
+}
+
 .HM-heading-container {
    margin-top: 1%; 
 }
@@ -49,7 +64,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
 }
 
 .HM-hover-options {
@@ -58,7 +72,10 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
+    background-color: rgba(114, 109, 109, 0.8); /* Light grey with 50% opacity */
+    border-radius: 10px; /* Adjust the value to control the roundness */
+    padding: 5px;
+    cursor: pointer;
 }
 
 .HM-singular-recipe-container:hover .HM-hover-options {
@@ -87,6 +104,7 @@
 .HM-recipe-img {
     width: 20vw;
     height: auto;
+    border-radius: 10px; 
 }
 
 .HM-sad-chef-container {
@@ -112,4 +130,51 @@
 .HM-sad-text {
     font-family: "Droid Sans", serif;
     font-size: 250%;
+}
+
+.HM-selected-text {
+    font-family: "Droid Sans", serif;
+    font-size: 175%;   
+}
+
+.HM-selected-title-container {
+    position: absolute;
+    left: 32.5%;
+    top: 25%;
+}
+
+.HM-selected-image {
+    position: absolute;
+    left: 65vw;
+    top: 30vh;   
+    width: 30vw;
+    height: auto;
+    border-radius: 10px; 
+}
+.HM-selected-time-container {
+    position: absolute;
+    left: 35%;
+    top: 32.5%;
+}
+
+.HM-selected-servings-container {
+    position: absolute;
+    left: 35%;
+    top: 37.5%;
+}
+
+.HM-ingredients-steps-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 35%;
+    top: 42.5%;
+    width: 24%;
+}
+
+.HM-selected-ingredients-container {
+    position: absolute;
+    left: 35%;
+    top: 42.5%;
+    width: 25%;
 }
