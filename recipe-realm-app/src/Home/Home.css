@@ -1,3 +1,11 @@
+.HM-help-img {
+    position: absolute;
+    left: 65vw;
+    top: 4vh;
+    width: 2vw;
+    height: auto;
+}
+
 .HM-container {
     position: absolute;
     top: 5%;
@@ -35,12 +43,38 @@
 }
 
 .HM-singular-recipe-container {
+    position: relative;
     margin-right: 31.25px;
     margin-left: 31.25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+}
+
+.HM-hover-options {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.HM-singular-recipe-container:hover .HM-hover-options {
+    display: flex;
+    flex-direction: row;         
+}
+
+.HM-RedX-img {
+    width: 5vw;
+    height: auto;
+}
+
+.HM-Eye-img {
+    width: 5vw;
+    height: auto;
+    margin-right: 15px;
 }
 
 .HM-recipe-text {

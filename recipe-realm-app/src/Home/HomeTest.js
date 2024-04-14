@@ -2,14 +2,21 @@ import React, {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom";
 import "./Home.css"
 import Template from "../Template/Template";
-import SPapi from "../SPapi"
-import SadChef_RR from "./SadChef_RR.jpg"
+import SPapi from "../SPapi";
+import SadChef_RR from "./SadChef_RR.jpg";
+import RedX_RR from "./RedX_RR.png";
+import QuestionMark_RR from "./QuestionMark_RR.png";
+import Eye_RR from "./Eye_RR.png";
 
 
 const HomeTest = () => {
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [recipes, setRecipes] = useState([]);
+    const [showRecipes, setShowRecipes] = useState(true);
+    const [selectedRecipe, setSelectedRecipe] = useState({});
+    const helpText = "Welcome to the home page! Hover and click on a recipe to either view or delete it."
+    
 
     const GetUserInfo = () => {         // TODO: retrieve name and recipes from backend
         setName("Wilson");
@@ -18,12 +25,16 @@ const HomeTest = () => {
         .then(userRecipes => {
             setRecipes(OrganizeRecipes(userRecipes));
         })
+    }
 
-        // console.log(userRecipes);
-        // userRecipes = OrganizeRecipes(userRecipes);         // organize them correctly
+    const ViewRecipe = (id) => {
+        // get the info for the recipe, toggle some vars, and display the info
+        ShowAlert("Showing Recipe:", id + "...")
+    }
 
-        // setRecipes(userRecipes);
-   
+    const DeleteRecipe = (id) => {      // TODO: backend
+        // delete the recipe and it's ingredients from the database (the id that is passed in here is the correct ID)
+        ShowAlert("Deleting Recipe:", id)       // this is temporary so we know it's working
     }
 
     const GenerateTestRecipes = async () => {
@@ -95,8 +106,15 @@ const HomeTest = () => {
             <Template />
 
             <div className="HM-container">
+                {/* title */}
                 <div className="HM-title-text">
                     {name}'s RecipeRealm™
+                </div>
+
+                {/* help image */}
+                <div>
+                    <img src={QuestionMark_RR} alt="Small Question Mark Image" className="HM-help-img"
+                        onClick={() => ShowAlert(helpText, "")}/>
                 </div>
 
                 {/* user's recipes */}
@@ -116,7 +134,12 @@ const HomeTest = () => {
                                             recipe && recipe.title && (
                                                 <div className="HM-singular-recipe-container">
                                                     <div className="HM-recipe-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                    <img className="HM-recipe-img" src={recipe.image} alt="Sorry, No Picture Available!" />                                                </div>
+                                                    <img className="HM-recipe-img" src={recipe.image} alt="Sorry, No Picture Available!" />     
+                                                    <div className="HM-hover-options">
+                                                        <img className="HM-Eye-img" src={Eye_RR} alt="View Recipe" onClick={() => ViewRecipe(recipe.id)}/>     
+                                                        <img className="HM-RedX-img" src={RedX_RR} alt="Delete Recipe" onClick={() => DeleteRecipe(recipe.id)}/>     
+                                                    </div>                                           
+                                                </div>    
                                             )
                                         ))}
                                     </div>
