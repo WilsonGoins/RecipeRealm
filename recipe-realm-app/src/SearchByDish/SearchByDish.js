@@ -90,6 +90,11 @@ const SearchByDish = () => {
     }
 
     const AddRecipe = () => {
+        // TODO: check if we do not already have 30 recipes (this the max)
+            // if numRecipes > 30:
+                // ShowAlert("Sorry, you already have the maximum number of recipes (30)!", "Go to the home page to delete recipes.");
+                // return;
+
         ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
         // reset all variables
         setQuery("");
@@ -171,7 +176,7 @@ const SearchByDish = () => {
                                         {recipeOptions.slice(0, 2).map(recipe => (
                                             <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
                                                 <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Sorry, No Picture Available!" />
                                             </div>
                                         ))}
                                     </div>
@@ -180,7 +185,7 @@ const SearchByDish = () => {
                                         {recipeOptions.slice(2, 4).map(recipe => (
                                             <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
                                                 <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Sorry, No Picture Available!" />
                                             </div>
                                         ))}
                                     </div>
@@ -198,7 +203,7 @@ const SearchByDish = () => {
                                         {recipeOptions.slice(4, 6).map(recipe => (
                                             <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
                                                 <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Sorry, No Picture Available!" />
                                             </div>
                                         ))}
                                     </div>
@@ -207,7 +212,7 @@ const SearchByDish = () => {
                                         {recipeOptions.slice(6, 8).map(recipe => (
                                             <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
                                                 <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Sorry, No Picture Available!" />
                                             </div>
                                         ))}
                                     </div>
@@ -228,7 +233,7 @@ const SearchByDish = () => {
                                         {recipeOptions.slice(8, 10).map(recipe => (
                                             <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
                                                 <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Sorry, No Picture Available!" />
                                             </div>
                                         ))}
                                     </div>
@@ -237,7 +242,7 @@ const SearchByDish = () => {
                                         {recipeOptions.slice(10, 12).map(recipe => (
                                             <div className="SBD-options-items-container-small" key={recipe.id} onClick={() => HandleImageSelected(recipe.id)}>
                                                 <div className="SBD-options-items-text"> {ReduceRecipeName(recipe.title)} </div>
-                                                <img className="SBD-options-items-img" src={recipe.image} alt="Picture of Dish" />
+                                                <img className="SBD-options-items-img" src={recipe.image} alt="Sorry, No Picture Available!" />
                                             </div>
                                         ))}
                                     </div>
@@ -266,7 +271,7 @@ const SearchByDish = () => {
                             </div>
 
                             <div className="SBD-selected-image-container">
-                                <img src={currRecipe["image"]} alt="Picture of Dish" />
+                                <img src={currRecipe["image"]} alt="Sorry, No Picture Available!" />
                             </div>
 
                             <div className="SBD-selected-time-container">

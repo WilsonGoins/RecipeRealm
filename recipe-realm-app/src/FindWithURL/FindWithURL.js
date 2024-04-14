@@ -59,6 +59,11 @@ const FindWithURL = () => {
     }
 
     const AddRecipe = () => {
+        // TODO: check if we do not already have 30 recipes (this the max)
+            // if numRecipes > 30:
+                // ShowAlert("Sorry, you already have the maximum number of recipes (30)!", "Go to the home page to delete recipes.");
+                // return;
+
         ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
 
         // reset all variables

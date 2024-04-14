@@ -4,6 +4,7 @@ import LandingPage from '../LandingPage/LandingPage'
 import CreateAccount from "../CreateAccount/CreateAccount";
 import Login from '../Login/Login';
 import Home from '../Home/Home';
+import HomeTest from '../Home/HomeTest';
 import SearchByDish from "../SearchByDish/SearchByDish";
 import BuildYourOwn from "../BuildYourOwn/BuildYourOwn";
 import FindWithURL from "../FindWithURL/FindWithURL";
@@ -19,7 +20,7 @@ function App() {
 
                 <Route path="/createaccount" exact element={<CreateAccount />} />
                 <Route path="/login" exact element={<Login />} />
-                <Route path="/home" exact element={<Home />} />
+                <Route path="/home" exact element={<HomeTest />} />
                 <Route path="/searchbydish" exact element={<SearchByDish />} />
                 <Route path="/findwithurl" exact element={<FindWithURL />} />
                 <Route path="/buildyourown" exact element={<BuildYourOwn />} />
