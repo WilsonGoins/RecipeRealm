@@ -20,7 +20,9 @@ const SearchByDish = () => {
         setOptionStage("1-4");
 
         try {
-            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}&number=12`;
+            // const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}&number=12`;
+            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${process.env.REACT_APP_API_KEY}&number=12`;
+
             const response = await fetch(endpoint);
 
             // check if we got a bad response

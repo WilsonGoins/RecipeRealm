@@ -14,7 +14,9 @@ const FindWithURL = () => {
         event.preventDefault();
 
         try {
-            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
+            //const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
+            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${process.env.REACT_APP_API_KEY}&apiKey=${SPapi}`;
+
             const response = await fetch(endpoint);
 
             if (!response.ok) {         // if bad request
