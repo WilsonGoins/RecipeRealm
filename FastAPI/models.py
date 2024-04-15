@@ -25,7 +25,7 @@ class Ingredient(Base):
     amount = Column(String)
 
 #Intersection table
-class Recipe_Ingredient(Base):
+class RecipeIngredient(Base):
     __tablename__ = 'recipe_ingredient'
     key = Column(Integer, primary_key=True, index=True)
     rec_id = Column(Integer)

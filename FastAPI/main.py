@@ -3,6 +3,7 @@ from typing import Annotated, List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from starlette.responses import JSONResponse
+from sqlalchemy import text
 
 from database import SessionLocal, engine
 import models
@@ -25,6 +26,9 @@ app.add_middleware(
 )
 
 
+
+#connection = engine.connect()
+
 #Pydantic model for request and response data
 class UserModel(BaseModel):
     name: str
@@ -36,13 +40,19 @@ class UserResponse(BaseModel):
     password: str
 
 class RecipeModel(BaseModel):
+    name: str
+
+class RecipeResponse(BaseModel):
     rec_id: int
     name: str
 
 class IngredientModel(BaseModel):
-    ing_id: int
     name: str
     amount: str
+
+class RecipeIngredientModel(BaseModel):
+    rec_id: int
+    ing_id: int
 
 class Config:
     orm_mode = True
@@ -64,14 +74,72 @@ def db_dependency():
 models.Base.metadata.create_all(bind=engine)
 
 @app.post("/recipes/")
-async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], db: Session = Depends(db_dependency)):
+async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], recipe_ingredient: List[RecipeIngredientModel], db: Session = Depends(db_dependency)):
+
+    rec_id_current = 0
+    ing_id_current = 0
+
+    #find max rec_id value in recipes table
+    result = db.execute(text('SELECT MAX(rec_id) FROM recipes'))
+    for element in result:
+        #add one to max rec_id to get current rec_id
+        rec_id_current = element[0] + 1
+
+    #find max ing_id value in ingredients table
+    result = db.execute(text('SELECT MAX(ing_id) FROM ingredients'))
+    for element in result:
+        #add one to max ing_id to get current ing_id
+        ing_id_current = element[0] + 1
+
+    #set up items to be added to recipes and ingredients tables
     db_recipe = models.Recipe(**recipe.dict())
     db_ingredients = [ingredient_item.dict() for ingredient_item in ingredient]
+
+    #set up items to be added to recipes_ingredients intersection table
+    for ingredient_item in ingredient:
+        #set the ids for the recipes_ingredients table to the current id values and store in a dictionary
+        recipe_ingredient_dict = {"rec_id": rec_id_current, "ing_id": ing_id_current}
+        #create pydantic model object using the dictionary
+        tmp = RecipeIngredientModel.model_validate(recipe_ingredient_dict)
+        #add the object to the list
+        recipe_ingredient.append(tmp)
+        #increment ing_id_current to account for multiple ingredients being added to recipes_ingredients
+        ing_id_current = ing_id_current + 1
+
+    db_recipe_ingredients = [item.dict() for item in recipe_ingredient]
+
+    #add entries to tables
     db.add(db_recipe)
     db.bulk_insert_mappings(models.Ingredient, db_ingredients)
+    db.bulk_insert_mappings(models.RecipeIngredient, db_recipe_ingredients)
     db.commit()
     db.refresh(db_recipe)
-    return db_recipe, db_ingredients
+    return db_recipe, db_ingredients, db_recipe_ingredients
+
+#get the recipe information based on the passed in rec_id
+@app.get("/recipes/", response_model=RecipeResponse)
+async def get_recipe(rec_id: int, db: Session = Depends(db_dependency)):
+    db_recipe = db.query(models.Recipe).filter(models.Recipe.rec_id == rec_id).first()
+    return db_recipe
+
+#get the ingredients for a recipe based on the passed in rec_id
+@app.get("/ingredients/")
+async def get_ingredients(rec_id: int, db: Session = Depends(db_dependency)):
+    db_recipe_ingredients = db.query(models.RecipeIngredient).filter(models.RecipeIngredient.rec_id == rec_id).all()
+
+    db_ingredients = []
+    for item in db_recipe_ingredients:
+        ing_id = item.ing_id
+        db_tmp = db.query(models.Ingredient).filter(models.Ingredient.ing_id == ing_id).first()
+        db_ingredients.append(db_tmp)
+    return db_ingredients
+
+@app.delete("/recipe/{rec_id}")
+async def delete_recipe(rec_id: int, db: Session = Depends(db_dependency)):
+    tmp = db.query(models.Recipe).filter(models.Recipe.rec_id == rec_id).first()
+    db.delete(tmp)
+    db.commit()
+
 
 #api endpoint to create an item
 @app.post("/users/", response_model=UserModel)
