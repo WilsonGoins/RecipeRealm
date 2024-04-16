@@ -27,10 +27,15 @@ const HomeTest = () => {
         })
     }
 
-    const ViewRecipe = (recipe) => {
+    const ViewRecipe = (recipe) => {    // TODO: backend
         setShowRecipes(false);                      // don't show the recipes anymore
-        setSelectedRecipe(recipe);                         // save the recipe they selected as the selected recipe
+        var tempRecipe =  recipe;
 
+        // TODO: this is where the logic goes to retrieve the ingredients  
+        // var tempIngredients = [];
+        // tempRecipe["ingredients"] = tempIngredients;
+
+        setSelectedRecipe(tempRecipe);                         // save the recipe they selected as the selected recipe
     }
 
     const DeleteRecipe = (id) => {      // TODO: backend
@@ -209,7 +214,91 @@ const HomeTest = () => {
                     "Step 2: Do that",
                     "Step 3: Do something else"
                 ]
-            }
+            },{
+                "title": "Recipe 1",
+                "id": 1,
+                "image": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+                "servings": 4,
+                "time": 30,
+                "ingredients": [
+                    {"item": "Ingredient 1", "aisle": "Aisle 1"},
+                    {"item": "Ingredient 2", "aisle": "Aisle 2"},
+                    {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                ],
+                "steps": [
+                    "Step 1: Do this",
+                    "Step 2: Do that",
+                    "Step 3: Do something else"
+                ]
+            },
+            {
+                "title": "Recipe 2",
+                "id": 2,
+                "image": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+                "servings": 2,
+                "time": 45,
+                "ingredients": [
+                    {"item": "Ingredient 1", "aisle": "Aisle 1"},
+                    {"item": "Ingredient 2", "aisle": "Aisle 2"},
+                    {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                ],
+                "steps": [
+                    "Step 1: Do this",
+                    "Step 2: Do that",
+                    "Step 3: Do something else"
+                ]
+            },
+            {
+                "title": "Recipe 3",
+                "id": 3,
+                "image": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+                "servings": 6,
+                "time": 60,
+                "ingredients": [
+                    {"item": "Ingredient 1", "aisle": "Aisle 1"},
+                    {"item": "Ingredient 2", "aisle": "Aisle 2"},
+                    {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                ],
+                "steps": [
+                    "Step 1: Do this",
+                    "Step 2: Do that",
+                    "Step 3: Do something else"
+                ]
+            },
+            {
+                "title": "Recipe 4",
+                "id": 4,
+                "image": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+                "servings": 3,
+                "time": 25,
+                "ingredients": [
+                    {"item": "Ingredient 1", "aisle": "Aisle 1"},
+                    {"item": "Ingredient 2", "aisle": "Aisle 2"},
+                    {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                ],
+                "steps": [
+                    "Step 1: Do this",
+                    "Step 2: Do that",
+                    "Step 3: Do something else"
+                ]
+            },
+            {
+                "title": "Recipe 5",
+                "id": 5,
+                "image": "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+                "servings": 8,
+                "time": 35,
+                "ingredients": [
+                    {"item": "Ingredient 1", "aisle": "Aisle 1"},
+                    {"item": "Ingredient 2", "aisle": "Aisle 2"},
+                    {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                ],
+                "steps": [
+                    "Step 1: Do this",
+                    "Step 2: Do that",
+                    "Step 3: Do something else"
+                ]
+            },
         ]
         
         return res;
@@ -256,10 +345,13 @@ const HomeTest = () => {
     }, []);
 
     return (
-        <>
+        <div style={{backgroundColor: "antiquewhite"}}>
             <Template />
 
+
             <div className="HM-container">
+                {/* <div className="HM-navbar-bg"></div> */}
+                
                 {/* title */}
                 <div className="HM-title-text">
                     {name}'s RecipeRealm™
@@ -385,7 +477,7 @@ const HomeTest = () => {
                     </div>
                 </>
             )}
-        </>
+        </div>
     )
 }
 

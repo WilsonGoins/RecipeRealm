@@ -14,8 +14,8 @@ const FindWithURL = () => {
         event.preventDefault();
 
         try {
-            //const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
-            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${process.env.REACT_APP_API_KEY}&apiKey=${SPapi}`;
+            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
+            // const endpoint = `https://api.spoonacular.com/recipes/extract?url=${process.env.REACT_APP_API_KEY}&apiKey=${SPapi}`;
 
             const response = await fetch(endpoint);
 
@@ -61,14 +61,9 @@ const FindWithURL = () => {
     }
 
     const AddRecipe = () => {
-        // TODO: check if we do not already have 30 recipes (this the max)
-            // if numRecipes > 30:
-                // ShowAlert("Sorry, you already have the maximum number of recipes (30)!", "Go to the home page to delete recipes.");
-                // return;
-
         ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
 
-        // reset all variables
+        // reset  variables
         setUrl("");
         setShowRecipe(false);
 
@@ -131,8 +126,15 @@ const FindWithURL = () => {
                                 <div className="FWU-selected-text" style={{fontSize: "250%"}}>{currRecipe["title"]}</div>
                             </div>
 
-                            <div className="FWU-selected-image-container">
+                            <div className="FWU-image-btn-container">
                                 <img className="FWU-selected-image" src={currRecipe["image"]} alt="Picture of Dish" />
+
+                                {/* button to add the recipe */}
+                                <div>
+                                    <button className="btn btn-dark btn-lg FWU-add-recipe-btn" onClick={() => {AddRecipe()}}>
+                                        Add Recipe
+                                    </button>
+                                </div>
                             </div>
 
                             <div className="FWU-selected-time-container">
@@ -162,13 +164,6 @@ const FindWithURL = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* button to add the recipe */}
-                        <div>
-                            <button className="btn btn-dark btn-lg FWU-add-recipe-btn" onClick={() => {AddRecipe()}}>
-                                Add Recipe
-                            </button>
                         </div>
                     </>
                 )}              

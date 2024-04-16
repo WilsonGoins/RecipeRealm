@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react";
 import "./ShoppingLists.css"
 import Template from "../Template/Template";
 
 const ShoppingLists = () => {
     const [recipes, setRecipes] = useState([]);
-    const [selectedRecipes, setSelectedRecipes] = useState([]);
-    const [listType, setListType] = useState("separate");
-
+    const [showShoppingList, setShowShoppingList] = useState(false);
+    const [shoppingList, setShoppingList] = useState([]);
 
     const GetRecipes = () => {         // TODO: retrieve name and recipes from backend
         var userRecipes = GenerateTestRecipes()
@@ -15,7 +14,7 @@ const ShoppingLists = () => {
         })
     }
 
-const GenerateTestRecipes = async () => {
+    const GenerateTestRecipes = async () => {
         var res = [
            {
                "title": "Recipe 1",
@@ -24,9 +23,12 @@ const GenerateTestRecipes = async () => {
                "servings": 4,
                "time": 30,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"},
+                   {"name": "Ingredient 4", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 5", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 6", "aisle": "Aisle 1"},
                ],
                "steps": [
                    "Step 1: Do this",
@@ -41,9 +43,9 @@ const GenerateTestRecipes = async () => {
                "servings": 2,
                "time": 45,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -58,9 +60,9 @@ const GenerateTestRecipes = async () => {
                "servings": 6,
                "time": 60,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -75,9 +77,9 @@ const GenerateTestRecipes = async () => {
                "servings": 3,
                "time": 25,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -92,9 +94,9 @@ const GenerateTestRecipes = async () => {
                "servings": 8,
                "time": 35,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -109,9 +111,9 @@ const GenerateTestRecipes = async () => {
                "servings": 5,
                "time": 50,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -126,9 +128,9 @@ const GenerateTestRecipes = async () => {
                "servings": 2,
                "time": 20,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -143,9 +145,9 @@ const GenerateTestRecipes = async () => {
                "servings": 4,
                "time": 40,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -160,9 +162,9 @@ const GenerateTestRecipes = async () => {
                "servings": 7,
                "time": 55,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -177,9 +179,9 @@ const GenerateTestRecipes = async () => {
                "servings": 3,
                "time": 30,
                "ingredients": [
-                   {"item": "Ingredient 1", "aisle": "Aisle 1"},
-                   {"item": "Ingredient 2", "aisle": "Aisle 2"},
-                   {"item": "Ingredient 3", "aisle": "Aisle 3"}
+                   {"name": "Ingredient 1", "aisle": "Aisle 1"},
+                   {"name": "Ingredient 2", "aisle": "Aisle 2"},
+                   {"name": "Ingredient 3", "aisle": "Aisle 3"}
                ],
                "steps": [
                    "Step 1: Do this",
@@ -225,8 +227,77 @@ const GenerateTestRecipes = async () => {
         setRecipes(tempRecipes);
     }
 
-    const MakeList = () => {
+    const GatherAndValidateRecipes = () => {            // TODO: backend
+        var result = [];
+
+        for (var i = 0; i < recipes.length; i++) {
+            for (var j = 0; j < 3; j++) {
+                const currRecipe = recipes[i][j];
+                if (currRecipe && currRecipe.clicked) {        // if the curr recipe was selected
+                    result.push({"title": currRecipe.title, "ingredients": currRecipe.ingredients});
+
+                    // TODO: this is where the logic goes to retrieve the ingredients  
+                    // var tempIngredients = [];
+                    // tempRecipe["ingredients"] = tempIngredients;
+                }
+            }
+        }
+
+        if (result.length === 0) {
+            ShowAlert("Please select one or more recipes.", "");
+        }
+        return result;
+    }
+
+    const FormatIngredients = (recipesList) => {
+        var tempRes = [];
         
+        for (let recipe of recipesList) {
+            var recipeIngreds = {};
+
+            for (let ingredient of recipe.ingredients) {
+                if (recipeIngreds.hasOwnProperty(ingredient.aisle)) {
+                    recipeIngreds[ingredient.aisle].push(ingredient.name);
+                } else {
+                    recipeIngreds[ingredient.aisle] = [ingredient.name];
+                }
+            }
+            tempRes.push({"title": recipe.title, "ingredients": recipeIngreds});
+        }
+
+        return tempRes;
+    }
+
+    const MakeList = () => {
+        var res = GatherAndValidateRecipes();
+        res = FormatIngredients(res);
+        console.log(res);
+
+        if (res.length !== 0) {          // if shopping list isn't empty (it will be empty if they did something wrong)
+            setShoppingList(res);
+            setShowShoppingList(true);
+        } 
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    const ShowAlert = (strongMessage, weakMessage) => {
+        const alertElement = document.createElement('div');
+        alertElement.classList.add('alert', 'alert-primary', 'alert-dismissible', 'fade', 'show');
+        alertElement.innerHTML = `
+            <strong>${strongMessage}</strong> ${weakMessage}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+
+        alertElement.style.position = 'fixed';
+        alertElement.style.top = '0';
+        alertElement.style.left = '50%';
+        alertElement.style.transform = 'translateX(-50%)';
+
+        document.body.appendChild(alertElement);
     }
 
     useEffect(() => {       // this get's called as soon as we open this page
@@ -237,47 +308,61 @@ const GenerateTestRecipes = async () => {
         <>
             <Template />
 
-            <div className="SL-prompt-container">
-                <div className="SL-heading">Welcome To Your Shopping List Creator</div>
+            {!showShoppingList && (
+                <div className="SL-prompt-container">
+                    <div className="SL-heading">Shopping List Creator</div>
 
-                <div className="SL-prompt">Please select the recipes that you want to make a shopping list for:</div>
+                    <div className="SL-prompt">Please select the recipes that you want to make a shopping list for:</div>
 
-                <div className="SL-all-recipes-container">
-                    {recipes.map((list, outerIndex) => (                // go through the 1st dimension of the list (groups of 3)
-                        <div className="HM-row-recipes-container">
-                            {list.map((recipe, innerIndex) => (         // go through each recipe in group of 3
-                                recipe && recipe.title && (
-                                    <div
-                                        className="SL-singular-recipe-container"
-                                        onClick={() => HandleSelect(outerIndex, innerIndex)}
-                                        style={{ backgroundColor: !recipe.clicked ? '' : 'rgba(114, 109, 109, 0.8)', 
-                                                borderRadius: !recipe.clicked ? '' : '10px'}}
-                                    >
-                                        <div className="HM-recipe-text">{ReduceRecipeName(recipe.title)}</div>
-                                        <img className="HM-recipe-img" src={recipe.image} alt="Sorry, No Picture Available!" />
-                                    </div> 
-                                )
-                            ))}
+                    <div className="SL-all-recipes-container">
+                        {recipes.map((list, outerIndex) => (                // go through the 1st dimension of the list (groups of 3)
+                            <div className="HM-row-recipes-container">
+                                {list.map((recipe, innerIndex) => (         // go through each recipe in group of 3
+                                    recipe && recipe.title && (
+                                        <div
+                                            className="SL-singular-recipe-container"
+                                            onClick={() => HandleSelect(outerIndex, innerIndex)}
+                                            style={{ backgroundColor: !recipe.clicked ? '' : 'rgba(114, 109, 109, 0.8)', 
+                                                    borderRadius: !recipe.clicked ? '' : '10px'}}
+                                        >
+                                            <div className="HM-recipe-text">{ReduceRecipeName(recipe.title)}</div>
+                                            <img className="HM-recipe-img" src={recipe.image} alt="Sorry, No Picture Available!" />
+                                        </div> 
+                                    )
+                                ))}
+                            </div>
+                        ))} 
+                    </div>
+
+                    <div style={{textAlign: "center"}}>
+                        <button className="btn btn-dark btn-lg SL-submit-btn" onClick={() => MakeList()}>
+                            Make My Shopping List!
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {showShoppingList && (
+                <div className="SL-prompt-container">
+                    {shoppingList.map((recipe) => (
+                        <div className="SL-shopping-list-container-small">
+                            <div className="SL-shopping-list-recipe-title"> {recipe.title} </div>
+                            <ul>
+                                {Object.entries(recipe.ingredients).map(([aisle, ingredients]) => (
+                                    <li key={aisle}>
+                                        <div className="SL-shopping-list-aisle"> {aisle} </div>
+                                        <ul>
+                                            {ingredients.map((ingredient, index) => (
+                                                <li className="SL-shopping-list-ingredient" key={index}> {ingredient} </li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))}
+                            </ul>                            
                         </div>
-                    ))} 
+                    ))}
                 </div>
-
-                <div className="SL-prompt2-container"> 
-                    <div className="SL-prompt">How do you want your shopping list organized?</div>
-
-                    <select class="SL-dropdown form-select" aria-label="Default select example" onChange={(event) => {setListType(event.target.value)}}>
-                        <option selected>Open this select menu</option>
-                        <option value="separate">Separate ingredients by recipe</option>
-                        <option value="combined">Combine all ingredients into one list</option>
-                    </select>
-                </div>
-
-                <div style={{textAlign: "center"}}>
-                    <button className="btn btn-dark btn-lg SL-submit-btn" onClick={() => MakeList()}>
-                        Make My Shopping List!
-                    </button>
-                </div>
-            </div>
+            )}
         </>
 
     )

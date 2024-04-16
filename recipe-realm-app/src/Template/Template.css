@@ -19,11 +19,12 @@
 }
 
 .TMP-credit-container {
-    position: fixed;
+    align-items: center;
+    position: absolute;
+    left: 2.5%;
     bottom: 0;
     margin-bottom: 2%;
     width: 22%;
-    left: 2%;
 }
 
 .TMP-title-text {

@@ -19,10 +19,11 @@ const Template = () => {
             </div>
 
             {/* side navigation bar */}
-            <div className="container-fluid app-container">
+            <div className="container-fluid">
                 <div className="row">
                     <nav className="TMP-hover-white TMP-dropdown-menu col-md-3 col-lg-2 d-md-block bg-dark sidebar"
-                         style={{width: "27vw", height: "500vh", color: "darkgrey"}}>
+                        style={{width: "27vw", height: "75vh", color: "darkgrey", borderBottomRightRadius: "10px"}}>
+
                         <div className="position-sticky">
                             <ul className="nav flex-column">
                                 <li className="nav-item">
@@ -50,16 +51,14 @@ const Template = () => {
                                 </li>
                             </ul>
                         </div>
+
+                        {/*footer*/}
+                        <div className="TMP-credit-container">
+                            <div className="TMP-credit-text">
+                                Created by Wilson Goins, Allison Barfield, Ajay Patel, and Ethan Durand
+                            </div>
+                        </div>
                     </nav>
-                </div>
-            </div>
-
-            {/* TODO: Add file style organization of recipes */}
-
-            {/*footer*/}
-            <div className="TMP-credit-container">
-                <div className="TMP-credit-text">
-                    Created by Wilson Goins, Allison Barfield, Ajay Patel, and Ethan Durand
                 </div>
             </div>
         </div>

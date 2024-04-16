@@ -20,8 +20,8 @@ const SearchByDish = () => {
         setOptionStage("1-4");
 
         try {
-            // const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}&number=12`;
-            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${process.env.REACT_APP_API_KEY}&number=12`;
+            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}&number=12`;
+            //const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${process.env.REACT_APP_API_KEY}&number=12`;
 
             const response = await fetch(endpoint);
 
@@ -91,11 +91,6 @@ const SearchByDish = () => {
     }
 
     const AddRecipe = () => {
-        // TODO: check if we do not already have 30 recipes (this the max)
-            // if numRecipes > 30:
-                // ShowAlert("Sorry, you already have the maximum number of recipes (30)!", "Go to the home page to delete recipes.");
-                // return;
-
         ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
 
         // reset all variables
@@ -139,7 +134,7 @@ const SearchByDish = () => {
     }
 
     return (
-        <div className="app-container">
+        <div>
             <Template />
 
             {/* search bar */}

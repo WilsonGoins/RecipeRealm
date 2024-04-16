@@ -1,9 +1,9 @@
 .SL-prompt-container {
     position: absolute;
     left: 30vw;
-    top: 5vw;
+    top: 2.5vw;
     width: 67vw;
-    height: 480vh;
+    padding-bottom: 5%;
     /* outline: 2px solid red;  */
 }
 
@@ -53,4 +53,26 @@
 
 .SL-submit-btn {
     margin-top: 2.5%;
+}
+
+.SL-shopping-list-container-small {
+    display: flex;
+    flex-direction: column;
+}
+
+.SL-shopping-list-recipe-title {
+    position: relative;
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
+}
+
+.SL-shopping-list-aisle {
+    font-family: "Droid Sans", serif;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.SL-shopping-list-ingredient {
+    font-family: "Droid Sans", serif;
+    font-size: 150%;
 }
