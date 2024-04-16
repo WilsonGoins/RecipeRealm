@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react"
 import "./FindWithURL.css"
 import Template from "../Template/Template";
-import SPapi from "../SPapi"
 import QuestionMark_RR from "../SearchByDish/QuestionMark_RR.png";
 
 const FindWithURL = () => {
@@ -14,8 +13,9 @@ const FindWithURL = () => {
         event.preventDefault();
 
         try {
-            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${SPapi}`;
-            // const endpoint = `https://api.spoonacular.com/recipes/extract?url=${process.env.REACT_APP_API_KEY}&apiKey=${SPapi}`;
+            console.log(process.env.REACT_APP_API_KEY);
+
+            const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${process.env.REACT_APP_API_KEY}`;
 
             const response = await fetch(endpoint);
 
@@ -56,7 +56,7 @@ const FindWithURL = () => {
                 }
             }
         } catch (error) {
-            ShowAlert("Uh-Oh, Something Went Wrong", "");
+            ShowAlert("Uh-Oh, Something Went Wrong", error);
         }
     }
 

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react"
 import "./SearchByDish.css"
 import Template from "../Template/Template";
-import SPapi from "../SPapi"
 import QuestionMark_RR from "./QuestionMark_RR.png"
 import Arrow_Left_RR from "./Arrow_Left_RR.png"
 import Arrow_Right_RR from "./Arrow_Right_RR.png"
@@ -20,8 +19,7 @@ const SearchByDish = () => {
         setOptionStage("1-4");
 
         try {
-            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${SPapi}&number=12`;
-            //const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${process.env.REACT_APP_API_KEY}&number=12`;
+            const endpoint = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${process.env.REACT_APP_API_KEY}&number=12`;
 
             const response = await fetch(endpoint);
 
@@ -46,7 +44,7 @@ const SearchByDish = () => {
     const HandleImageSelected = async (id) => {
         // fetch the recipe information
         try {
-            const endpoint = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${SPapi}`;
+            const endpoint = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY}`;
             const response = await fetch(endpoint);
 
             // check if we got a bad response
