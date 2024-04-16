@@ -16,13 +16,17 @@ class Recipe(Base):
 
     rec_id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
+    servings = Column(String)
+    time = Column(String)
+    steps = Column(String)
+    email = Column(String)
 
 #Table for ingredients
 class Ingredient(Base):
     __tablename__ = 'ingredients'
     ing_id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    amount = Column(String)
+    aisle = Column(String)
 
 #Intersection table
 class RecipeIngredient(Base):

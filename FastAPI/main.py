@@ -41,14 +41,22 @@ class UserResponse(BaseModel):
 
 class RecipeModel(BaseModel):
     name: str
+    servings: str
+    time: str
+    steps: str
+    email: str
 
 class RecipeResponse(BaseModel):
     rec_id: int
     name: str
+    servings: str
+    time: str
+    steps: str
+    email: str
 
 class IngredientModel(BaseModel):
     name: str
-    amount: str
+    aisle: str
 
 class RecipeIngredientModel(BaseModel):
     rec_id: int
@@ -82,14 +90,22 @@ async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], rec
     #find max rec_id value in recipes table
     result = db.execute(text('SELECT MAX(rec_id) FROM recipes'))
     for element in result:
-        #add one to max rec_id to get current rec_id
-        rec_id_current = element[0] + 1
+        #handle empty database case
+        if element[0] is None:
+            rec_id_current = 1
+        else:
+            #add one to max rec_id to get current rec_id
+            rec_id_current = element[0] + 1
 
     #find max ing_id value in ingredients table
     result = db.execute(text('SELECT MAX(ing_id) FROM ingredients'))
     for element in result:
-        #add one to max ing_id to get current ing_id
-        ing_id_current = element[0] + 1
+        #handle empty database case
+        if element[0] is None:
+            ing_id_current = 1
+        else:
+            #add one to max ing_id to get current ing_id
+            ing_id_current = element[0] + 1
 
     #set up items to be added to recipes and ingredients tables
     db_recipe = models.Recipe(**recipe.dict())
@@ -117,9 +133,9 @@ async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], rec
     return db_recipe, db_ingredients, db_recipe_ingredients
 
 #get the recipe information based on the passed in rec_id
-@app.get("/recipes/", response_model=RecipeResponse)
-async def get_recipe(rec_id: int, db: Session = Depends(db_dependency)):
-    db_recipe = db.query(models.Recipe).filter(models.Recipe.rec_id == rec_id).first()
+@app.get("/recipes/")
+async def get_recipe(email: str, db: Session = Depends(db_dependency)):
+    db_recipe = db.query(models.Recipe).filter(models.Recipe.email == email).all()
     return db_recipe
 
 #get the ingredients for a recipe based on the passed in rec_id
@@ -134,11 +150,23 @@ async def get_ingredients(rec_id: int, db: Session = Depends(db_dependency)):
         db_ingredients.append(db_tmp)
     return db_ingredients
 
-@app.delete("/recipe/{rec_id}")
+@app.delete("/delete_recipe/")
 async def delete_recipe(rec_id: int, db: Session = Depends(db_dependency)):
-    tmp = db.query(models.Recipe).filter(models.Recipe.rec_id == rec_id).first()
-    db.delete(tmp)
+    #delete the recipe
+    db_recipe = db.query(models.Recipe).filter(models.Recipe.rec_id == rec_id).first()
+    db.delete(db_recipe)
+
+    #delete the ingredients associated with the recipe
+    db_recipe_ingredients = db.query(models.RecipeIngredient).filter(models.RecipeIngredient.rec_id == rec_id).all()
+    for item in db_recipe_ingredients:
+        ing_id = item.ing_id
+        db_ingredient = db.query(models.Ingredient).filter(models.Ingredient.ing_id == ing_id).first()
+        db.delete(db_ingredient)
+
+    #delete the items in the intersection table associated with the recipe
+    [db.delete(item) for item in db_recipe_ingredients]
     db.commit()
+    return True
 
 
 #api endpoint to create an item
