@@ -165,7 +165,7 @@ const SearchByDish = () => {
                             <div className="SBD-options-title-text">Options</div>
                         </div>
 
-                        {optionStage === "1-4" && (
+                        {optionStage === "1-4" && recipeOptions.length >= 1 && (
                             <>
                                 <div className="SBD-options-items-container-big">
                                     <div className="SBD-options-items-container1">
@@ -187,12 +187,14 @@ const SearchByDish = () => {
                                     </div>
                                 </div>
 
-                                <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
-                                onClick={() => {setOptionStage("5-8")}}/>
+                                {recipeOptions.length >= 5 && (     // if there are more options
+                                    <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
+                                    onClick={() => {setOptionStage("5-8")}}/>
+                                )}
                             </>
                         )}
 
-                        {optionStage === "5-8" && (
+                        {optionStage === "5-8" && recipeOptions.length >= 5 && (
                             <>
                                 <div className="SBD-options-items-container-big">
                                     <div className="SBD-options-items-container1">
@@ -215,14 +217,16 @@ const SearchByDish = () => {
                                 </div>
 
                                 <img src={Arrow_Left_RR} alt="Left Arrow Button" className="SBD-arrow-left"
-                                     onClick={() => {setOptionStage("1-4")}}/>
+                                onClick={() => {setOptionStage("1-4")}}/>
 
-                                <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
-                                     onClick={() => {setOptionStage("9-12")}}/>
+                                {recipeOptions.length >= 9 && (     // if there are more options
+                                    <img src={Arrow_Right_RR} alt="Right Arrow Button" className="SBD-arrow-right"
+                                    onClick={() => {setOptionStage("9-12")}}/>
+                                )}
                             </>
                         )}
 
-                        {optionStage === "9-12" && (
+                        {optionStage === "9-12" && recipeOptions.length >= 9 && (
                             <>
                                 <div className="SBD-options-items-container-big">
                                     <div className="SBD-options-items-container1">

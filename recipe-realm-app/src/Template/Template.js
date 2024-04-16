@@ -6,7 +6,7 @@ const Template = () => {
     const navigate = useNavigate();
 
     return (
-        <div style={{background: "antiqueWhite"}}>
+        <div style={{position: "fixed", background: "antiqueWhite"}}>
 
             {/* spacing */}
             <div className="TMP-empty-container bg-dark"></div>
@@ -22,7 +22,7 @@ const Template = () => {
             <div className="container-fluid">
                 <div className="row">
                     <nav className="TMP-hover-white TMP-dropdown-menu col-md-3 col-lg-2 d-md-block bg-dark sidebar"
-                        style={{width: "27vw", height: "75vh", color: "darkgrey", borderBottomRightRadius: "10px"}}>
+                        style={{width: "27vw", height: "77.5vh", color: "darkgrey", borderBottomRightRadius: "10px"}}>
 
                         <div className="position-sticky">
                             <ul className="nav flex-column">
@@ -51,14 +51,14 @@ const Template = () => {
                                 </li>
                             </ul>
                         </div>
-
-                        {/*footer*/}
-                        <div className="TMP-credit-container">
-                            <div className="TMP-credit-text">
-                                Created by Wilson Goins, Allison Barfield, Ajay Patel, and Ethan Durand
-                            </div>
-                        </div>
                     </nav>
+                </div>
+            </div>
+            
+            {/*footer*/}
+            <div className="TMP-credit-container">
+                <div className="TMP-credit-text">
+                    Created by Wilson Goins, Allison Barfield, Ajay Patel, and Ethan Durand
                 </div>
             </div>
         </div>

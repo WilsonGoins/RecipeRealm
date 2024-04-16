@@ -4,27 +4,11 @@
 }
 
 .TMP-title-container {
-    position: absolute;
+    position: relative;
+    margin-top: 10%;
     margin-bottom: 10%;
     top: 5%;
-    left: 1.25%;
-}
-
-.TMP-empty-container {
-    position: relative;
-    width: 27vw;
-    height: 25vh;
-    left: 0;
-    top: 0;
-}
-
-.TMP-credit-container {
-    align-items: center;
-    position: absolute;
-    left: 2.5%;
-    bottom: 0;
-    margin-bottom: 2%;
-    width: 22%;
+    text-align: center;
 }
 
 .TMP-title-text {
@@ -33,11 +17,30 @@
     cursor: pointer;
 }
 
+.TMP-empty-container {
+    position: absolute;
+    width: 27vw;
+    height: 25vh;
+    left: 0;                
+    border-top-right-radius: 10px;
+    /* outline: 2px solid green;  */
+
+}
+
+.TMP-credit-container {
+    position: fixed;
+    text-align: center; 
+    top: 87.5vh; 
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+    width: 22vw;
+    /* outline: 2px solid blue;   */
+}
+
 .TMP-credit-text {
     font-family: "Prata", sans-serif;
     font-size: 100%;
     color: antiquewhite;
-    text-align: center;
 }
 
 .TMP-nav-item {
