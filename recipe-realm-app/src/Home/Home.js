@@ -21,12 +21,7 @@ const Home = () => {
     const GetUserInfo = async () => {         // TODO: retrieve name and recipes from backend  
         var response = await api.get('/recipes/', {params: {email}});
 
-        var tempRes = [...recipes]
-        tempRes.push(response.data);
-
-        console.log(tempRes);
-
-        setRecipes(tempRes);
+        setRecipes(OrganizeRecipes(response.data));
     }
 
     const ViewRecipe = (recipe) => {    // TODO: backend
@@ -108,7 +103,7 @@ const Home = () => {
                 <div>
                     {showRecipes && (           // if they have not selected a recipe
                         <>
-                            {recipes.length !== 0 && (                // if they have recipes to show
+                            {recipes.length > 0 && (                // if they have recipes to show
                                 <>
                                     <div className="HM-heading-container">
                                         <div className="HM-heading-text">
@@ -120,7 +115,7 @@ const Home = () => {
                                         {recipes.map((list) => (                // go through the 1st dimension of the list (groups of 3)
                                             <div className="HM-row-recipes-container">
                                                 {list.map((recipe) => (         // go through each recipe in group of 3
-                                                    recipe && recipe.title && (
+                                                    recipe && recipe.name && (
                                                         <div className="HM-singular-recipe-container">
                                                             <div className="HM-recipe-text"> {ReduceRecipeName(recipe.name)} </div>
                                                             <img className="HM-recipe-img" src={recipe.image} alt="Sorry, No Picture Available!" />     
@@ -206,7 +201,7 @@ const Home = () => {
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    Are you sure want to delete {recipeToDelete.title}?
+                                    Are you sure want to delete {recipeToDelete.name}?
                                     This cannot be undone!
                                 </div>
                                 <div class="modal-footer">

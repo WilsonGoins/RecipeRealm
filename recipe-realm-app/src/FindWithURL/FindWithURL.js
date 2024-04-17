@@ -21,7 +21,6 @@ const FindWithURL = () => {
             const response = await fetch(endpoint);
 
             if (!response.ok) {         // if bad request
-                console.error(`Error: ${response.status}`)
                 ShowAlert("Sorry That Didn't Work!", "Check for typos in the URL")
             } else {                    // if good request
                 const data = await response.json();
@@ -31,7 +30,7 @@ const FindWithURL = () => {
 
                     var result = {};
 
-                    result["title"] = data["title"];
+                    result["name"] = data["title"];
                     result["id"] = data["id"];
                     result["time"] = data["readyInMinutes"];
                     result["image"] = data["image"];
@@ -57,12 +56,12 @@ const FindWithURL = () => {
                 };
             }
         } catch (error) {
-            ShowAlert("Uh-Oh, Something Went Wrong", error);
+            ShowAlert("Uh-Oh, Something Went Wrong", "");
         }
     }
 
     const AddRecipe = async () => {
-        ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
+        ShowAlert(currRecipe["name"] + " was succesfully added!", "");     // notify the user that the recipe was added
 
         // reset  variables
         setUrl("");
@@ -71,18 +70,10 @@ const FindWithURL = () => {
         let recipeToSend = currRecipe;
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
-
-        // var ingredientIdList = [];
-        // for (var i = 0; i < recipeToSend["ingredients"]; i++) {
-        //     ingredientIdList.push({rec_id: 1, ing_id: i});
-        // }
-
-        console.log(recipeToSend);
         
-        // TODO: test that this works (it doesn't)
         await api.post('/recipes/',
             {
-            recipe: {name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], email: email},
+            recipe: {name: recipeToSend["name"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], image: recipeToSend["image"], email: email},
             ingredient: recipeToSend["ingredients"],
             recipe_ingredient: []
             }
@@ -136,7 +127,7 @@ const FindWithURL = () => {
                         {/* display the recipe information */}
                         <div>        
                             <div className="FWU-selected-title-container">
-                                <div className="FWU-selected-text" style={{fontWeigth: "bold", fontSize: "250%"}}>{currRecipe["title"]}</div>
+                                <div className="FWU-selected-text" style={{fontWeigth: "bold", fontSize: "250%"}}>{currRecipe["name"]}</div>
                             </div>
 
                             <div className="FWU-image-btn-container">

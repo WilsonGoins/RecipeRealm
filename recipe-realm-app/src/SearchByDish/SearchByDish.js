@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from "react"
 import "./SearchByDish.css"
+import api from '../api'
 import Template from "../Template/Template";
 import QuestionMark_RR from "./QuestionMark_RR.png"
 import Arrow_Left_RR from "./Arrow_Left_RR.png"
 import Arrow_Right_RR from "./Arrow_Right_RR.png"
 
 const SearchByDish = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get("email");
     const [query, setQuery] = useState("");
     const [recipeOptions, setRecipeOptions] = useState([]);      // a list of recipes (each recipe is a dict)
     const [optionStage, setOptionStage] = useState("1-4");
@@ -28,7 +31,8 @@ const SearchByDish = () => {
                 ShowAlert("Uh-Oh, Something Went Wrong", "");
             } else {   // if we didn't, proceed...
                 const data = await response.json();
-                if (data.length === 0) {         // if we get an empty result
+
+                if (data.results.length === 0) {         // if we get an empty result
                     setRecipeOptions([]);
                     ShowAlert("Sorry No Results For This Query!", "Try something less specific");
                 } else {            // if we did get results
@@ -60,7 +64,7 @@ const SearchByDish = () => {
                     
                     var result = {};
 
-                    result["title"] = data["title"];
+                    result["name"] = data["title"];
                     result["id"] = data["id"];
                     result["time"] = data["readyInMinutes"];
                     result["image"] = data["image"];
@@ -69,7 +73,7 @@ const SearchByDish = () => {
                     // now let's also correctly format the ingredient list
                     var ingredients = [];
                     for (var i = 0; i < data["extendedIngredients"].length; i++) {
-                        const tempRes = {"item": data["extendedIngredients"][i]["original"], "aisle": data["extendedIngredients"][i]["aisle"]}
+                        const tempRes = {"name": data["extendedIngredients"][i]["original"], "aisle": data["extendedIngredients"][i]["aisle"]}
                         ingredients.push(tempRes);
                     }
                     result["ingredients"] = ingredients;       
@@ -88,8 +92,8 @@ const SearchByDish = () => {
         }
     }
 
-    const AddRecipe = () => {
-        ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
+    const AddRecipe = async () => {
+        ShowAlert(currRecipe["name"] + " was succesfully added!", "");     // notify the user that the recipe was added
 
         // reset all variables
         setQuery("");
@@ -102,16 +106,27 @@ const SearchByDish = () => {
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
         
-        // TODO: send recipeToSend to backend
 
-        setCurrRecipe({});      // reset currRecipe
+        console.log({
+        recipe: {name: recipeToSend["name"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], image: recipeToSend["image"], email: email},
+        ingredient: recipeToSend["ingredients"],
+        recipe_ingredient: []
+        });
+
+        await api.post('/recipes/',
+            {
+            recipe: {name: recipeToSend["name"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], image: recipeToSend["image"], email: email},
+            ingredient: recipeToSend["ingredients"],
+            recipe_ingredient: []
+            }
+        ).then(setCurrRecipe({}));
     }
 
-    const ReduceRecipeName = (title) => {
-        if (title.length > 25) {
-            return title.substring(0, 25) + '...';
+    const ReduceRecipeName = (name) => {
+        if (name.length > 25) {
+            return name.substring(0, 25) + '...';
           } else {
-            return title;
+            return name;
         }    
     }
 
@@ -267,7 +282,7 @@ const SearchByDish = () => {
                         {/* display the recipe information */}
                         <div>       
                             <div className="SBD-selected-title-container">
-                                <div className="SBD-selected-text" style={{fontWeight: "bold", fontSize: "250%"}}>{currRecipe["title"]}</div>
+                                <div className="SBD-selected-text" style={{fontWeight: "bold", fontSize: "250%"}}>{currRecipe["name"]}</div>
                             </div>
 
                             <div className="SBD-selected-image-container">
@@ -287,7 +302,7 @@ const SearchByDish = () => {
                                     <div className="SBD-selected-text" style={{fontWeight: "bold"}}>Ingredients:</div>
                                     <ul>
                                         {currRecipe["ingredients"]?.map((ingredient) => (
-                                            <li className="SBD-selected-text"> {ingredient["item"]} </li>
+                                            <li className="SBD-selected-text"> {ingredient["name"]} </li>
                                         ))}
                                     </ul>
                                 </div>
