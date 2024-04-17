@@ -6,7 +6,6 @@ import Eye_RR from "./Eye_RR.png";
 
 const CreateAccount = () => {
     const navigate = useNavigate();
-    const [transactions, setTransactions] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,7 +27,7 @@ const CreateAccount = () => {
             setEmail('');
             setPassword('');
 
-            navigate('/home');
+            navigate(`/home?email=${email}`);
         }
     };
 

@@ -15,12 +15,9 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" exact element={<LandingPage />} />
-
-                {/*<Route path="/" exact element={<Home />} />*/}
-
                 <Route path="/createaccount" exact element={<CreateAccount />} />
                 <Route path="/login" exact element={<Login />} />
-                <Route path="/home" exact element={<HomeTest />} />
+                <Route path="/home" exact element={<Home />} />
                 <Route path="/searchbydish" exact element={<SearchByDish />} />
                 <Route path="/findwithurl" exact element={<FindWithURL />} />
                 <Route path="/buildyourown" exact element={<BuildYourOwn />} />

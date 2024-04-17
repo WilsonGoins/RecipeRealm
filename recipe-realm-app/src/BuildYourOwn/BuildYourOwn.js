@@ -4,6 +4,8 @@ import TextboxList from "./TextboxList"
 import "./BuildYourOwn.css"
 
 const BuildYourOwn = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get("email");
     const navigate = useNavigate();
     const [recipeName, setRecipeName] = useState('');
     const [prepTime, setPrepTime] = useState('');
@@ -33,7 +35,7 @@ const BuildYourOwn = () => {
             {/* title text */}
             <div className="BYO-title-container">
                 <div className="BYO-title-text" style={{color: "antiquewhite"}} onClick={() => {
-                    navigate("/home")
+                    navigate(`/home?email=${email}`)
                 }}>
                     Recipe Realm
                 </div>
@@ -48,7 +50,7 @@ const BuildYourOwn = () => {
                             <ul className="nav flex-column">
                                 <li className="nav-item">
                                     <a className="BYO-nav-item nav-link" onClick={() => {
-                                        navigate("/searchbydish")
+                                        navigate(`/searchbydish?email=${email}`)
                                     }}>
                                         Search By Dish
                                     </a>
@@ -56,7 +58,7 @@ const BuildYourOwn = () => {
 
                                 <li className="nav-item">
                                     <a className="BYO-nav-item nav-link" onClick={() => {
-                                        navigate("/findwithurl")
+                                        navigate(`/findwithurl?email=${email}`)
                                     }}>
                                         Find With URL
                                     </a>
@@ -64,7 +66,7 @@ const BuildYourOwn = () => {
 
                                 <li className="nav-item">
                                     <a className="BYO-nav-item nav-link" onClick={() => {
-                                        navigate("/buildyourown")
+                                        navigate(`/buildyourown?email=${email}`)
                                     }}>
                                         Build Your Own
                                     </a>
@@ -72,7 +74,7 @@ const BuildYourOwn = () => {
 
                                 <li className="nav-item">
                                     <a className="BYO-nav-item nav-link" aria-current="page" onClick={() => {
-                                        navigate("/shoppinglists")
+                                        navigate(`/shoppinglists?email=${email}`)
                                     }}>
                                         Create Shopping Lists
                                     </a>

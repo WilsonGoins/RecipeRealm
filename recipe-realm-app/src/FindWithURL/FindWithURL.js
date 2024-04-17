@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import "./FindWithURL.css"
+import api from '../api'
 import Template from "../Template/Template";
 import QuestionMark_RR from "../SearchByDish/QuestionMark_RR.png";
 
@@ -53,14 +54,14 @@ const FindWithURL = () => {
                     setCurrRecipe(result);
                 } else {
                     ShowAlert("Sorry We Weren't Able To Find Data!", "The website isn't formatted well for us, try a different recipe")
-                }
+                };
             }
         } catch (error) {
             ShowAlert("Uh-Oh, Something Went Wrong", error);
         }
     }
 
-    const AddRecipe = () => {
+    const AddRecipe = async () => {
         ShowAlert(currRecipe["title"] + " was succesfully added!", "");     // notify the user that the recipe was added
 
         // reset  variables
@@ -71,7 +72,11 @@ const FindWithURL = () => {
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
         
-        // TODO: send recipeToSend to backend
+        // TODO: test that this works
+        await api.post('/recipes/',
+         {name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"]},
+         recipeToSend["ingredients"], []
+        );
 
         setCurrRecipe({});      // reset currRecipe
     }

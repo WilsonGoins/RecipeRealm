@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import "./Template.css"
 
 const Template = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get("email");
     const navigate = useNavigate();
 
     return (
@@ -13,7 +15,7 @@ const Template = () => {
 
             {/* title text */}
             <div className="TMP-title-container">
-                <div className="TMP-title-text" style={{color: "antiquewhite"}} onClick={() => {navigate("/home")}}>
+                <div className="TMP-title-text" style={{color: "antiquewhite"}} onClick={() => {navigate(`/home?email=${email}`)}}>
                     Recipe Realm
                 </div>
             </div>
@@ -27,25 +29,25 @@ const Template = () => {
                         <div className="position-sticky">
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate("/searchbydish")}}>
+                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/searchbydish?email=${email}`)}}>
                                         Search By Dish
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate("/findwithurl")}}>
+                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/findwithurl?email=${email}`)}}>
                                         Find With URL
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate("/buildyourown")}}>
+                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/buildyourown?email=${email}`)}}>
                                         Build Your Own
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" aria-current="page" onClick={() => {navigate("/shoppinglists")}}>
+                                    <a className="TMP-nav-item nav-link" aria-current="page" onClick={() => {navigate(`/shoppinglists?email=${email}`)}}>
                                         Create Shopping Lists
                                     </a>
                                 </li>

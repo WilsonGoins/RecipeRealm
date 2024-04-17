@@ -5,7 +5,6 @@ import "./Login.css"
 import Eye_RR from "./Eye_RR.png";
 const Login = () => {
     const navigate = useNavigate();
-    const [transactions, setTransactions] = useState([]);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
@@ -24,7 +23,7 @@ const Login = () => {
             // reset the data
             setEmail('');
             setPassword('');
-            navigate('/home');
+            navigate(`/home?email=${email}`);
         }
     };
 

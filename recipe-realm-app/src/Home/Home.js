@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
-import {useNavigate} from "react-router-dom";
 import "./Home.css"
 import Template from "../Template/Template";
+import api from '../api'
 import SadChef_RR from "./SadChef_RR.jpg";
 import RedX_RR from "./RedX_RR.png";
 import QuestionMark_RR from "./QuestionMark_RR.png";
@@ -9,8 +9,8 @@ import Eye_RR from "./Eye_RR.png";
 
 
 const Home = () => {
-    const navigate = useNavigate();
-    const [name, setName] = useState("");
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get("email");
     const [recipes, setRecipes] = useState([]);
     const [showRecipes, setShowRecipes] = useState(true);
     const [selectedRecipe, setSelectedRecipe] = useState({});
@@ -18,15 +18,21 @@ const Home = () => {
     const helpText = "Welcome to the home page! Hover and click on a recipe to either view or delete it."
     
 
-    const GetUserInfo = () => {         // TODO: retrieve name and recipes from backend
-        setName("Wilson");
-        setRecipes([]);
+    const GetUserInfo = async () => {         // TODO: retrieve name and recipes from backend  
+        var response = await api.get('/recipes/', {params: {email}});
+
+        setRecipes(response);
     }
 
-    const ViewRecipe = (recipe) => {
+    const ViewRecipe = (recipe) => {    // TODO: backend
         setShowRecipes(false);                      // don't show the recipes anymore
-        setSelectedRecipe(recipe);                         // save the recipe they selected as the selected recipe
+        var tempRecipe =  recipe;
 
+        // TODO: this is where the logic goes to retrieve the ingredients  
+        // var tempIngredients = [];
+        // tempRecipe["ingredients"] = tempIngredients;
+
+        setSelectedRecipe(tempRecipe);                         // save the recipe they selected as the selected recipe
     }
 
     const DeleteRecipe = (id) => {      // TODO: backend
@@ -75,13 +81,16 @@ const Home = () => {
     }, []);
 
     return (
-        <>
+        <div style={{backgroundColor: "antiquewhite"}}>
             <Template />
 
+
             <div className="HM-container">
+                {/* <div className="HM-navbar-bg"></div> */}
+                
                 {/* title */}
                 <div className="HM-title-text">
-                    {name}'s RecipeRealm™
+                    {email}'s RecipeRealm™
                 </div>
 
                 {/* help image */}
@@ -204,7 +213,7 @@ const Home = () => {
                     </div>
                 </>
             )}
-        </>
+        </div>
     )
 }
 

@@ -109,7 +109,7 @@
 }
 
 .HM-sad-chef-container {
-    position: absolute;
+    position: fixed;
     text-align: center;
     left: 27%;
     top: 25%;
@@ -121,7 +121,7 @@
 }
 
 .HM-sad-text-container {
-    position: absolute;
+    position: fixed;
     text-align: center;
     left: 27%;
     top: 85%;
