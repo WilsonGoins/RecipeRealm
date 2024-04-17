@@ -104,7 +104,7 @@
     position: absolute;
     left: 31%;
     top: 50%;
-    width: 70%;
+    width: 210%;
     height: 5%;
 }
 
@@ -132,8 +132,16 @@
     padding: 5px; /* Add padding for better appearance */
 }
 
-.btn-primary{
+.BYO-steps-container {
+    position: absolute;
+    left: 31%;
+    top: 183%; /* Adjust the top position to move the steps section up */
+    width: 70%;
+    height: 5%;
+}
+
+.BYO-submit {
     position: absolute;
     left: 33%;
-    top: 300%;
+    top: 300%; /* Adjust the top position to move the submit button down */
 }
