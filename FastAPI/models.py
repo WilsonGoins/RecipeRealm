@@ -16,9 +16,10 @@ class Recipe(Base):
 
     rec_id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    servings = Column(String)
-    time = Column(String)
+    servings = Column(Integer)
+    time = Column(Integer)
     steps = Column(String)
+    image = Column(String)
     email = Column(String)
 
 #Table for ingredients

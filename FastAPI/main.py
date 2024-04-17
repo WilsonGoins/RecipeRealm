@@ -41,9 +41,10 @@ class UserResponse(BaseModel):
 
 class RecipeModel(BaseModel):
     name: str
-    servings: str
-    time: str
+    servings: int
+    time: int
     steps: str
+    image : str
     email: str
 
 class RecipeResponse(BaseModel):
@@ -51,9 +52,8 @@ class RecipeResponse(BaseModel):
     name: str
     servings: int       
     time: int
-    # servings: str
-    # time: str
     steps: str
+    image: str
     email: str
 
 class IngredientModel(BaseModel):

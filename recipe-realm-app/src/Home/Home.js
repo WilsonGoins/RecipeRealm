@@ -20,8 +20,13 @@ const Home = () => {
 
     const GetUserInfo = async () => {         // TODO: retrieve name and recipes from backend  
         var response = await api.get('/recipes/', {params: {email}});
-    
-        setRecipes(response.data);
+
+        var tempRes = [...recipes]
+        tempRes.push(response.data);
+
+        console.log(tempRes);
+
+        setRecipes(tempRes);
     }
 
     const ViewRecipe = (recipe) => {    // TODO: backend
@@ -117,7 +122,7 @@ const Home = () => {
                                                 {list.map((recipe) => (         // go through each recipe in group of 3
                                                     recipe && recipe.title && (
                                                         <div className="HM-singular-recipe-container">
-                                                            <div className="HM-recipe-text"> {ReduceRecipeName(recipe.title)} </div>
+                                                            <div className="HM-recipe-text"> {ReduceRecipeName(recipe.name)} </div>
                                                             <img className="HM-recipe-img" src={recipe.image} alt="Sorry, No Picture Available!" />     
                                                             <div className="HM-hover-options">
                                                                 <img className="HM-Eye-img" src={Eye_RR} alt="View Recipe" onClick={() => ViewRecipe(recipe)}/>     
@@ -159,7 +164,7 @@ const Home = () => {
                     {/* display the recipe information */}
                     <div className="HM-selected-recipe-container">       
                         <div className="HM-selected-title-container">
-                            <div className="HM-selected-text" style={{fontWeight: "bold", fontSize: "250%"}}>{selectedRecipe["title"]}</div>
+                            <div className="HM-selected-text" style={{fontWeight: "bold", fontSize: "250%"}}>{selectedRecipe["name"]}</div>
                         </div>
 
                         <img className="HM-selected-image" src={selectedRecipe["image"]} alt="Sorry, No Picture Available!" />

@@ -40,7 +40,7 @@ const FindWithURL = () => {
                     // now let's also correctly format the ingredient list
                     var ingredients = [];
                     for (var i = 0; i < data["extendedIngredients"].length; i++) {
-                        const tempRes = {"item": data["extendedIngredients"][i]["original"], "aisle": data["extendedIngredients"][i]["aisle"]}
+                        const tempRes = {"name": data["extendedIngredients"][i]["original"], "aisle": data["extendedIngredients"][i]["aisle"]}
                         ingredients.push(tempRes);
                     }
                     result["ingredients"] = ingredients;       
@@ -68,22 +68,24 @@ const FindWithURL = () => {
         setUrl("");
         setShowRecipe(false);
 
-        var recipeToSend = currRecipe;
+        let recipeToSend = currRecipe;
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
 
-        var ingredientIdList = [];
-        for (var i = 0; i < recipeToSend["ingredients"]; i++) {
-            ingredientIdList.push({rec_id: 1, ing_id: i});
-        }
+        // var ingredientIdList = [];
+        // for (var i = 0; i < recipeToSend["ingredients"]; i++) {
+        //     ingredientIdList.push({rec_id: 1, ing_id: i});
+        // }
 
-        console.log({rec_id: 1, name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], email: email});
+        console.log(recipeToSend);
         
         // TODO: test that this works (it doesn't)
         await api.post('/recipes/',
-         {rec_id: 1, name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], email: email},
-         recipeToSend["ingredients"],
-         ingredientIdList
+            {
+            recipe: {name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], email: email},
+            ingredient: recipeToSend["ingredients"],
+            recipe_ingredient: []
+            }
         ).then(setCurrRecipe({}));
     }
 
@@ -161,7 +163,7 @@ const FindWithURL = () => {
                                     <div className="FWU-selected-text" style={{fontWeight: "bold"}}>Ingredients:</div>
                                     <ul>
                                         {currRecipe["ingredients"]?.map((ingredient) => (
-                                            <li className="FWU-selected-text"> {ingredient["item"]} </li>
+                                            <li className="FWU-selected-text"> {ingredient["name"]} </li>
                                         ))}
                                     </ul>
                                 </div>

@@ -164,10 +164,10 @@ const CreateAccount = () => {
                 </form>
             </div>
 
-            {/*eye image*/}
+            {/* eye image
             <div>
                 <img src={Eye_RR} alt="Show Password Icon" className="CR-eye-icon" onClick={() => {setShowPass(!showPass)}}/>
-            </div>
+            </div> */}
 
             {/*footer*/}
             <nav className="navbar fixed-bottom bg-dark" style={{position: "absolute", bottom: "0vh"}}>
