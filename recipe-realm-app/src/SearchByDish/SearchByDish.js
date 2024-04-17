@@ -267,7 +267,7 @@ const SearchByDish = () => {
                         {/* display the recipe information */}
                         <div>       
                             <div className="SBD-selected-title-container">
-                                <div className="SBD-selected-text" style={{fontSize: "250%"}}>{currRecipe["title"]}</div>
+                                <div className="SBD-selected-text" style={{fontWeight: "bold", fontSize: "250%"}}>{currRecipe["title"]}</div>
                             </div>
 
                             <div className="SBD-selected-image-container">
@@ -284,7 +284,7 @@ const SearchByDish = () => {
 
                             <div className="SBD-ingredients-steps-container">
                                 <div>
-                                    <div className="SBD-selected-text">Ingredients:</div>
+                                    <div className="SBD-selected-text" style={{fontWeight: "bold"}}>Ingredients:</div>
                                     <ul>
                                         {currRecipe["ingredients"]?.map((ingredient) => (
                                             <li className="SBD-selected-text"> {ingredient["item"]} </li>
@@ -293,12 +293,12 @@ const SearchByDish = () => {
                                 </div>
 
                                 <div>
-                                    <div className="SBD-selected-text">Instructions:</div>
-                                    <ul>
+                                    <div className="SBD-selected-text" style={{fontWeight: "bold"}}>Instructions:</div>
+                                    <ol>
                                         {currRecipe["steps"]?.map((step) => (
                                             <li className="SBD-selected-text" style={{width: "50vw"}}> {step} </li>
                                         ))}
-                                    </ul>
+                                    </ol>
                                 </div>
                             </div>
                         </div>

@@ -20,8 +20,8 @@ const Home = () => {
 
     const GetUserInfo = async () => {         // TODO: retrieve name and recipes from backend  
         var response = await api.get('/recipes/', {params: {email}});
-
-        setRecipes(response);
+    
+        setRecipes(response.data);
     }
 
     const ViewRecipe = (recipe) => {    // TODO: backend
@@ -159,7 +159,7 @@ const Home = () => {
                     {/* display the recipe information */}
                     <div className="HM-selected-recipe-container">       
                         <div className="HM-selected-title-container">
-                            <div className="HM-selected-text" style={{fontSize: "250%"}}>{selectedRecipe["title"]}</div>
+                            <div className="HM-selected-text" style={{fontWeight: "bold", fontSize: "250%"}}>{selectedRecipe["title"]}</div>
                         </div>
 
                         <img className="HM-selected-image" src={selectedRecipe["image"]} alt="Sorry, No Picture Available!" />
@@ -174,7 +174,7 @@ const Home = () => {
 
                         <div className="HM-ingredients-steps-container">
                             <div>
-                                <div className="HM-selected-text">Ingredients:</div>
+                                <div className="HM-selected-text" style={{fontWeight: "bold"}}>Ingredients:</div>
                                 <ul>
                                     {selectedRecipe["ingredients"]?.map((ingredient) => (
                                         <li className="HM-selected-text"> {ingredient["item"]} </li>
@@ -183,12 +183,12 @@ const Home = () => {
                             </div>
 
                             <div>
-                                <div className="HM-selected-text">Instructions:</div>
-                                <ul>
+                                <div className="HM-selected-text" style={{fontWeight: "bold"}}>Instructions:</div>
+                                <ol>
                                     {selectedRecipe["steps"]?.map((step) => (
                                         <li className="HM-selected-text" style={{width: "50vw"}}> {step} </li>
                                     ))}
-                                </ul>
+                                </ol>
                             </div>
                         </div>
                     </div>

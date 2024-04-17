@@ -5,6 +5,8 @@ import Template from "../Template/Template";
 import QuestionMark_RR from "../SearchByDish/QuestionMark_RR.png";
 
 const FindWithURL = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get("email");
     const [url, setUrl] = useState('');
     const [showRecipe, setShowRecipe] = useState(false);
     const [currRecipe, setCurrRecipe] = useState({});
@@ -14,8 +16,6 @@ const FindWithURL = () => {
         event.preventDefault();
 
         try {
-            console.log(process.env.REACT_APP_API_KEY);
-
             const endpoint = `https://api.spoonacular.com/recipes/extract?url=${url}&apiKey=${process.env.REACT_APP_API_KEY}`;
 
             const response = await fetch(endpoint);
@@ -71,14 +71,20 @@ const FindWithURL = () => {
         var recipeToSend = currRecipe;
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
-        
-        // TODO: test that this works
-        await api.post('/recipes/',
-         {name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"]},
-         recipeToSend["ingredients"], []
-        );
 
-        setCurrRecipe({});      // reset currRecipe
+        var ingredientIdList = [];
+        for (var i = 0; i < recipeToSend["ingredients"]; i++) {
+            ingredientIdList.push({rec_id: 1, ing_id: i});
+        }
+
+        console.log({rec_id: 1, name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], email: email});
+        
+        // TODO: test that this works (it doesn't)
+        await api.post('/recipes/',
+         {rec_id: 1, name: recipeToSend["title"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], email: email},
+         recipeToSend["ingredients"],
+         ingredientIdList
+        ).then(setCurrRecipe({}));
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
@@ -128,7 +134,7 @@ const FindWithURL = () => {
                         {/* display the recipe information */}
                         <div>        
                             <div className="FWU-selected-title-container">
-                                <div className="FWU-selected-text" style={{fontSize: "250%"}}>{currRecipe["title"]}</div>
+                                <div className="FWU-selected-text" style={{fontWeigth: "bold", fontSize: "250%"}}>{currRecipe["title"]}</div>
                             </div>
 
                             <div className="FWU-image-btn-container">
@@ -152,7 +158,7 @@ const FindWithURL = () => {
 
                             <div className="FWU-ingredients-steps-container">
                                 <div>
-                                    <div className="FWU-selected-text">Ingredients:</div>
+                                    <div className="FWU-selected-text" style={{fontWeight: "bold"}}>Ingredients:</div>
                                     <ul>
                                         {currRecipe["ingredients"]?.map((ingredient) => (
                                             <li className="FWU-selected-text"> {ingredient["item"]} </li>
@@ -161,12 +167,12 @@ const FindWithURL = () => {
                                 </div>
 
                                 <div>
-                                    <div className="FWU-selected-text">Instructions:</div>
-                                    <ul>
+                                    <div className="FWU-selected-text" style={{fontWeight: "bold"}}>Instructions:</div>
+                                    <ol>
                                         {currRecipe["steps"]?.map((step) => (
                                             <li className="FWU-selected-text" style={{width: "50vw"}}> {step} </li>
                                         ))}
-                                    </ul>
+                                    </ol>
                                 </div>
                             </div>
                         </div>
