@@ -85,17 +85,17 @@
 }
 .BYO-prep-time-container{
     position: absolute;
-    left: 68%;
+    left: 62.5%;
     top: 22%;
-    width: 10%;
+    width: 12.5%;
     height: 5%;
 
 }
 .BYO-servings-container{
     position: absolute;
-    left: 85%;
+    left: 80%;
     top: 22%;
-    width: 10%;
+    width: 15%;
     height: 5%;
 
 }
@@ -104,7 +104,7 @@
     position: absolute;
     left: 31%;
     top: 50%;
-    width: 70%;
+    /* width: 210%; */
     height: 5%;
 }
 
@@ -115,8 +115,9 @@
 }
 
 .textBox {
-    width: 20%;
-    margin-right: 10px; /* Add spacing between textboxes */
+    width: 35vw;
+    margin-right: 50px; /* Add spacing between textboxes */
+    margin-left: 10px;
     margin-bottom: 5px;
 }
 
@@ -126,14 +127,24 @@
 
 .bigTextBox {
     margin-top: 10px;
+    margin-left: 10px;
     width: 93%; /* Make the textarea expand to fill available width */
     height: 40px; /* Set the height to make it bigger */
     resize: vertical; /* Allow vertical resizing */
     padding: 5px; /* Add padding for better appearance */
 }
 
-.btn-primary {
+.BYO-steps-container {
     position: absolute;
-    left: 33%;
-    top: 300%;
+    left: 31%;
+    top: 183%; /* Adjust the top position to move the steps section up */
+    width: 60%;
+    height: 5%;
+}
+
+.BYO-submit {
+    position: absolute;
+    align-self: center;
+    left: 60%;
+    top: 300%; /* Adjust the top position to move the submit button down */
 }
