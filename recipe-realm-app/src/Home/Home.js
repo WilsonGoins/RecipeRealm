@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react"
+import {useNavigate} from "react-router-dom";
 import "./Home.css"
 import Template from "../Template/Template";
 import api from '../api'
@@ -11,6 +12,8 @@ import Eye_RR from "./Eye_RR.png";
 const Home = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get("email");
+    const navigate = useNavigate();
+    const [name, setName] = useState("");
     const [recipes, setRecipes] = useState([]);
     const [showRecipes, setShowRecipes] = useState(true);
     const [selectedRecipe, setSelectedRecipe] = useState({});
@@ -18,26 +21,32 @@ const Home = () => {
     const helpText = "Welcome to the home page! Hover and click on a recipe to either view or delete it."
     
 
-    const GetUserInfo = async () => {         // TODO: retrieve name and recipes from backend  
-        var response = await api.get('/recipes/', {params: {email}});
-
-        setRecipes(OrganizeRecipes(response.data));
+    const GetUserInfo = async () => {           // TODO: get name
+        // const nameResponse = await api.get('/name/', {params: {email}});             // this doesn't work yet
+        
+        var recipesResponse = await api.get('/recipes/', {params: {email}});
+        setRecipes(OrganizeRecipes(recipesResponse.data));
     }
 
-    const ViewRecipe = (recipe) => {    // TODO: backend
+    const ViewRecipe = async (recipe) => {    
         setShowRecipes(false);                      // don't show the recipes anymore
-        var tempRecipe =  recipe;
+        var tempRecipe = recipe;
 
-        // TODO: this is where the logic goes to retrieve the ingredients  
-        // var tempIngredients = [];
-        // tempRecipe["ingredients"] = tempIngredients;
+        // get the ingredients
+        const response = await api.get('/ingredients/', {params: {rec_id: recipe["rec_id"]}});
+        tempRecipe["ingredients"] = response.data;
+
+        // turn the steps into a list
+        tempRecipe["steps"] = tempRecipe["steps"].split('|');
 
         setSelectedRecipe(tempRecipe);                         // save the recipe they selected as the selected recipe
     }
 
-    const DeleteRecipe = (id) => {      // TODO: backend
-        // delete the recipe and it's ingredients from the database (the id that is passed in here is the correct ID)
-        ShowAlert("Deleting Recipe:", id)       // this is temporary so we know it's working
+    const DeleteRecipe = async (id) => {      // TODO: backend
+        console.log(id);
+        await api.delete('/delete_recipe/', {params: {rec_id: id}});
+        GetUserInfo();
+        ShowAlert("Recipe Deleted!", "")       // this is temporary so we know it's working
     }
 
     const OrganizeRecipes = (recipes) => {    // so recipes is a 2d list. the outer list is groups of 3, the inner lists has individual recipes
@@ -77,8 +86,12 @@ const Home = () => {
     }
     
     useEffect(() => {       // this get's called as soon as we open this page
-        GetUserInfo();
-    }, []);
+        if (email === null) {
+            navigate("/");
+        } else {
+            GetUserInfo();
+        }
+    }, []); 
 
     return (
         <div style={{backgroundColor: "antiquewhite"}}>
@@ -90,7 +103,7 @@ const Home = () => {
                 
                 {/* title */}
                 <div className="HM-title-text">
-                    {email}'s RecipeRealm™
+                    RecipeRealm™
                 </div>
 
                 {/* help image */}
@@ -177,7 +190,7 @@ const Home = () => {
                                 <div className="HM-selected-text" style={{fontWeight: "bold"}}>Ingredients:</div>
                                 <ul>
                                     {selectedRecipe["ingredients"]?.map((ingredient) => (
-                                        <li className="HM-selected-text"> {ingredient["item"]} </li>
+                                        <li className="HM-selected-text"> {ingredient["name"]} </li>
                                     ))}
                                 </ul>
                             </div>
@@ -205,7 +218,7 @@ const Home = () => {
                                     This cannot be undone!
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => DeleteRecipe(recipeToDelete.id)}>Delete</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={() => DeleteRecipe(recipeToDelete.rec_id)}>Delete</button>
                                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>

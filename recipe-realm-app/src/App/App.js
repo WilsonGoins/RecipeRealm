@@ -4,7 +4,6 @@ import LandingPage from '../LandingPage/LandingPage'
 import CreateAccount from "../CreateAccount/CreateAccount";
 import Login from '../Login/Login';
 import Home from '../Home/Home';
-import HomeTest from '../Home/HomeTest';
 import SearchByDish from "../SearchByDish/SearchByDish";
 import BuildYourOwn from "../BuildYourOwn/BuildYourOwn";
 import FindWithURL from "../FindWithURL/FindWithURL";

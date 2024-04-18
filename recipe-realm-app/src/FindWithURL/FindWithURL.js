@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react"
+import {useNavigate} from "react-router-dom";
 import "./FindWithURL.css"
 import api from '../api'
 import Template from "../Template/Template";
@@ -7,6 +8,7 @@ import QuestionMark_RR from "../SearchByDish/QuestionMark_RR.png";
 const FindWithURL = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get("email");
+    const navigate = useNavigate();
     const [url, setUrl] = useState('');
     const [showRecipe, setShowRecipe] = useState(false);
     const [currRecipe, setCurrRecipe] = useState({});
@@ -95,6 +97,12 @@ const FindWithURL = () => {
 
         document.body.appendChild(alertElement);
     }
+
+    useEffect(() => {       // this get's called as soon as we open this page
+        if (email === null) {
+            navigate("/");
+        } 
+    }, []); 
 
     return (
         <div>

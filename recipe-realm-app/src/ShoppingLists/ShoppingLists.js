@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import api from '../api'
 import "./ShoppingLists.css"
 import Template from "../Template/Template";
@@ -6,6 +7,7 @@ import Template from "../Template/Template";
 const ShoppingLists = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get("email");
+    const navigate = useNavigate();
     const [recipes, setRecipes] = useState([]);
     const [showShoppingList, setShowShoppingList] = useState(false);
     const [shoppingList, setShoppingList] = useState([]);
@@ -116,7 +118,11 @@ const ShoppingLists = () => {
     }
 
     useEffect(() => {       // this get's called as soon as we open this page
-        GetRecipes();
+        if (email === null) {
+            navigate("/");
+        } else {
+            GetRecipes();
+        }
     }, []);
 
     return (

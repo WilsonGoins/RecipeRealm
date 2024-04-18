@@ -104,7 +104,7 @@
 
 .HM-recipe-img {
     width: 20vw;
-    height: auto;
+    height: 17.5vw;
     border-radius: 10px; 
 }
 
@@ -146,10 +146,11 @@
 
 .HM-selected-image {
     position: absolute;
-    left: 65vw;
-    top: 30vh;   
-    width: 30vw;
-    height: auto;
+    left: 70vw;
+    top: 35vh;   
+    width: 25vw;
+    height: 22.5vw;
+
     border-radius: 10px; 
 }
 .HM-selected-time-container {

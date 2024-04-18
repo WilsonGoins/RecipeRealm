@@ -3,16 +3,12 @@ import {useNavigate} from "react-router-dom";
 import api from '../api'
 import "./Login.css"
 import Eye_RR from "./Eye_RR.png";
+
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
-
-    useEffect(() => {
-
-    }, []);
-
 
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
@@ -133,10 +129,10 @@ const Login = () => {
                 </form>
             </div>
 
-            {/*eye image*/}
-            <div>
+            {/* eye image */}
+            {/* <div>
                 <img src={Eye_RR} alt="Show Password Icon" className="LGN-eye-icon" onClick={() => {setShowPass(!showPass)}}/>
-            </div>
+            </div> */}
 
             {/*footer*/}
             <nav className="navbar fixed-bottom bg-dark" style={{position: "absolute", bottom: "0vh"}}>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react"
+import {useNavigate} from "react-router-dom";
 import "./SearchByDish.css"
 import api from '../api'
 import Template from "../Template/Template";
@@ -9,6 +10,7 @@ import Arrow_Right_RR from "./Arrow_Right_RR.png"
 const SearchByDish = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get("email");
+    const navigate = useNavigate();
     const [query, setQuery] = useState("");
     const [recipeOptions, setRecipeOptions] = useState([]);      // a list of recipes (each recipe is a dict)
     const [optionStage, setOptionStage] = useState("1-4");
@@ -105,13 +107,6 @@ const SearchByDish = () => {
         var recipeToSend = currRecipe;
         delete recipeToSend["id"];                // delete the id key from the recipe because we don't need it
         recipeToSend["steps"] = recipeToSend["steps"].join('|');            // add delimiter to instructions
-        
-
-        console.log({
-        recipe: {name: recipeToSend["name"], servings: recipeToSend["servings"], time: recipeToSend["time"], steps: recipeToSend["steps"], image: recipeToSend["image"], email: email},
-        ingredient: recipeToSend["ingredients"],
-        recipe_ingredient: []
-        });
 
         await api.post('/recipes/',
             {
@@ -145,6 +140,12 @@ const SearchByDish = () => {
 
         document.body.appendChild(alertElement);
     }
+
+    useEffect(() => {       // this get's called as soon as we open this page
+        if (email === null) {
+            navigate("/");
+        } 
+    }, []); 
 
     return (
         <div>

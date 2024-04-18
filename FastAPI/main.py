@@ -39,6 +39,9 @@ class UserResponse(BaseModel):
     email: str
     password: str
 
+# class NameResponse(BaseModel):
+#     name: str
+
 class RecipeModel(BaseModel):
     name: str
     servings: int
@@ -192,10 +195,7 @@ async def read_user(email: str, password: str, db: Session = Depends(db_dependen
         return JSONResponse(status_code=404, content={'error': 'Incorrect Password'})
     return db_user
 
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    # Run the FastAPI application using Uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# @app.get("/name/", response_model=NameResponse)
+# async def read_name(email: str, db: Session = Depends(db_dependency)):
+#     db_user = db.query(models.User).filter(models.User.email == email).first()
+#     return db_user.name
