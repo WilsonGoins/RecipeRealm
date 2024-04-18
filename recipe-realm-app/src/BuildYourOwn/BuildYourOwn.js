@@ -56,8 +56,6 @@ const BuildYourOwn = () => {
         if (prepTime && servings && servings.length > 0 && prepTime.length > 0) {
             result["time"] = parseInt(prepTime);
             result["servings"] = parseInt(servings);
-
-            console.log(result["servings"]);
             
             if (isNaN(result["time"]) || isNaN(result["servings"])) {
                 ShowAlert("Please enter an integer for time and serving inputs.", "");
