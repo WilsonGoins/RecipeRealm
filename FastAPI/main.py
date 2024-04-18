@@ -187,7 +187,7 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
     return db_user
 
 #api endpoint to read an item by id
-@app.get("/users/", response_model=UserResponse)
+@app.get("/users/", response_model=UserModel) #response_model=UserResponse)
 async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
     if db_user is None:
