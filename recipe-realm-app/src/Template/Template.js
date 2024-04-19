@@ -63,6 +63,10 @@ const Template = () => {
                 <div className="TMP-credit-text">
                     Created by Wilson Goins, Allison Barfield, Ajay Patel, and Ethan Durand
                 </div>
+
+                <div className="TMP-logout-btn" onClick={() => {navigate("/")}}>
+                    Sign Out
+                </div>
             </div>
         </div>
     )

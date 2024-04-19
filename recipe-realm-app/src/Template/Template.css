@@ -28,6 +28,8 @@
 }
 
 .TMP-credit-container {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     text-align: center; 
     top: 87.5vh; 
@@ -63,4 +65,15 @@
         color: yellow;
         background-color: transparent;
     }
+}
+
+.TMP-logout-btn {
+    margin-top: 2.5%;
+    font-family: "Droid Sans", serif;
+    color: antiquewhite;
+    cursor: pointer;
+}
+
+.TMP-logout-btn:hover {
+    text-decoration-line: underline;
 }
