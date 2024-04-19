@@ -14,8 +14,6 @@ const Login = () => {
         event.preventDefault();
 
         if (validateLogin(email, password)) {
-            // TODO: backend stuff to log them in
-
             // reset the data
             setEmail('');
             setPassword('');
@@ -23,9 +21,15 @@ const Login = () => {
         }
     };
 
-    const checkExistingUser = (email, password) => {      // TODO: Add checks through backend
-        return true;        // always return true for now bc we want them to be an existing user
-        // return true if email and password are already in database
+    const checkExistingUser = async (email, password) => {      // TODO: Add checks through backend
+        const response = await api.get('/users/', {params: {email, password}});
+
+        if (response.status === 200) {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
 
     const showAlert = (strongText, additionalText) => {
@@ -75,7 +79,7 @@ const Login = () => {
 
 
             <div className="container">
-                <form onSubmit={handleLoginSubmit}>
+                <form onSubmit={(event) => handleLoginSubmit(event)}>
                     {/* email textbox */}
                     <div className="LGN-text-entry-form LGN-centered-container" style={{top: "50vh", left: "42.5vw"}}>
                         <div className="row g-3 align-items-center form-control-lg">
