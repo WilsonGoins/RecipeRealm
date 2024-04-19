@@ -5,6 +5,7 @@ import "./Template.css"
 const Template = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get("email");
+    const name = urlParams.get("name");
     const navigate = useNavigate();
 
     return (
@@ -15,7 +16,7 @@ const Template = () => {
 
             {/* title text */}
             <div className="TMP-title-container">
-                <div className="TMP-title-text" style={{color: "antiquewhite"}} onClick={() => {navigate(`/home?email=${email}`)}}>
+                <div className="TMP-title-text" style={{color: "antiquewhite"}} onClick={() => {navigate(`/home?email=${email}&name=${name}`)}}>
                     Recipe Realm
                 </div>
             </div>
@@ -29,25 +30,25 @@ const Template = () => {
                         <div className="position-sticky">
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/searchbydish?email=${email}`)}}>
+                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/searchbydish?email=${email}&name=${name}`)}}>
                                         Search By Dish
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/findwithurl?email=${email}`)}}>
+                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/findwithurl?email=${email}&name=${name}`)}}>
                                         Find With URL
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/buildyourown?email=${email}`)}}>
+                                    <a className="TMP-nav-item nav-link" onClick={() => {navigate(`/buildyourown?email=${email}&name=${name}`)}}>
                                         Build Your Own
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="TMP-nav-item nav-link" aria-current="page" onClick={() => {navigate(`/shoppinglists?email=${email}`)}}>
+                                    <a className="TMP-nav-item nav-link" aria-current="page" onClick={() => {navigate(`/shoppinglists?email=${email}&name=${name}`)}}>
                                         Create Shopping Lists
                                     </a>
                                 </li>

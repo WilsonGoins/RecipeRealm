@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom";
 import api from '../api'
 import "./Login.css"
-import Eye_RR from "./Eye_RR.png";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -15,9 +14,12 @@ const Login = () => {
 
         if (await validateLogin(email, password)) {
             // reset the data
+            const nameRes = await api.get('/users/', {params: {email, password}});
+
             setEmail('');
             setPassword('');
-            navigate(`/home?email=${email}`);
+
+            navigate(`/home?email=${email}&name=${nameRes.data.name}`);
         }
     };
 

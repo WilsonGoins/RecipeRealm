@@ -192,11 +192,9 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
 async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
     if db_user is None:
-        # return JSONResponse(status_code=404, content={'error': 'User not found'})
         return JSONResponse(status_code=200, content={'error': 'User not found'})
 
     if Hasher.verify_password(password, db_user.password) is False:
-        # return JSONResponse(status_code=404, content={'error': 'Incorrect Password'})
         return JSONResponse(status_code=200, content={'error': 'Incorrect Password'})
 
     return db_user

@@ -22,7 +22,11 @@ const Home = () => {
     
 
     const GetUserInfo = async () => {           // TODO: get name
-        // const nameResponse = await api.get('/name/', {params: {email}});             // this doesn't work yet
+        var tempName = urlParams.get("name");
+        if (tempName) {
+            tempName = tempName.charAt(0).toUpperCase() + tempName.slice(1);
+            setName(tempName);
+        }
         
         var recipesResponse = await api.get('/recipes/', {params: {email}});
         setRecipes(OrganizeRecipes(recipesResponse.data));
@@ -42,11 +46,10 @@ const Home = () => {
         setSelectedRecipe(tempRecipe);                         // save the recipe they selected as the selected recipe
     }
 
-    const DeleteRecipe = async (id) => {      // TODO: backend
-        console.log(id);
+    const DeleteRecipe = async (id) => {      
         await api.delete('/delete_recipe/', {params: {rec_id: id}});
         GetUserInfo();
-        ShowAlert("Recipe Deleted!", "")       // this is temporary so we know it's working
+        ShowAlert("Recipe Deleted!", "")       
     }
 
     const OrganizeRecipes = (recipes) => {    // so recipes is a 2d list. the outer list is groups of 3, the inner lists has individual recipes
@@ -103,7 +106,7 @@ const Home = () => {
                 
                 {/* title */}
                 <div className="HM-title-text">
-                    RecipeRealm™
+                    {name}'s RecipeRealm™
                 </div>
 
                 {/* help image */}

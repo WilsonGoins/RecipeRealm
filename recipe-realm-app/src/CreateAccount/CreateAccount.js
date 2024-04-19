@@ -20,6 +20,8 @@ const CreateAccount = () => {
         event.preventDefault();
 
         if (await validateAccountCreation(name, email, password)) {
+            setName(name.charAt(0).toUpperCase() + name.slice(1));
+
             await api.post('/users/', {name, email, password});
 
             // reset the data
@@ -27,7 +29,7 @@ const CreateAccount = () => {
             setEmail('');
             setPassword('');   
 
-            navigate(`/home?email=${email}`);
+            navigate(`/home?email=${email}&name=${name}`);
         }
     };
 
