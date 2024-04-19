@@ -15,6 +15,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "http://localhost:8000",
     "https://reciperealm-three.vercel.app",
 ]
 
@@ -191,12 +192,11 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
 async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
     if db_user is None:
-        return JSONResponse(status_code=404, content={'error': 'User not found'})
-    if Hasher.verify_password(password, db_user.password) is False:
-        return JSONResponse(status_code=404, content={'error': 'Incorrect Password'})
-    return db_user
+        # return JSONResponse(status_code=404, content={'error': 'User not found'})
+        return JSONResponse(status_code=200, content={'error': 'User not found'})
 
-# @app.get("/name/", response_model=NameResponse)
-# async def read_name(email: str, db: Session = Depends(db_dependency)):
-#     db_user = db.query(models.User).filter(models.User.email == email).first()
-#     return db_user.name
+    if Hasher.verify_password(password, db_user.password) is False:
+        # return JSONResponse(status_code=404, content={'error': 'Incorrect Password'})
+        return JSONResponse(status_code=200, content={'error': 'Incorrect Password'})
+
+    return db_user

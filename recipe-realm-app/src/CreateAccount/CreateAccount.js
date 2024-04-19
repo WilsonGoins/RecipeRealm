@@ -19,30 +19,49 @@ const CreateAccount = () => {
     const handleCreateAccountSubmit = async (event) => {
         event.preventDefault();
 
-        if (validateAccountCreation(name, email, password)) {
+        if (await validateAccountCreation(name, email, password)) {
             await api.post('/users/', {name, email, password});
 
             // reset the data
             setName('');
             setEmail('');
-            setPassword('');
+            setPassword('');   
 
             navigate(`/home?email=${email}`);
         }
     };
 
-    const checkExistingUser = async (email) => {      // TODO: Check for existing user via backend
-        const response = await api.get('/users/', {params: {email, password}});
+    const validateAccountCreation = async (name, email, password) => {
+        if (/^[A-Za-z]+$/.test(name)) {
+            if (email.trim() !== '') {
+                if (/^\S{8,20}$/.test(password)) {
+                    const response = await api.get('/users/', {params: {email, password}});
+                    const result = response.data.error;
 
-        if (response.status === 200) {
-            return true;
-        }
-        else {
+                    if (!result) {     // the email and password entered already exist
+                        ShowAlert("An account with this email already exists!", "Try a different email.");
+                        return false;                           // return false because that user already exists
+                    } else if (result === "User not found") {      // the email does not exist
+                        return true;                                    // return true because it is a new account
+                    } else if (result === "Incorrect Password") {      // the email exists but the password is wrong
+                        ShowAlert("An account with this email already exists!", "Try a different email.");
+                        return false;                                   // return false because the user already exists
+                    }
+                } else {
+                    ShowAlert("Password Invalid!", "Passwords must be 8-20 characters long");
+                    return false;
+                }
+            } else {
+                ShowAlert("Email Invalid!", "Please enter a valid email address")
+                return false;
+            }
+        } else {
+            ShowAlert("Name Invalid!", "Names must be one word long and may only contain letters")
             return false;
         }
     };
 
-    const showAlert = (strongText, additionalText) => {
+    const ShowAlert = (strongText, additionalText) => {
         const alertElement = document.createElement('div');
         alertElement.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show');
         alertElement.innerHTML = `
@@ -60,27 +79,6 @@ const CreateAccount = () => {
         document.body.appendChild(alertElement);
     };
 
-    const validateAccountCreation = (name, email, password) => {
-        if (/^[A-Za-z]+$/.test(name)) {
-            if (email.trim() !== '') {
-                if (/^\S{8,20}$/.test(password)) {
-                    if (!checkExistingUser(email)) {        // we check if they are an existing user
-                        return true;
-                    } else {
-                        showAlert("Email Already Exists!", "")
-                    }
-                } else {
-                    showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
-                }
-            } else {
-                showAlert("Email Invalid!", "Please enter a valid email address")
-            }
-        } else {
-            showAlert("Name Invalid!", "Names must be one word long and may only contain letters")
-        }
-        return false;
-    };
-
     return (
         <div style={{background: "antiquewhite", width: "100vw", height: "100vh"}}>
             <div className="CR-title-container">
@@ -88,7 +86,7 @@ const CreateAccount = () => {
             </div>
 
             <div className="container">
-                <form onSubmit={handleCreateAccountSubmit}>
+                <form onSubmit={(event) => handleCreateAccountSubmit(event)}>
                     {/* Name text box */}
                     <div className="CR-text-entry-form CR-centered-container" style={{top: "50vh", left: "42.5vw"}}>
                         <div className="row g-3 align-items-center form-control-lg">

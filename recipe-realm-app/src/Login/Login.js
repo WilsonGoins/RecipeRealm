@@ -13,7 +13,7 @@ const Login = () => {
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
 
-        if (validateLogin(email, password)) {
+        if (await validateLogin(email, password)) {
             // reset the data
             setEmail('');
             setPassword('');
@@ -21,18 +21,7 @@ const Login = () => {
         }
     };
 
-    const checkExistingUser = async (email, password) => {      // TODO: Add checks through backend
-        const response = await api.get('/users/', {params: {email, password}});
-
-        if (response.status === 200) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-
-    const showAlert = (strongText, additionalText) => {
+    const ShowAlert = (strongText, additionalText) => {
         // Create a new alert element
         const alertElement = document.createElement('div');
         alertElement.classList.add('alert', 'alert-warning', 'alert-dismissible', 'fade', 'show');
@@ -51,21 +40,29 @@ const Login = () => {
         document.body.appendChild(alertElement);
     };
 
-    const validateLogin = (email, password) => {
+    const validateLogin = async (email, password) => {
         if (email.trim() !== '') {
             if (/^\S{8,20}$/.test(password)) {
-                if (checkExistingUser(email, password)) {        // we check if they are an existing user
-                    return true;
-                } else {
-                    showAlert("Email or Password is Incorrect!", "Check For Typos")
+                const response = await api.get('/users/', {params: {email, password}});
+                const result = response.data.error; // if info was correct there will be no error so '!result' returns true
+
+                if (!result) {     // the email and password entered are correct
+                    return true;                           // return false because that user already exists
+                } else if (result === "User not found") {      // the email does not exist
+                    ShowAlert("Incorrect email or password!", "Check for typos.");
+                    return false;                                    // return true because it is a new account
+                } else if (result === "Incorrect Password") {      // the email exists but the password is wrong
+                    ShowAlert("Incorrect email or password!", "Check for typos.");
+                    return false;                                   // return false because the user already exists
                 }
             } else {
-                showAlert("Password Invalid!", "Passwords must be 8-20 characters long")
+                ShowAlert("Password Invalid!", "Passwords must be 8-20 characters long");
+                return false;
             }
         } else {
-            showAlert("Email Invalid!", "Please enter a valid email address")
+            ShowAlert("Email Invalid!", "Please enter a valid email address");
+            return false;
         }
-        return false;
     };
 
     return (
