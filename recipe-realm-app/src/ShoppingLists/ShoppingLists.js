@@ -80,7 +80,6 @@ const ShoppingLists = () => {
                 }
                 tempRes.push({"name": recipe.name, "ingredients": recipeIngreds});
             }
-            ShowAlert("hooray!", "");
             return tempRes;
         }
 
