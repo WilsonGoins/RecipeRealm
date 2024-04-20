@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from starlette.responses import JSONResponse
 from sqlalchemy import text
-
 from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,11 +12,14 @@ from hashing import Hasher
 #fastapi instance
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-    "http://localhost:8000",
-    "https://reciperealm-three.vercel.app",
-]
+#Access-Control-Allow-Origin: https://reciperealm-three.vercel.app
+
+# origins = [
+#     "http://localhost:3000",
+#     "http://localhost:8000",
+#     "https://reciperealm-three.vercel.app",
+# ]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
