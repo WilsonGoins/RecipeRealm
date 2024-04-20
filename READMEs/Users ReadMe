@@ -1,13 +1,13 @@
 A ReadMe for new users on how to get this project running on their own machine
 
 1. First we need to install several backend dependencies. In a terminal run:
-    pip install fastapi, sqlalchemy, uvicorn, passlib, bcrypt
+    pip install fastapi sqlalchemy uvicorn passlib bcrypt gunicorn
 2. We will now download the frontend dependencies:
     a. Go to https://nodejs.org/en/download and download the correct version of Node.js
         i. Double click on it in files and select "open with Windows Installer".
         ii. Once installed, restart your computer
     b. Now we just need to run the following commands in a terminal:
-        npm install npm, react-router-dom
+        npm install npm react-router-dom
 2. Close that terminal and open two new terminals. One will run the front end, the other will run the back end
 3. First, in one terminal run:
     cd FastAPI
