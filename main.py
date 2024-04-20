@@ -6,27 +6,26 @@ from starlette.responses import JSONResponse
 from sqlalchemy import text
 from database import SessionLocal, engine
 import models
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 from hashing import Hasher
 
 #fastapi instance
 app = FastAPI()
 
-#Access-Control-Allow-Origin: https://reciperealm-three.vercel.app
+# Access-Control-Allow-Origin: https://reciperealm-three.vercel.app
 
-# origins = [
-#     "http://localhost:3000",
-#     "http://localhost:8000",
-#     "https://reciperealm-three.vercel.app",
-# ]
-origins = ["*"]
+origins = [
+    "https://reciperealm-three.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:8000",
+]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
