@@ -68,83 +68,44 @@ const Login = () => {
     };
 
     return (
-        <div style={{background: "antiquewhite", width: "100vw", height: "100vh"}}>
-            <div className="LGN-title-container">
-                <div className="LGN-title-text">Recipe Realm</div>
-            </div>
-            <div className="LGN-welcome-container">
-                <div className="LGN-welcome-text">Welcome Back</div>
+        <div className="CR-page-container">
+            <div className="CR-title-container">
+                <div className="CR-title-text">Recipe Realm</div>
             </div>
 
-
-            <div className="container">
-                <form onSubmit={(event) => handleLoginSubmit(event)}>
-                    {/* email textbox */}
-                    <div className="LGN-text-entry-form LGN-centered-container" style={{top: "50vh", left: "42.5vw"}}>
-                        <div className="row g-3 align-items-center form-control-lg">
-                            <div className="col-auto">
-                                <label htmlFor="inputPassword6" className="col-form-label">Email</label>
-                            </div>
-                            <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
-                                <input type="text" id="inputPassword6" className="form-control"
-                                       aria-describedby="passwordHelpInline"
-                                       onChange={(event) => setEmail(event.target.value)}
-                                       value={email}/>
-                            </div>
-                            <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
-                                    <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
-                                      Please Enter Your Email Address
-                                    </span>
-                            </div>
+            <form className="CR-form-container" onSubmit={(event) => handleLoginSubmit(event)}>
+                {/* email textbox */}
+                <div className="CR-text-entry-form ">
+                    <div className="row g-3 align-items-center form-control-lg">
+                        <div className="CR-text-first col-auto">
+                            <label htmlFor="inputPassword6" className="col-form-label">Email</label>
+                        </div>
+                        <div className="CR-text-second col-auto">
+                            <input type="text" id="inputPassword6" className="form-control"
+                                onChange={(event) => setEmail(event.target.value)}
+                                value={email}/>
                         </div>
                     </div>
-
-                    {/* password textbox */}
-                    <div className="LGN-text-entry-form LGN-centered-container" style={{top: "50vh", left: "42.5vw"}}>
-                        <div className="row g-3 align-items-center form-control-lg">
-                            <div className="col-auto">
-                                <label htmlFor="inputPassword6" className="col-form-label">Password</label>
-                            </div>
-                            <div className="col-auto" style={{position: "absolute", left: "20vh"}}>
-                                {showPass ? (
-                                    <input type="text" id="inputPassword6" className="form-control"
-                                           aria-describedby="passwordHelpInline"
-                                           onChange={(event) => setPassword(event.target.value)}
-                                           value={password}/>
-                                ) : (
-                                    <input type="password" id="inputPassword6" className="form-control"
-                                           aria-describedby="passwordHelpInline"
-                                           onChange={(event) => setPassword(event.target.value)}
-                                           value={password}/>
-                                )}
-                            </div>
-                            <div className="col-auto" style={{position: "absolute", left: "50vh"}}>
-                                    <span id="passwordHelpInline" className="form-text" style={{color: "black"}}>
-                                      Must be 8-20 characters long
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" className="btn btn-lg btn-dark LGN-login-btn">
-                        Log In
-                    </button>
-                </form>
-            </div>
-
-            {/* eye image */}
-            {/* <div>
-                <img src={Eye_RR} alt="Show Password Icon" className="LGN-eye-icon" onClick={() => {setShowPass(!showPass)}}/>
-            </div> */}
-
-            {/*footer*/}
-            <nav className="navbar fixed-bottom bg-dark" style={{position: "absolute", bottom: "0vh"}}>
-                <div className="container-fluid d-flex justify-content-between">
-                    <p className="navbar-text text-white mb-0">
-                        Created by Wilson Goins, Allison Barfield, Ajay Patel, and Ethan Durand
-                    </p>
                 </div>
-            </nav>
+
+                {/* password textbox */}
+                <div className="CR-text-entry-form ">
+                    <div className="row g-3 align-items-center form-control-lg">
+                        <div className="CR-text-first col-auto">
+                            <label htmlFor="inputPassword6" className="col-form-label">Password</label>
+                        </div>
+                        <div className="CR-text-second col-auto">
+                            <input type="password" id="inputPassword6" className="form-control"
+                                onChange={(event) => setPassword(event.target.value)}
+                                value={password}/>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" className="btn btn-lg btn-dark CR-create-account-btn">
+                    Log In
+                </button>
+            </form>
         </div>
     )
 }
