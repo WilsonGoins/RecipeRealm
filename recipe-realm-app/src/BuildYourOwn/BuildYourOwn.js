@@ -9,41 +9,41 @@ const BuildYourOwn = () => {
     const email = urlParams.get("email");
     const navigate = useNavigate();
 
-    const initialIngredientData = Array.from({ length: 20 }, () => ({
-        name: "",
-        aisle: "" // Default aisle
+    const initialIngredientData = Array.from({ length: 20 }, () => ({       // declare an initial array of dicts of length 20 
+        name: "",               // each ingredient has a name and an aisle
+        aisle: "" 
     }));
 
-    const initialStepData = Array.from({ length: 15 }, () => "");
+    const initialStepData = Array.from({ length: 15 }, () => "");       // declare an initial array of length 15 that is a list of strings
 
-    const [recipeName, setRecipeName] = useState("");
-    const [prepTime, setPrepTime] = useState("");
-    const [servings, setServings] = useState("");
-    const [ingredientData, setIngredientData] = useState(initialIngredientData);
-    const [stepData, setStepData] = useState(initialStepData);
+    const [recipeName, setRecipeName] = useState("");       // set the name of their inputted recipe to an empty string
+    const [prepTime, setPrepTime] = useState("");           // set the prep time of their inputted recipe to an empty string
+    const [servings, setServings] = useState("");           // set the num of servings of their inputted recipe to an empty string
+    const [ingredientData, setIngredientData] = useState(initialIngredientData);        // set their ingredients to what we defined above
+    const [stepData, setStepData] = useState(initialStepData);      // set their steps to what we defined above
 
 
-    const handleRecipeNameChange = (e) => {
+    const handleRecipeNameChange = (e) => {         // change the recipe name to what they inputted
         setRecipeName(e.target.value);
     };
 
-    const handlePrepTimeChange = (e) => {
+    const handlePrepTimeChange = (e) => {           // change prep time to what the inputted
         setPrepTime(e.target.value);
     };
 
-    const handleServingsChange = (e) => {
+    const handleServingsChange = (e) => {            // change num servings to what the inputted
         setServings(e.target.value);
     };
 
-    const handleIngredientChange = (index, field, value) => {
-        const newIngredientData = [...ingredientData];
-        newIngredientData[index][field] = value;
-        setIngredientData(newIngredientData);
+    const handleIngredientChange = (index, field, value) => {       // update the ingredients to what they just entered
+        const newIngredientData = [...ingredientData];          // make a temp variable with the current ingredients
+        newIngredientData[index][field] = value;                // and the new ingredient
+        setIngredientData(newIngredientData);               // set the variable to the temp
         if(ingredientData.hasOwnProperty("aisle")){};
 
     };
 
-    const formatRecipeData = () => {
+    const formatRecipeData = () => {                // format the recipe to send to the backend
         const result = {};
 
         if (recipeName && recipeName.length > 0) {
