@@ -16,6 +16,7 @@ origins = [
     "https://reciperealm-three.vercel.app",
     "http://localhost:3000",
     "http://localhost:8000",
+    "http://76.76.21.164",
 ]
 
 app.add_middleware(
