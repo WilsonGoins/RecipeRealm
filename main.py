@@ -14,7 +14,6 @@ app = FastAPI()
 
 origins = [
     "https://reciperealm-three.vercel.app",
-    'https://reciperealm-ghe7r2zrt-wilsongoins-projects.vercel.app',
     "http://localhost:3000",
     "http://localhost:8000",
 ]
@@ -191,9 +190,9 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
 async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
     if db_user is None:
-        return JSONResponse(status_code=200, content={'error': 'User not found'}, headers={'Access-Control-Allow-Origin': 'https://reciperealm-ghe7r2zrt-wilsongoins-projects.vercel.app'})
+        return JSONResponse(status_code=200, content={'error': 'User not found'}, headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'})
 
     if Hasher.verify_password(password, db_user.password) is False:
-        return JSONResponse(status_code=200, content={'error': 'Incorrect Password'}, headers={'Access-Control-Allow-Origin': 'https://reciperealm-ghe7r2zrt-wilsongoins-projects.vercel.app'})
+        return JSONResponse(status_code=200, content={'error': 'Incorrect Password'}, headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'})
 
     return db_user
