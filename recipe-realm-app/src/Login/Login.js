@@ -14,7 +14,12 @@ const Login = () => {
 
         if (await validateLogin(email, password)) {
             // reset the data
-            const nameRes = await api.get('/users/', {params: {email, password}});
+            const nameRes = await api.get('/users/', {
+                params: {email, password},
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'
+                }
+            });
 
             setEmail('');
             setPassword('');
@@ -45,7 +50,12 @@ const Login = () => {
     const validateLogin = async (email, password) => {
         if (email.trim() !== '') {
             if (/^\S{8,20}$/.test(password)) {
-                const response = await api.get('/users/', {params: {email, password}});
+                const response = await api.get('/users/', {
+                    params: {email, password},
+                    headers: {
+                        'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'
+                    }
+                });
                 const result = response.data.error; // if info was correct there will be no error so '!result' returns true
 
                 if (!result) {     // the email and password entered are correct
