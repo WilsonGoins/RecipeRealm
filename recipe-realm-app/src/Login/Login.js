@@ -17,7 +17,7 @@ const Login = () => {
             const nameRes = await api.get('/users/', {
                 params: {email, password},
                 headers: {
-                    'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'
+                    'Access-Control-Allow-Origin': 'https://reciperealm-ghe7r2zrt-wilsongoins-projects.vercel.app'
                 }
             });
 
@@ -53,7 +53,7 @@ const Login = () => {
                 const response = await api.get('/users/', {
                     params: {email, password},
                     headers: {
-                        'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'
+                        'Access-Control-Allow-Origin': 'https://reciperealm-ghe7r2zrt-wilsongoins-projects.vercel.app'
                     }
                 });
                 const result = response.data.error; // if info was correct there will be no error so '!result' returns true
