@@ -64,6 +64,7 @@ const Home = () => {
         return result;
     }
 
+    // For when a name would be too long to display
     const ReduceRecipeName = (title) => {
         if (title.length > 25) {
             return title.substring(0, 25) + '...';
@@ -73,7 +74,7 @@ const Home = () => {
     }
 
     const ShowAlert = (strongMessage, weakMessage) => {
-        const alertElement = document.createElement('div');
+        const alertElement = document.createElement('div'); //function for alerts/warnings
         alertElement.classList.add('alert', 'alert-primary', 'alert-dismissible', 'fade', 'show');
         alertElement.innerHTML = `
             <strong>${strongMessage}</strong> ${weakMessage}
