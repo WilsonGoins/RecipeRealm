@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a285021-2a28-46c3-93c7-c1046b7a9ce4" name="Changes" comment="git rm idea">
+    <list default="true" id="4a285021-2a28-46c3-93c7-c1046b7a9ce4" name="Changes" comment="Couple of changes and comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recipe-realm-app/src/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/recipe-realm-app/src/App/App.js" afterDir="false" />
     </list>
@@ -110,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711070406277</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Couple of changes and comments">
+      <created>1713980256829</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713980256829</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +150,7 @@
     <MESSAGE value="things work again? so odd" />
     <MESSAGE value="remove node_modules and venv, move react" />
     <MESSAGE value="git rm idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="git rm idea" />
+    <MESSAGE value="Couple of changes and comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Couple of changes and comments" />
   </component>
 </project>
