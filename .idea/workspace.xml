@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a285021-2a28-46c3-93c7-c1046b7a9ce4" name="Changes" comment="Couple of changes and comments">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipe-realm-app/src/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/recipe-realm-app/src/App/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipe-realm-app/src/CreateAccount/CreateAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/recipe-realm-app/src/CreateAccount/CreateAccount.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1713980256829</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Couple of changes and comments">
+      <created>1713980835892</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713980835892</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Couple of changes and comments">
+      <created>1713980975827</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713980975827</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

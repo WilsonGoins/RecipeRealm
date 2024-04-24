@@ -51,15 +51,15 @@ const CreateAccount = () => {
                     }
                 } else {
                     ShowAlert("Password Invalid!", "Passwords must be 8-20 characters long");
-                    return false;
+                    return false;       // return false because password has invalid length
                 }
             } else {
                 ShowAlert("Email Invalid!", "Please enter a valid email address")
-                return false;
+                return false;       //return false because email is invalid
             }
         } else {
             ShowAlert("Name Invalid!", "Names must be one word long and may only contain letters")
-            return false;
+            return false;   //return false because name is incorrect
         }
     };
 
