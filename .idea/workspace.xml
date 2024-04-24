@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a285021-2a28-46c3-93c7-c1046b7a9ce4" name="Changes" comment="git rm idea">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipe-realm-app/src/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/recipe-realm-app/src/App/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
