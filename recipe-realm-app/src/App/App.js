@@ -9,18 +9,28 @@ import BuildYourOwn from "../BuildYourOwn/BuildYourOwn";
 import FindWithURL from "../FindWithURL/FindWithURL";
 import ShoppingLists from "../ShoppingLists/ShoppingLists";
 
+//In order
+//route for the landing page
+//route for create account
+//route for login
+//route to home
+//route for search by dish
+//route for find with url
+//route for build your own
+//route for shopping lists
+
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" exact element={<LandingPage />} />  //route for the landing page
-                <Route path="/createaccount" exact element={<CreateAccount />} />   //route for create account
-                <Route path="/login" exact element={<Login />} />   //route for login
-                <Route path="/home" exact element={<Home />} /> //route to home
-                <Route path="/searchbydish" exact element={<SearchByDish />} /> //route for search by dish
-                <Route path="/findwithurl" exact element={<FindWithURL />} />   //route for find with url
-                <Route path="/buildyourown" exact element={<BuildYourOwn />} /> //route for build your own
-                <Route path="/shoppinglists" exact element={<ShoppingLists />} />   //route for shopping lists
+                <Route path="/" exact element={<LandingPage />} />
+                <Route path="/createaccount" exact element={<CreateAccount />} />
+                <Route path="/login" exact element={<Login />} />
+                <Route path="/home" exact element={<Home />} />
+                <Route path="/searchbydish" exact element={<SearchByDish />} />
+                <Route path="/findwithurl" exact element={<FindWithURL />} />
+                <Route path="/buildyourown" exact element={<BuildYourOwn />} />
+                <Route path="/shoppinglists" exact element={<ShoppingLists />} />
             </Routes>
         </BrowserRouter>
     );
