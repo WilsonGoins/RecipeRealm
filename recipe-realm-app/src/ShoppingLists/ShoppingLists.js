@@ -14,7 +14,7 @@ const ShoppingLists = () => {
 
     const GetRecipes = async () => {        
         var response = await api.get('/recipes/', {params: {email}});
-        setRecipes(OrganizeRecipes(response.data));
+        setRecipes(OrganizeRecipes(response.content.recipe));
     }
 
    const OrganizeRecipes = (recipes) => {    // so recipes is a 2d list. the outer list is groups of 3, the inner lists has individual recipes
@@ -58,7 +58,7 @@ const ShoppingLists = () => {
                 const currRecipe = recipes[i][j];
                 if (currRecipe && currRecipe.clicked) {        // if the curr recipe was selected
                     const response = await api.get('/ingredients/', {params: {rec_id: currRecipe["rec_id"]}});
-                    result.push({"name": currRecipe.name, "ingredients": response.data});
+                    result.push({"name": currRecipe.name, "ingredients": response.content.ingredients});
                 }
             }
         }

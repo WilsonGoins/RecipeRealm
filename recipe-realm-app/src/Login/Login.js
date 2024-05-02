@@ -58,7 +58,7 @@ const Login = () => {
                 });
                 const result = response.data.error; // if info was correct there will be no error so '!result' returns true
 
-                if (!result) {     // the email and password entered are correct
+                if (result === "No Error") {     // the email and password entered are correct
                     return true;                           // return false because that user already exists
                 } else if (result === "User not found") {      // the email does not exist
                     ShowAlert("Incorrect email or password!", "Check for typos.");

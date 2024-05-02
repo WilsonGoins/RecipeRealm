@@ -40,7 +40,7 @@ const CreateAccount = () => {
                     const response = await api.get('/users/', {params: {email, password}});
                     const result = response.data.error;
 
-                    if (!result) {     // the email and password entered already exist
+                    if (result === "No Error") {     // the email and password entered already exist
                         ShowAlert("An account with this email already exists!", "Try a different email.");
                         return false;                           // return false because that user already exists
                     } else if (result === "User not found") {      // the email does not exist
