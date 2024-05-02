@@ -37,8 +37,8 @@ const CreateAccount = () => {
         if (/^[A-Za-z]+$/.test(name)) {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
-                    const response = "Incorrect Password";
-                    const result = "";
+                    const response = "";
+                    const result = "Incorrect Password";
                     try {
                         response = await api.get('/users/', {params: {email, password}});
                         result = response.data.error;
@@ -100,7 +100,7 @@ const CreateAccount = () => {
                         </div>
 
                         <div className="CR-text-second">
-                            <input type="text" id="inputPassword6" className="form-control"
+                            <input type="text" className="form-control"
                                 onChange={(event) => setName(event.target.value)}
                                 value={name}/>
                         </div>
@@ -114,7 +114,7 @@ const CreateAccount = () => {
                             <label htmlFor="inputPassword6" className="col-form-label">Email</label>
                         </div>
                         <div className="CR-text-second col-auto">
-                            <input type="text" id="inputPassword6" className="form-control"
+                            <input type="text"className="form-control"
                                 onChange={(event) => setEmail(event.target.value)}
                                 value={email}/>
                         </div>
@@ -124,11 +124,11 @@ const CreateAccount = () => {
                 {/* password textbox */}
                 <div className="CR-text-entry-form ">
                     <div className="row g-3 align-items-center form-control-lg">
-                        <div className="CR-text-first col-auto">
+                        <div className="CR-text-first col-auto"> 
                             <label htmlFor="inputPassword6" className="col-form-label">Password</label>
                         </div>
                         <div className="CR-text-second col-auto">
-                            <input type="password" id="inputPassword6" className="form-control"
+                            <input type="password" className="form-control"
                                 onChange={(event) => setPassword(event.target.value)}
                                 value={password}/>
                         </div>
