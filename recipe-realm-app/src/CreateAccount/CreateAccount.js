@@ -45,6 +45,7 @@ const CreateAccount = () => {
                         console.log("result: ", result);
                         console.log("response: ", response);
                     } catch (error) {
+                        result = response.data.error;
                         console.log("error! result: ", result);
                     }
 
