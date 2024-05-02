@@ -45,11 +45,11 @@ const CreateAccount = () => {
                         console.log("result: ", result);
                         console.log("response: ", response);
                     } catch (error) {
+                        console.log("error! result: ", result);
+                        console.log("error! response: ", response);
                         if (response.data.error) {
                             result = response.data.error;
                         }
-                        console.log("error! result: ", result);
-                        console.log("error! response: ", response);
                     }
 
                     if (result === "No Error") {     // the email and password entered already exist
