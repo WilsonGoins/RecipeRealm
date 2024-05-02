@@ -24,7 +24,7 @@ const Login = () => {
             setEmail('');
             setPassword('');
 
-            navigate(`/home?email=${email}&name=${nameRes.data.name}`);
+            navigate(`/home?email=${email}&name=${nameRes.content.user.name}`);
         }
     };
 
@@ -56,7 +56,7 @@ const Login = () => {
                         'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'
                     }
                 });
-                const result = response.data.error; // if info was correct there will be no error so '!result' returns true
+                const result = response.content.error; // if info was correct there will be no error so '!result' returns true
 
                 if (result === "No Error") {     // the email and password entered are correct
                     return true;                           // return false because that user already exists

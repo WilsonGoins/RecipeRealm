@@ -14,7 +14,7 @@ const ShoppingLists = () => {
 
     const GetRecipes = async () => {        
         var response = await api.get('/recipes/', {params: {email}});
-        setRecipes(OrganizeRecipes(response.content.recipe));
+        setRecipes(OrganizeRecipes(response.content.recipes));
     }
 
    const OrganizeRecipes = (recipes) => {    // so recipes is a 2d list. the outer list is groups of 3, the inner lists has individual recipes

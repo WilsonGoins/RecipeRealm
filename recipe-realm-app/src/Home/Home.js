@@ -29,7 +29,7 @@ const Home = () => {
         }
         
         var recipesResponse = await api.get('/recipes/', {params: {email}});
-        setRecipes(OrganizeRecipes(recipesResponse.data.recipe));
+        setRecipes(OrganizeRecipes(recipesResponse.content.recipes));
     }
 
     const ViewRecipe = async (recipe) => {    
@@ -38,7 +38,7 @@ const Home = () => {
 
         // get the ingredients
         const response = await api.get('/ingredients/', {params: {rec_id: recipe["rec_id"]}});
-        tempRecipe["ingredients"] = response.data.ingredients;
+        tempRecipe["ingredients"] = response.content.ingredients;
 
         // turn the steps into a list
         tempRecipe["steps"] = tempRecipe["steps"].split('|');
