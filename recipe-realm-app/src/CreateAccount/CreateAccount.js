@@ -42,7 +42,11 @@ const CreateAccount = () => {
                     try {
                         response = await api.get('/users/', {params: {email, password}});
                         result = response.data.error;
-                    } catch (error) {}
+                        console.log("result: ", result);
+                        console.log("response: ", response);
+                    } catch (error) {
+                        console.log("error! result: ", result);
+                    }
 
                     if (result === "No Error") {     // the email and password entered already exist
                         ShowAlert("An account with this email already exists!", "Try a different email.");
