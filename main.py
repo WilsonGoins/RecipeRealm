@@ -146,10 +146,10 @@ async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], rec
 #get the recipe information based on the passed in rec_id
 @app.get("/recipes/")
 async def get_recipe(email: str, db: Session = Depends(db_dependency)):
-    db_recipe = db.query(models.Recipe).filter(models.Recipe.email == email).all()
+    db_recipes = db.query(models.Recipe).filter(models.Recipe.email == email).all()
     return JSONResponse(
             status_code=200,
-            content={'error': 'No Error', 'recipe': db_recipe},
+            content={'error': 'No Error', 'recipes': db_recipes},
             headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
             )
 
@@ -230,6 +230,6 @@ async def read_user(email: str, password: str, db: Session = Depends(db_dependen
 
     return JSONResponse(
             status_code=200,
-            content={'error': 'No Error'},
+            content={'error': 'No Error', 'user': db_user},
             headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
             )
