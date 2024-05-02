@@ -2,14 +2,12 @@ import React, {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom";
 import api from '../api'
 import "./CreateAccount.css"
-import Eye_RR from "./Eye_RR.png";
 
 const CreateAccount = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showPass, setShowPass] = useState(false);
 
     useEffect(() => {
 
@@ -37,21 +35,9 @@ const CreateAccount = () => {
         if (/^[A-Za-z]+$/.test(name)) {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
-                    const response = "";
-                    const result = "Whoops";
-                    try {
-                        response = await api.get('/users/', {params: {email, password}});
-                        result = response.data.error;
-                        console.log("result: ", result);
-                        console.log("response: ", response);
-                    } catch (error) {
-                        console.log("error! result: ", result);
-                        console.log("error! response: ", response);
-                        if (response.data.error) {
-                            result = response.data.error;
-                        }
-                    }
-
+                    response = await api.get('/users/', {params: {email, password}});
+                    result = response.data.error;
+                
                     if (result === "No Error") {     // the email and password entered already exist
                         ShowAlert("An account with this email already exists!", "Try a different email.");
                         return false;                           // return false because that user already exists
