@@ -1,31 +1,33 @@
 from fastapi import FastAPI, HTTPException, Depends
-from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated, List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from starlette.responses import JSONResponse
 from sqlalchemy import text
+
 from database import SessionLocal, engine
 import models
+from fastapi.middleware.cors import CORSMiddleware
 from hashing import Hasher
 
 #fastapi instance
 app = FastAPI()
 
 origins = [
-    "https://reciperealm-three.vercel.app",
     "http://localhost:3000",
     "http://localhost:8000",
+    "https://reciperealm-three.vercel.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"],
+    allow_methods=['*'],
+    allow_headers=['*'],
 )
+
+
 
 #connection = engine.connect()
 
@@ -135,23 +137,13 @@ async def add_recipe(recipe: RecipeModel, ingredient: List[IngredientModel], rec
     db.bulk_insert_mappings(models.RecipeIngredient, db_recipe_ingredients)
     db.commit()
     db.refresh(db_recipe)
-    # return db_recipe, db_ingredients, db_recipe_ingredients
-    return JSONResponse(
-            status_code=200,
-            content={'error': 'No Error'},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
-
+    return db_recipe, db_ingredients, db_recipe_ingredients
 
 #get the recipe information based on the passed in rec_id
 @app.get("/recipes/")
 async def get_recipe(email: str, db: Session = Depends(db_dependency)):
     db_recipe = db.query(models.Recipe).filter(models.Recipe.email == email).all()
-    return JSONResponse(
-            status_code=200,
-            content={'error': 'No Error', 'recipe': db_recipe},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
+    return db_recipe
 
 #get the ingredients for a recipe based on the passed in rec_id
 @app.get("/ingredients/")
@@ -163,13 +155,7 @@ async def get_ingredients(rec_id: int, db: Session = Depends(db_dependency)):
         ing_id = item.ing_id
         db_tmp = db.query(models.Ingredient).filter(models.Ingredient.ing_id == ing_id).first()
         db_ingredients.append(db_tmp)
-
-    return JSONResponse(
-            status_code=200,
-            content={'error': 'No Error', 'ingredients': db_ingredients},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
-
+    return db_ingredients
 
 @app.delete("/delete_recipe/")
 async def delete_recipe(rec_id: int, db: Session = Depends(db_dependency)):
@@ -187,11 +173,7 @@ async def delete_recipe(rec_id: int, db: Session = Depends(db_dependency)):
     #delete the items in the intersection table associated with the recipe
     [db.delete(item) for item in db_recipe_ingredients]
     db.commit()
-    return JSONResponse(
-            status_code=200,
-            content={'error': 'No Error'},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
+    return True
 
 
 #api endpoint to create an item
@@ -203,33 +185,16 @@ async def create_user(user: UserModel, db: Session = Depends(db_dependency)):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    return JSONResponse(
-            status_code=200,
-            content={'error': 'No Error', 'user': db_user},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
-
+    return db_user
 
 #api endpoint to read an item by id
 @app.get("/users/", response_model=UserModel) #response_model=UserResponse)
 async def read_user(email: str, password: str, db: Session = Depends(db_dependency)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
     if db_user is None:
-        return JSONResponse(
-            status_code=200,
-            content={'error': 'User not found'},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
+        return JSONResponse(status_code=200, content={'error': 'User not found'})
 
     if Hasher.verify_password(password, db_user.password) is False:
-        return JSONResponse(
-            status_code=200,
-            content={'error': 'Incorrect Password'},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
+        return JSONResponse(status_code=200, content={'error': 'Incorrect Password'})
 
-    return JSONResponse(
-            status_code=200,
-            content={'error': 'No Error'},
-            headers={'Access-Control-Allow-Origin': 'https://reciperealm-three.vercel.app'}
-            )
+    return db_user

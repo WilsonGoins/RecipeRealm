@@ -1,0 +1,78 @@
+.SL-prompt-container {
+    position: absolute;
+    left: 30vw;
+    top: 2.5vw;
+    width: 67vw;
+    padding-bottom: 5%;
+    /* outline: 2px solid red;  */
+}
+
+.SL-heading {
+    position: relative;
+    text-align: center;
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
+}
+
+.SL-all-recipes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SL-singular-recipe-container {
+    position: relative;
+    margin-right: 22.5px;
+    margin-left: 22.5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.SL-prompt {
+    position: relative;
+    margin-top: 5%;
+    font-family: "Droid Sans", serif;
+    font-size: 200%;
+}
+
+.SL-prompt2-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.SL-dropdown {
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 20vw;
+    height: 5vh;
+}
+
+.SL-submit-btn {
+    margin-top: 2.5%;
+}
+
+.SL-shopping-list-container-small {
+    display: flex;
+    flex-direction: column;
+}
+
+.SL-shopping-list-recipe-title {
+    position: relative;
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
+}
+
+.SL-shopping-list-aisle {
+    font-family: "Droid Sans", serif;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.SL-shopping-list-ingredient {
+    font-family: "Droid Sans", serif;
+    font-size: 150%;
+}

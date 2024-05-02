@@ -1,0 +1,150 @@
+@font-face {
+    font-family: 'Prata';
+    src: url('Prata-Regular.ttf') format("truetype");
+}
+
+.BYO-title-container {
+    position: absolute;
+    margin-bottom: 10%;
+    top: 5%;
+    left: 1.25%;
+    width: 27%;
+}
+
+.BYO-empty-container {
+    position: relative;
+    width: 27vw;
+    height: 25vh;
+    left: 0;
+    top: 0;
+}
+
+.BYO-credit-container {
+    position: absolute;
+    width: 22%;
+    left: 2%;
+    top: 320%;
+    /*top: 92%;*/
+}
+
+.BYO-title-text {
+    font-family: "Prata", sans-serif;
+    font-size: 350%;
+    cursor: pointer;
+}
+
+.BYO-credit-text {
+    font-family: "Prata", sans-serif;
+    font-size: 100%;
+    color: antiquewhite;
+    text-align: center;
+}
+
+.BYO-nav-item {
+    position: relative;
+    margin-bottom: 10%;
+    font-family: "Droid Sans", serif;
+    font-size: 250%;
+    color: antiquewhite;
+    cursor: pointer;
+}
+
+.BYO-hover-white {
+    .nav-item .nav-link {
+        color: antiquewhite;
+    }
+
+    .nav-item:hover .nav-link,
+    .nav-item:focus .nav-link,
+    .nav-item:active .nav-link {
+        color: yellow;
+        background-color: transparent;
+    }
+}
+
+
+.BYO-title-container-specific {
+    position: absolute;
+    top: 5%;
+    left: 30%;
+}
+
+.BYO-title-text-specific {
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
+}
+
+
+.BYO-name-of-recipe-container{
+    position: absolute;
+    left: 30%;
+    top: 22%;
+    width: 30%;
+    height: 5%;
+
+}
+.BYO-prep-time-container{
+    position: absolute;
+    left: 62.5%;
+    top: 22%;
+    width: 12.5%;
+    height: 5%;
+
+}
+.BYO-servings-container{
+    position: absolute;
+    left: 80%;
+    top: 22%;
+    width: 15%;
+    height: 5%;
+
+}
+
+.BYO-ingredients-container{
+    position: absolute;
+    left: 31%;
+    top: 50%;
+    /* width: 210%; */
+    height: 5%;
+}
+
+.textBoxContainer {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Align items vertically */
+
+}
+
+.textBox {
+    width: 35vw;
+    margin-right: 50px; /* Add spacing between textboxes */
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.dropdown {
+    margin-left: 10px; /* Add spacing between textboxes and dropdown */
+}
+
+.bigTextBox {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 93%; /* Make the textarea expand to fill available width */
+    height: 40px; /* Set the height to make it bigger */
+    resize: vertical; /* Allow vertical resizing */
+    padding: 5px; /* Add padding for better appearance */
+}
+
+.BYO-steps-container {
+    position: absolute;
+    left: 31%;
+    top: 183%; /* Adjust the top position to move the steps section up */
+    width: 60%;
+    height: 5%;
+}
+
+.BYO-submit {
+    position: absolute;
+    align-self: center;
+    left: 60%;
+    top: 300%; /* Adjust the top position to move the submit button down */
+}

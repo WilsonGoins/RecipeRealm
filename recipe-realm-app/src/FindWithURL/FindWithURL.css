@@ -1,0 +1,84 @@
+.FWU-search-bar {
+    position: absolute;
+    left: 58%;
+    top: 8.5%;
+    width: 40%;
+    height: 5%;
+}
+
+.FWU-help-img {
+    position: absolute;
+    left: 56%;
+    top: 9%;
+    width: 2%;
+    height: auto;
+}
+
+.FWU-title-container {
+    position: absolute;
+    top: 5%;
+    left: 30%;
+}
+
+.FWU-title-text {
+    font-family: "Droid Sans", serif;
+    font-size: 350%;
+}
+
+.FWU-selected-text {
+    font-family: "Droid Sans", serif;
+    font-size: 175%;   
+}
+
+.FWU-selected-title-container {
+    position: absolute;
+    left: 32.5%;
+    top: 20%;
+}
+
+.FWU-selected-image {
+    width: 25vw;
+    height: 22.5vw;
+    border-radius: 10px; 
+}
+
+.FWU-selected-time-container {
+    position: absolute;
+    left: 35%;
+    top: 27.5%;
+}
+
+.FWU-selected-servings-container {
+    position: absolute;
+    left: 35%;
+    top: 32.5%;
+}
+
+.FWU-ingredients-steps-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 35%;
+    top: 37.5%;
+    width: 24%;
+}
+
+.FWU-selected-ingredients-container {
+    position: absolute;
+    left: 35%;
+    top: 37.5%;
+    width: 25%;
+}
+
+.FWU-add-recipe-btn {
+    margin-top: 25%
+}
+
+.FWU-image-btn-container {
+    position: absolute;
+    left: 70vw;
+    top: 27.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
