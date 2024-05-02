@@ -38,7 +38,8 @@ const CreateAccount = () => {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
                     const response = await api.get('/users/', {params: {email, password}});
-                    const result = response.content.error;
+                    console.log(response);
+                    const result = response.data.error;
 
                     if (result === "No Error") {     // the email and password entered already exist
                         ShowAlert("An account with this email already exists!", "Try a different email.");
