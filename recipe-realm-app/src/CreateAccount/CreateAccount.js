@@ -38,15 +38,18 @@ const CreateAccount = () => {
             if (email.trim() !== '') {
                 if (/^\S{8,20}$/.test(password)) {
                     const response = "";
-                    const result = "Incorrect Password";
+                    const result = "Whoops";
                     try {
                         response = await api.get('/users/', {params: {email, password}});
                         result = response.data.error;
                         console.log("result: ", result);
                         console.log("response: ", response);
                     } catch (error) {
-                        result = response.data.error;
+                        if (response.data.error) {
+                            result = response.data.error;
+                        }
                         console.log("error! result: ", result);
+                        console.log("error! response: ", response);
                     }
 
                     if (result === "No Error") {     // the email and password entered already exist
@@ -57,6 +60,9 @@ const CreateAccount = () => {
                     } else if (result === "Incorrect Password") {      // the email exists but the password is wrong
                         ShowAlert("An account with this email already exists!", "Try a different email.");
                         return false;                                   // return false because the user already exists
+                    } else {
+                        ShowAlert("Sorry That Didn't Work.", "Please try again.");
+                        return false;
                     }
                 } else {
                     ShowAlert("Password Invalid!", "Passwords must be 8-20 characters long");
